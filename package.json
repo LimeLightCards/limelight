@@ -11,7 +11,8 @@
     "test": "npm run lint",
     "lint": "ng lint",
     "setup": "npm run setup:cards",
-    "setup:cards": "ts-node scripts/get-cards"
+    "setup:cards": "ts-node scripts/get-cards",
+    "analyze:cards": "ts-node scripts/get-cards-info"
   },
   "private": true,
   "dependencies": {
