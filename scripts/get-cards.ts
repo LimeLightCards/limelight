@@ -21,7 +21,8 @@ allCards.forEach(card => {
 
   card.color = card.color.toUpperCase();
 
-  card.rarity = card.rarity.trim();
+  if(card.rarity === 'Ｒ') card.rarity = 'R';
+  card.rarity = card.rarity.trim().split('/')[0] || 'C';
 
   card.level = +card.level;
   if(isNaN(card.level)) card.level = 0;
