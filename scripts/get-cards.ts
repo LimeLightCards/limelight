@@ -21,6 +21,8 @@ allCards.forEach(card => {
 
   card.color = card.color.toUpperCase();
 
+  card.rarity = card.rarity.trim();
+
   card.level = +card.level;
   if(isNaN(card.level)) card.level = 0;
   if(card.level > 3) card.level = 3;

@@ -19,3 +19,4 @@ console.log('Level', getUniqueValues('level'));
 console.log('Cost', getUniqueValues('cost'));
 console.log('Power', getUniqueValues('power'));
 console.log('Soul', getUniqueValues('soul'));
+console.log('Rarity', getUniqueValues('rarity'));

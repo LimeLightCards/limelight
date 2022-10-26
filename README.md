@@ -3,14 +3,20 @@
 
 A simple and powerful search tool for Weiss Schwarz cards.
 
-## Setup
+## Development
+
+### Setup
 
 * `npm i`
 * `npm run setup`
 
-## Running
+### Running
 
 * `npm start`
+
+## Search Spec
+
+Check out the [search spec](SEARCH.md) for more information.
 
 ## Contributing
 
