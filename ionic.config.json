@@ -1,0 +1,7 @@
+{
+  "name": "limelight",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
