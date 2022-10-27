@@ -1,27 +1,103 @@
-#container {
-  text-align: center;
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(135deg, #8360c3, #608b7d);
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-left: 15%;
+  padding-right: 15%;
+
+  .search-container {
+    margin-top: -20%;
+    width: 100%;
+    position: relative;
+
+    .search-text {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .search-bar-container {
+      width: 100%;
+      position: relative;
+      margin-bottom: 20px;
+
+      padding-left: 15%;
+      padding-right: 15%;
+
+      .search-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: calc(15% + 15px);
+        z-index: 10;
+        height: 32px;
+        width: 32px;
+      }
+
+      .search {
+        width: 100%;
+        border: 1px solid #608b7d;
+        border-radius: 3px;
+        --padding-top: 20px;
+        --padding-end: 20px;
+        --padding-start: 60px;
+        --padding-bottom: 20px;
+        --background: #3f2f5c;
+      }
+    }
+
+    .search-actions {
+      width: 100%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+
+      ion-button {
+        margin-right: 10px;
+      }
+    }
+  }
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+.below-the-fold {
+  width: 100vw;
+  height: 30vh;
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+  background-color: #19181f;
 
-  color: #8c8c8c;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 
-  margin: 0;
-}
+  padding-left: 25%;
+  padding-right: 25%;
 
-#container a {
-  text-decoration: none;
+  color: #999;
+
+  .map {
+    min-height: 20vh;
+
+    .map-title {
+      font-variant: small-caps;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #999;
+    }
+
+    .map-item {
+      margin-bottom: 5px;
+      --ion-color-primary: #999;
+
+      a:link, a:hover, a:visited, a:active {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .legal {
+    color: #444;
+  }
 }

@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('./randomcard/randomcard.module').then( m => m.RandomcardPageModule)
   },
   {
+    path: 'sets',
+    loadChildren: () => import('./sets/sets.module').then( m => m.SetsPageModule)
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'

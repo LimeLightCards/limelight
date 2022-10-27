@@ -1,20 +1,70 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="container">
+    <div class="search-container">
+      <div class="search-text">
+        <strong>Limelight</strong> is a powerful search tool for <strong>Weiß Schwarz</strong>.
+      </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <div class="search-bar-container">
+        <ion-img class="search-icon" src="assets/favicon/android-chrome-192x192.png"></ion-img>
+        <ion-input placeholder="Search all of Weiss Schwarz..." class="search"></ion-input>
+      </div>
+
+      <div class="search-actions">
+        <ion-button fill="outline" color="dark" routerLink="/advanced">Advanced Search</ion-button>
+        <ion-button fill="outline" color="dark" routerLink="/syntax">Syntax</ion-button>
+        <ion-button fill="outline" color="dark" routerLink="/sets">All Sets</ion-button>
+        <ion-button fill="outline" color="dark" routerLink="/randomcard">Random Card</ion-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="below-the-fold">
+    <div class="map">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3">
+            <div class="map-title">Cards</div>
+            <hr>
+            <div class="map-item">
+              <a routerLink="/advanced">Advanced Search</a>
+            </div>
+            <div class="map-item">
+              <a routerLink="/syntax">Syntax</a>
+            </div>
+            <div class="map-item">
+              <a routerLink="/sets">All Sets</a>
+            </div>
+            <div class="map-item">
+              <a routerLink="/randomcard">Random Card</a>
+            </div>
+          </ion-col>
+
+          <ion-col size="3">
+
+          </ion-col>
+
+          <ion-col size="3">
+
+          </ion-col>
+
+          <ion-col size="3">
+            <div class="map-title">More</div>
+            <hr>
+            <div class="map-item">
+              <a target="_blank" href="https://github.com/LimeLightCards/limelight">GitHub</a>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div class="legal">
+      The literal and graphical information presented on this site about Weiß Schwarz, including card images and symbols is copyright Bushiroad, LLC. Limelight is not produced by or endorsed by Bushiroad.
+
+      Card text is provided by translators and other community members, and not vetted by Limelight.
+
+      All other content © Limelight.
+    </div>
   </div>
 </ion-content>
