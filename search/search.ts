@@ -4,22 +4,23 @@ import { isString } from 'lodash';
 
 import { ICard } from '../interfaces';
 
-import { bare, card, color, rarity, side } from './operators';
+import { bare, card, color, rarity, set, side, type } from './operators';
 
 const allKeywords = [
   'attribute',  'a',
-  'id',
-  'color',      'c',
+  'id',                 // exact text
+  'color',      'c',    // exact text
   'cost',       'co',
   'expansion',  'e',
   'level',      'l',
   'name',       'n',
   'power',      'p',
-  'rarity',     'r',
+  'rarity',     'r',    // exact text
   'release',    'rel',
-  'set',
-  'side',
+  'set',                // exact text
+  'side',               // exact text
   'soul',       's',
+  'type',               // exact text
   'trigger',    't'
 ];
 
@@ -27,7 +28,9 @@ const operators = [
   card,
   color,
   rarity,
-  side
+  set,
+  side,
+  type
 ];
 
 export function parseQuery(cards: ICard[], query: string): ICard[] {

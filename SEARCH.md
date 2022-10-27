@@ -112,6 +112,14 @@ Soul can be searched for by doing:
 - `soul:>=2` to add cards with soul >= `2` to the search results
 - `-s:<=3` to remove cards with soul <= `3` from the search results
 
+## Type
+
+Type can be searched for by doing:
+
+- `type:Character` to add cards with type `Character` to the search results
+- `type:Character,Event` to add cards with type `Character` or `Event` to the search results
+- `-type:Climax` to remove cards with type `Climax` from the search results
+
 ## Trigger
 
 Trigger can be searched for by doing:
