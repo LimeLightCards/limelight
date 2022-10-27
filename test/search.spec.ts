@@ -58,18 +58,37 @@ test('Filtering cards by side should return cards of only that side', () => {
   expect(res2.every(c => c.side === 'S')).toBe(true);
 });
 
-test('Filtering cards by color should return cards of only that side', () => {
+test('Filtering cards by color should return cards of only that color', () => {
   const res = parseQuery(allCards, 'color:Y');
   expect(res.every(c => c.color === 'Y')).toBe(true);
 
   const res2 = parseQuery(allCards, '-color:Y');
   expect(res2.every(c => c.color !== 'Y')).toBe(true);
+
+  const res3 = parseQuery(allCards, '-color:Y,G');
+  expect(res3.every(c => ['R', 'B'].includes(c.color))).toBe(true);
 });
 
-test('Filtering cards by rarity should return cards of only that side', () => {
+test('Filtering cards by rarity should return cards of only that rarity', () => {
   const res = parseQuery(allCards, 'rarity:RR+');
   expect(res.every(c => c.rarity === 'RR+')).toBe(true);
 
   const res2 = parseQuery(allCards, '-rarity:R');
   expect(res2.every(c => c.rarity !== 'R')).toBe(true);
+});
+
+test('Filtering cards by set should return cards of only that set', () => {
+  const res = parseQuery(allCards, 'set:5hy');
+  expect(res.every(c => c.set === '5HY')).toBe(true);
+
+  const res2 = parseQuery(allCards, '-set:5hy');
+  expect(res2.every(c => c.set !== '5HY')).toBe(true);
+});
+
+test('Filtering cards by type should return cards of only that type', () => {
+  const res = parseQuery(allCards, 'type:character');
+  expect(res.every(c => c.type === 'Character')).toBe(true);
+
+  const res2 = parseQuery(allCards, '-type:character');
+  expect(res2.every(c => c.type !== 'Character')).toBe(true);
 });
