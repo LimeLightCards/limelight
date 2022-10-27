@@ -1,4 +1,3 @@
-import { Color } from 'rot-js';
 import { CardColor, CardTrigger } from '../interfaces';
 import { parseQuery } from '../search/search';
 
@@ -147,4 +146,65 @@ test('Filtering cards by attribute should return cards with that attribute', () 
 
   const res2 = parseQuery(allCards, '-a:quintessential');
   expect(res2.every(c => !c.attributes.includes('quintessential'))).toBe(true);
+});
+
+test('Filtering cards by cost should return cards with that cost/range', () => {
+  const res = parseQuery(allCards, 'cost:3');
+  expect(res.every(c => c.cost === 3)).toBe(true);
+
+  const res2 = parseQuery(allCards, 'cost:>3');
+  expect(res2.every(c => c.cost > 3)).toBe(true);
+
+  const res3 = parseQuery(allCards, 'cost:>=3');
+  expect(res3.every(c => c.cost >= 3)).toBe(true);
+
+  const res4 = parseQuery(allCards, 'cost:<3');
+  expect(res4.every(c => c.cost < 3)).toBe(true);
+
+  const res5 = parseQuery(allCards, 'cost:<=3');
+  expect(res5.every(c => c.cost <= 3)).toBe(true);
+
+  const res6 = parseQuery(allCards, 'cost:3,>4');
+  expect(res6.every(c => c.cost === 3
+                      || c.cost > 4)).toBe(true);
+  expect(res6.every(c => c.cost === 4
+                      || c.cost < 3)).toBe(false);
+
+  const res7 = parseQuery(allCards, '-co:3,>4');
+  expect(res7.every(c => c.cost === 4
+                      || c.cost < 3)).toBe(true);
+  expect(res7.every(c => c.cost === 3
+                      || c.cost > 4)).toBe(false);
+});
+
+test('Filtering cards by level should return cards with that level/range', () => {
+  const res = parseQuery(allCards, 'level:3');
+  expect(res.every(c => c.level === 3)).toBe(true);
+
+  const res2 = parseQuery(allCards, '-l:>2');
+  expect(res2.some(c => c.level > 2)).toBe(false);
+});
+
+test('Filtering cards by power should return cards with that power/range', () => {
+  const res = parseQuery(allCards, 'power:2000');
+  expect(res.every(c => c.power === 2000)).toBe(true);
+
+  const res2 = parseQuery(allCards, '-p:>10000');
+  expect(res2.some(c => c.power > 10000)).toBe(false);
+});
+
+test('Filtering cards by release should return cards with that release/range', () => {
+  const res = parseQuery(allCards, 'release:83');
+  expect(res.every(c => c.release === '83')).toBe(true);
+
+  const res2 = parseQuery(allCards, '-rel:83');
+  expect(res2.some(c => c.release === '83')).toBe(false);
+});
+
+test('Filtering cards by soul should return cards with that soul/range', () => {
+  const res = parseQuery(allCards, 'soul:3');
+  expect(res.every(c => c.soul === 3)).toBe(true);
+
+  const res2 = parseQuery(allCards, '-s:>1');
+  expect(res2.some(c => c.soul > 1)).toBe(false);
 });

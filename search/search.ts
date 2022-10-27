@@ -4,22 +4,22 @@ import { isString } from 'lodash';
 
 import { ICard } from '../interfaces';
 
-import { attribute, bare, card, color, expansion, name, rarity, set, side, trigger, type } from './operators';
+import { attribute, bare, card, color, cost, expansion, level, name, power, rarity, release, set, side, soul, trigger, type } from './operators';
 
 const allKeywords = [
   'attribute',  'a',    // array search
   'id',                 // exact text
   'color',      'c',    // exact text
-  'cost',       'co',
+  'cost',       'co',   // number search
   'expansion',  'e',    // loose text
-  'level',      'l',
+  'level',      'l',    // number search
   'name',       'n',    // loose text
-  'power',      'p',
+  'power',      'p',    // number search
   'rarity',     'r',    // exact text
-  'release',    'rel',
+  'release',    'rel',  // exact text
   'set',                // exact text
   'side',               // exact text
-  'soul',       's',
+  'soul',       's',    // number search
   'type',               // exact text
   'trigger',    't'     // array search
 ];
@@ -28,11 +28,16 @@ const operators = [
   attribute,
   card,
   color,
+  cost,
   expansion,
+  level,
   name,
+  power,
   rarity,
+  release,
   set,
   side,
+  soul,
   trigger,
   type
 ];
