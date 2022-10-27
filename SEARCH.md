@@ -40,6 +40,7 @@ Cost can be searched for by doing:
 
 - `cost:0` to add cards with cost `0` to the search results
 - `cost:>=1` to add cards with cost >= `1` to the search results
+- `cost:!=1` to add cards with cost not equaling `1` to the search results
 - `-co:<=2` to remove cards with cost <= `2` from the search results
 
 ## Expansion
@@ -57,6 +58,7 @@ Level can be searched for by doing:
 
 - `level:1` to add cards with level `1` to the search results
 - `level:>=2` to add cards with level >= `2` to the search results
+- `level:!=1` to add cards with level not equaling `1` to the search results
 - `-l:<=3` to remove cards with level <= `3` from the search results
 
 Notes: 
@@ -75,6 +77,7 @@ Power can be searched for by doing:
 
 - `power:1000` to add cards with power `1000` to the search results
 - `power:>=2000` to add cards with power >= `2000` to the search results
+- `power:!=2000` to add cards with power not equaling `2000` to the search results
 - `-p:<=3000` to remove cards with power <= `3000` from the search results
 
 ## Rarity
@@ -112,6 +115,7 @@ Soul can be searched for by doing:
 
 - `soul:1` to add cards with soul `1` to the search results
 - `soul:>=2` to add cards with soul >= `2` to the search results
+- `soul:!=2` to add cards with soul not equaling `2` to the search results
 - `-s:<=3` to remove cards with soul <= `3` from the search results
 
 ## Type

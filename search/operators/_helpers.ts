@@ -21,6 +21,10 @@ function cardMatchesNumberCheck(value: number, numberCheck: string): boolean {
     return value >= +numberCheck.replace('>=', '');
   }
 
+  if(numberCheck.includes('!=')) {
+    return value !== +numberCheck.replace('!=', '');
+  }
+
   return value === +numberCheck;
 }
 

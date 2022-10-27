@@ -175,6 +175,9 @@ test('Filtering cards by cost should return cards with that cost/range', () => {
                       || c.cost < 3)).toBe(true);
   expect(res7.every(c => c.cost === 3
                       || c.cost > 4)).toBe(false);
+
+  const res8 = parseQuery(allCards, 'cost:!=3');
+  expect(res8.every(c => c.cost !== 3)).toBe(true);
 });
 
 test('Filtering cards by level should return cards with that level/range', () => {
