@@ -8,6 +8,7 @@
     "ng": "ng",
     "start": "ng serve --port 6699 -o",
     "build": "ng build",
+    "build:netlify": "npm run setup && npm run build",
     "test": "npm run lint && npm run jest",
     "jest": "jest",
     "jest:watch": "jest --watch",
