@@ -41,11 +41,12 @@ export class SearchPage implements OnInit {
     this.querySortBy = this.route.snapshot.queryParamMap.get('b') as 'asc'|'desc' || 'asc';
 
     const page = parseInt(this.route.snapshot.queryParamMap.get('p') || '0', 10);
-    this.search(false);
+    this.search(this.query, false);
     this.changePage(page);
   }
 
-  search(changePage = true) {
+  search(query: string, changePage = true) {
+    this.query = query;
     this.page = 0;
     this.totalPages = 0;
     this.displayCurrent = 0;
@@ -55,6 +56,7 @@ export class SearchPage implements OnInit {
     if(!this.query) {
       this.queriedCards = [];
       this.visibleCards = [];
+      this.updateParams();
       return;
     }
 

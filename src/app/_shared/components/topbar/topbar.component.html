@@ -1,0 +1,12 @@
+
+  <ion-toolbar color="primary">
+    <a class="home-icon" routerLink="/">
+      <ion-img src="assets/favicon/android-chrome-192x192.png"></ion-img>
+    </a>
+
+    <ion-searchbar [debounce]="1000"
+                   (ionChange)="type.emit(query)"
+                   (keyup.enter)="enter.emit(query)"
+                   [(ngModel)]="query"
+                   placeholder="Search all of Weiß Schwarz..."></ion-searchbar>
+  </ion-toolbar>
