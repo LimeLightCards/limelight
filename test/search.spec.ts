@@ -1,3 +1,5 @@
+import { Color } from 'rot-js';
+import { CardColor, CardTrigger } from '../interfaces';
 import { parseQuery } from '../search/search';
 
 import * as cards from '../src/assets/cards.json';
@@ -60,13 +62,13 @@ test('Filtering cards by side should return cards of only that side', () => {
 
 test('Filtering cards by color should return cards of only that color', () => {
   const res = parseQuery(allCards, 'color:Y');
-  expect(res.every(c => c.color === 'Y')).toBe(true);
+  expect(res.every(c => c.color === CardColor.Yellow)).toBe(true);
 
   const res2 = parseQuery(allCards, '-color:Y');
-  expect(res2.every(c => c.color !== 'Y')).toBe(true);
+  expect(res2.every(c => c.color !== CardColor.Yellow)).toBe(true);
 
   const res3 = parseQuery(allCards, '-color:Y,G');
-  expect(res3.every(c => ['R', 'B'].includes(c.color))).toBe(true);
+  expect(res3.every(c => [CardColor.Red, CardColor.Blue].includes(c.color))).toBe(true);
 });
 
 test('Filtering cards by rarity should return cards of only that rarity', () => {
@@ -114,4 +116,35 @@ test('Filtering cards by expansion should return cards of that expansion', () =>
 test('Filtering cards by name should return cards of that name', () => {
   const res = parseQuery(allCards, 'name:"Nino Nakano"');
   expect(res.every(c => c.name.includes('Nino Nakano'))).toBe(true);
+});
+
+test('Filtering cards by trigger should return cards with that trigger', () => {
+  const res = parseQuery(allCards, 'trigger:soul');
+  expect(res.every(c => c.trigger.includes(CardTrigger.Soul))).toBe(true);
+
+  const res2 = parseQuery(allCards, '-t:soul');
+  expect(res2.every(c => !c.trigger.includes(CardTrigger.Soul))).toBe(true);
+
+  const res3 = parseQuery(allCards, 't:standby,soul');
+  expect(res3.every(c => c.trigger.includes(CardTrigger.Soul)
+                      || c.trigger.includes(CardTrigger.Standby))).toBe(true);
+
+
+  const res4 = parseQuery(allCards, 't:none');
+  expect(res4.every(c => c.trigger.length === 0)).toBe(true);
+
+  const res5 = parseQuery(allCards, '-t:none');
+  expect(res5.every(c => c.trigger.length > 0)).toBe(true);
+
+  const res6 = parseQuery(allCards, 't:soul,none');
+  expect(res6.every(c => c.trigger.includes(CardTrigger.Soul)
+                      || c.trigger.length === 0)).toBe(true);
+});
+
+test('Filtering cards by attribute should return cards with that attribute', () => {
+  const res = parseQuery(allCards, 'attribute:quintessential');
+  expect(res.every(c => c.attributes.includes('quintessential'))).toBe(true);
+
+  const res2 = parseQuery(allCards, '-a:quintessential');
+  expect(res2.every(c => !c.attributes.includes('quintessential'))).toBe(true);
 });

@@ -4,10 +4,10 @@ import { isString } from 'lodash';
 
 import { ICard } from '../interfaces';
 
-import { bare, card, color, expansion, name, rarity, set, side, type } from './operators';
+import { attribute, bare, card, color, expansion, name, rarity, set, side, trigger, type } from './operators';
 
 const allKeywords = [
-  'attribute',  'a',
+  'attribute',  'a',    // array search
   'id',                 // exact text
   'color',      'c',    // exact text
   'cost',       'co',
@@ -21,10 +21,11 @@ const allKeywords = [
   'side',               // exact text
   'soul',       's',
   'type',               // exact text
-  'trigger',    't'
+  'trigger',    't'     // array search
 ];
 
 const operators = [
+  attribute,
   card,
   color,
   expansion,
@@ -32,6 +33,7 @@ const operators = [
   rarity,
   set,
   side,
+  trigger,
   type
 ];
 

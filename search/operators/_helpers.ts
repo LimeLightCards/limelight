@@ -4,11 +4,61 @@ import type * as parser from 'search-query-parser';
 
 import { ICard } from '../../interfaces';
 
-// TODO: array search
 // TODO: number search
 
 export function numericalOperator(aliases: string[], key: string) {
   return (cards: ICard[], results: parser.SearchParserResult) => {
+  };
+}
+
+// this operator works on equal text matches, but the subproperty is an array
+// it also checks case-insensitively
+// it also supports "none" as a value for empty arrays
+export function arraySearchOperator(aliases: string[], key: string) {
+  return (cards: ICard[], results: parser.SearchParserResult) => {
+
+    // if we have no cards, short-circuit because we can't filter it anymore
+    if(cards.length === 0) return [];
+
+    // if this operator isn't present at all, we skip it
+    const shouldFilterThisOperator = aliases.some(alias => results[alias] || results.exclude[alias]);
+    if(!shouldFilterThisOperator) return cards;
+
+    // map all of the aliases (the same alias is an OR)
+    return aliases.map(alias => {
+
+      // if we have an exclusion rule for the alias (-alias), we ignore those cards
+      if(results.exclude[alias]) {
+        const search = isArray(results.exclude[alias]) ? results.exclude[alias] : [results.exclude[alias]];
+        const invalidItems = search.map(x => x.toLowerCase());
+        return cards.filter(c => {
+          return !invalidItems.some(i => {
+            if(i === 'none') return c[key].length === 0;
+
+            const innerSearches = c[key].map(x => x.toLowerCase());
+            return innerSearches.some(x => x === i);
+          });
+        });
+      }
+
+      // otherwise we treat it as inclusion, and get those cards
+      if(results[alias]) {
+        const search = isArray(results[alias]) ? results[alias] : [results[alias]];
+        const validItems = search.map(x => x.toLowerCase());
+        return cards.filter(c => {
+          return validItems.some(i => {
+            if(i === 'none') return c[key].length === 0;
+
+            const innerSearches = c[key].map(x => x.toLowerCase());
+            return innerSearches.some(x => x === i);
+          });
+        });
+      }
+
+      // if we have no results for this alias, we return no cards
+      return [];
+
+    }).flat();
   };
 }
 

@@ -12,6 +12,7 @@ You can search for cards by ability by putting it bare into the search field. Fo
 Attributes can be searched for by doing:
 
 - `attribute:stylish` to add attribute `stylish` to the search results
+- `attribute:none` to add cards with no attribute to the search results
 - `a:quintuplets` to add attribute `quintuplets` to the search results
 - `-a:ribbon` to remove attribute `ribbon` from the search results
 - `-a:ribbon,stylish` to remove attribute `ribbon` and `stylish` from the search results
@@ -126,5 +127,6 @@ Type can be searched for by doing:
 Trigger can be searched for by doing:
 
 - `trigger:draw` to add cards with trigger `draw` to the search results
-- `trigger:gate,shot` to add cards with trigger `gate` and `shot` to the search results
+- `trigger:gate,shot` to add cards with trigger `gate` or `shot` to the search results
+- `trigger:none` to add cards with no trigger to the search results
 - `-t:pool` to remove cards with trigger `pool` from the search results
