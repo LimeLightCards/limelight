@@ -10,6 +10,8 @@
   padding-left: 15%;
   padding-right: 15%;
 
+  color: #fff;
+
   .search-container {
     margin-top: -20%;
     width: 100%;
@@ -41,12 +43,10 @@
 
       .search {
         width: 100%;
-        border-radius: 3px;
         --padding-top: 20px;
         --padding-end: 20px;
         --padding-start: 60px;
         --padding-bottom: 20px;
-        --background: #3f2f5c;
       }
     }
 

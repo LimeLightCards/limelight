@@ -26,6 +26,9 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 body {
+  --border-width: 2px;
+  --border-radius: 4px;
+
   --ion-font-family: Montserrat, Roboto, Helvetica Neue, sans-serif;
 
 	--ion-color-primary: #8360c3;
@@ -58,6 +61,16 @@ body {
   padding-right: 1em;
 }
 
-ion-searchbar, ion-input {
-  border: 1px solid var(--ion-color-secondary);
+ion-searchbar, ion-input, ion-select {
+  --background: #3f2f5c !important;
+  --color: #fff !important;
+}
+
+ion-select {
+  --padding-end: 5px;
+}
+
+ion-input, ion-select {
+  border: var(--border-width) solid var(--ion-color-secondary);
+  border-radius: var(--border-radius);
 }

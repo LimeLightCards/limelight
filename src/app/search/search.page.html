@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <a class="home-icon" routerLink="/">
       <ion-img src="assets/favicon/android-chrome-192x192.png"></ion-img>
     </a>
 
-    <ion-searchbar [debounce]="1000" (ionChange)="search()" [(ngModel)]="query" placeholder="Search all of Weiss Schwarz..."></ion-searchbar>
+    <ion-searchbar [debounce]="1000" (ionChange)="search()" [(ngModel)]="query" placeholder="Search all of Weiß Schwarz..."></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -42,7 +42,7 @@
 <ng-template #switches>
   <ion-grid class="switches">
     <ion-row>
-      <ion-col size="3">
+      <ion-col size="2">
         <div class="text-display">Cards as</div>
         <ion-select [(ngModel)]="queryDisplay" interface="popover" placeholder="Card Display">
           <ion-select-option value="images">Images</ion-select-option>
@@ -51,7 +51,7 @@
         </ion-select>
       </ion-col>
 
-      <ion-col size="3">
+      <ion-col size="4">
         <div class="text-display">Sorted by</div>
         <ion-select [(ngModel)]="querySort" interface="popover" placeholder="Sort Prop" (ionChange)="search()">
           <ion-select-option value="name">Name</ion-select-option>
