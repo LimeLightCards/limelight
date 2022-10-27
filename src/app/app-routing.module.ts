@@ -3,12 +3,32 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: '',
-    redirectTo: 'home',
+    path: 'advanced',
+    loadChildren: () => import('./advanced/advanced.module').then( m => m.AdvancedPageModule)
+  },
+  {
+    path: 'search',
+    loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
+  },
+  {
+    path: 'card',
+    loadChildren: () => import('./card/card.module').then( m => m.CardPageModule)
+  },
+  {
+    path: 'syntax',
+    loadChildren: () => import('./syntax/syntax.module').then( m => m.SyntaxPageModule)
+  },
+  {
+    path: 'randomcard',
+    loadChildren: () => import('./randomcard/randomcard.module').then( m => m.RandomcardPageModule)
+  },
+  {
+    path: '**',
+    redirectTo: '',
     pathMatch: 'full'
   },
 ];

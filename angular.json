@@ -27,6 +27,9 @@
         },
         "@schematics/angular:service": {
           "skipTests": true
+        },
+        "@schematics/ionic:page": {
+          "skipTests": true
         }
       },
       "architect": {
