@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CardsService } from '../cards.service';
 
 @Component({
   selector: 'app-randomcard',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RandomcardPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private cardsService: CardsService
+  ) { }
 
   ngOnInit() {
+    const card = this.cardsService.getRandomCard();
+    this.router.navigate(['/card', card.code]);
   }
 
 }

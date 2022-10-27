@@ -1,3 +1,4 @@
+
 module.exports.classify = function(card) {
   card.tags = [];
 
@@ -46,6 +47,8 @@ module.exports.classify = function(card) {
       card.tags.push('Shift');
     }
   });
+
+  card.tags = [...new Set(card.tags)];
 
   return card;
 };

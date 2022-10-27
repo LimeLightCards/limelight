@@ -7,11 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { SetsPageRoutingModule } from './sets-routing.module';
 
 import { SetsPage } from './sets.page';
+import { SharedModule } from '../_shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    SharedModule,
     IonicModule,
     SetsPageRoutingModule
   ],

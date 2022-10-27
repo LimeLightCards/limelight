@@ -4,9 +4,10 @@
       <ion-img src="assets/favicon/android-chrome-192x192.png"></ion-img>
     </a>
 
-    <ion-searchbar [debounce]="1000"
-                   (ionChange)="type.emit(query)"
-                   (keyup.enter)="enter.emit(query)"
+    <ion-searchbar #search
+                   [debounce]="1000"
+                   (ionChange)="type.emit(search.value)"
+                   (keyup.enter)="enter.emit(search.value)"
                    [(ngModel)]="query"
                    placeholder="Search all of Weiß Schwarz..."></ion-searchbar>
   </ion-toolbar>

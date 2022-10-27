@@ -7,5 +7,10 @@
   .card-image {
     width: 250px;
     height: 350px;
+
+    &.large {
+      width: 350px;
+      height: 450px;
+    }
   }
 }

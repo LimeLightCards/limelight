@@ -1,7 +1,7 @@
 
 # Searching Cards
 
-Operators can be specified multiple times, and most operators will support commas to specify multiple values. Any numerical operators will be specified, but they should all support `>`, `>=`, `<=`, `<` in addition to equality checks.
+Operators can be specified multiple times, and most operators will support commas to specify multiple values. Any numerical operators will be specified, but they should all support `>`, `>=`, `<=`, `<`, `!=` in addition to equality checks.
 
 ## Abilities
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-syntax',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SyntaxPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  search(query: string) {
+    this.router.navigate(['/search'], { queryParams: { q: query } });
   }
 
 }

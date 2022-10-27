@@ -59,6 +59,12 @@ body {
 .page-container {
   padding-left: 1em;
   padding-right: 1em;
+  min-height: 70vh;
+}
+
+.vertical-center {
+  display: flex;
+  align-items: center;
 }
 
 ion-searchbar, ion-input, ion-select {

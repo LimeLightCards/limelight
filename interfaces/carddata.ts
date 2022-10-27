@@ -19,7 +19,6 @@ export enum CardTrigger {
   Gate = 'GATE',
   Pool = 'POOL',
   Return = 'RETURN',
-  Salvage = 'SALVAGE',
   Shot = 'SHOT',
   Soul = 'SOUL',
   Standby = 'STANDBY',

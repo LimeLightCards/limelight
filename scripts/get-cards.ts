@@ -8,6 +8,8 @@ gitClone('CCondeluci/WeissSchwarz-ENG-DB', { destination: 'cards' });
 
 const files = fs.readdirSync('cards/DB');
 
+const allTriggers = ['CHOICE', 'COMEBACK', 'DRAW', 'GATE', 'POOL', 'RETURN', 'SHOT', 'SOUL', 'STANDBY', 'TREASURE'];
+
 const allCards = [];
 
 files.forEach(file => {
@@ -21,18 +23,50 @@ allCards.forEach(card => {
 
   card.color = card.color.toUpperCase().substring(0, 1);
 
-  if(card.rarity === 'Ｒ') card.rarity = 'R';
+  if(card.rarity === 'Ｒ') {
+    card.rarity = 'R';
+  }
   card.rarity = card.rarity.trim().split('/')[0] || 'C';
 
   card.level = +card.level;
-  if(isNaN(card.level)) card.level = 0;
-  if(card.level > 3) card.level = 3;
+  if(isNaN(card.level)) {
+    card.level = 0;
+  }
+  if(card.level > 3) {
+    card.level = 3;
+  }
 
   card.cost = +card.cost;
-  if(isNaN(card.cost)) card.cost = 0;
+  if(isNaN(card.cost)) {
+    card.cost = 0;
+  }
 
   card.power = +card.power;
-  if(isNaN(card.power)) card.power = 0;
+  if(isNaN(card.power)) {
+    card.power = 0;
+  }
+
+  if(card.flavorText === '-' || card.flavorText === '－') {
+    card.flavorText = '';
+  }
+
+  if(card.type === 'Climax') {
+
+    if(card.trigger.includes('SALVAGE')) {
+      card.trigger = card.trigger.filter(t => t !== 'SALVAGE');
+      card.trigger.push('COMEBACK');
+    }
+
+    card.ability.forEach(abi => {
+      allTriggers.forEach(trigger => {
+        if(abi.includes(trigger) && !card.trigger.includes(trigger)) {
+          card.trigger.push(trigger);
+        }
+      });
+    });
+  }
+
+  card.attributes = card.attributes.filter(a => a !== '-' && a !== '－');
 });
 
 const formattedCards = allCards.map(card => classify(card));

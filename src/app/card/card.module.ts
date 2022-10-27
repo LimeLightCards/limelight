@@ -7,12 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { CardPageRoutingModule } from './card-routing.module';
 
 import { CardPage } from './card.page';
+import { SharedModule } from '../_shared/shared.module';
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    SharedModule,
     IonicModule,
+
+    ClipboardModule,
     CardPageRoutingModule
   ],
   declarations: [CardPage]

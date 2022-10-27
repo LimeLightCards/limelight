@@ -2,7 +2,7 @@
 
 .below-the-fold {
   width: 100vw;
-  height: 30vh;
+  min-height: 30vh;
 
   background-color: #19181f;
 
@@ -15,7 +15,7 @@
   color: #999;
 
   .map {
-    min-height: 20vh;
+    min-height: 15vh;
 
     .map-title {
       font-variant: small-caps;
@@ -35,5 +35,6 @@
 
   .legal {
     color: #444;
+    font-size: 0.75em;
   }
 }

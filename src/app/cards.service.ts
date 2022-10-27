@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { sample } from 'lodash';
 import { decompress } from 'compress-json';
 
 import { parseQuery } from '../../search/search';
@@ -22,5 +23,13 @@ export class CardsService {
 
   public searchCards(query: string): ICard[] {
     return parseQuery(this.cards, query);
+  }
+
+  public getCardById(id: string): ICard | undefined {
+    return this.cards.find(c => c.code === id);
+  }
+
+  public getRandomCard(): ICard {
+    return sample(this.cards);
   }
 }

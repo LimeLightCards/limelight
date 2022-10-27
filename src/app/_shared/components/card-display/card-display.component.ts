@@ -8,6 +8,7 @@ import { ICard } from '../../../../../interfaces';
 })
 export class CardDisplayComponent implements OnInit {
 
+  @Input() size: 'normal'|'large' = 'normal';
   @Input() card: ICard;
   @Input() display: 'images'|'text'|'checklist' = 'images';
 

@@ -7,11 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { AdvancedPageRoutingModule } from './advanced-routing.module';
 
 import { AdvancedPage } from './advanced.page';
+import { SharedModule } from '../_shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    SharedModule,
     IonicModule,
     AdvancedPageRoutingModule
   ],
