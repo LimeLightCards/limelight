@@ -4,7 +4,7 @@ import { isString } from 'lodash';
 
 import { ICard } from '../interfaces';
 
-import { bare, card, color, expansion, rarity, set, side, type } from './operators';
+import { bare, card, color, expansion, name, rarity, set, side, type } from './operators';
 
 const allKeywords = [
   'attribute',  'a',
@@ -13,7 +13,7 @@ const allKeywords = [
   'cost',       'co',
   'expansion',  'e',    // loose text
   'level',      'l',
-  'name',       'n',
+  'name',       'n',    // loose text
   'power',      'p',
   'rarity',     'r',    // exact text
   'release',    'rel',
@@ -28,6 +28,7 @@ const operators = [
   card,
   color,
   expansion,
+  name,
   rarity,
   set,
   side,

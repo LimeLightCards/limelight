@@ -110,3 +110,8 @@ test('Filtering cards by expansion should return cards of that expansion', () =>
   expect(res.every(c => c.expansion === 'The Quintessential Quintuplets'
                      || c.expansion === 'The Quintessential Quintpulets 2')).toBe(true);
 });
+
+test('Filtering cards by name should return cards of that name', () => {
+  const res = parseQuery(allCards, 'name:"Nino Nakano"');
+  expect(res.every(c => c.name.includes('Nino Nakano'))).toBe(true);
+});
