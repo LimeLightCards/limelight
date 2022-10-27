@@ -1,0 +1,55 @@
+
+.card-container {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.switches, .info {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--ion-color-secondary);
+  padding-left: 2em;
+  padding-right: 2em;
+
+  ion-row {
+    width: 100%;
+
+    ion-col {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+
+      .text-display {
+        min-width: 80px;
+      }
+    }
+  }
+
+  ion-select {
+    width: 200px;
+  }
+}
+
+.pagination {
+  justify-content: flex-end;
+
+  ion-button {
+    display: flex;
+    align-items: center;
+    margin-right: 0.5em;
+
+    .symbol {
+      font-size: 2rem;
+      margin-bottom: 6px;
+
+      &.left {
+        margin-right: 0.25em;
+      }
+
+      &.right {
+        margin-left: 0.25em;
+      }
+    }
+  }
+}

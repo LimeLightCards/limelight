@@ -1,9 +1,81 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>search</ion-title>
+    <ion-img class="home-icon" src="assets/favicon/android-chrome-192x192.png" routerLink="/"></ion-img>
+    <ion-searchbar [debounce]="1000" (ionChange)="search()" [(ngModel)]="query" placeholder="Search all of Weiss Schwarz..."></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid class="switches">
+    <ion-row>
+      <ion-col size="3">
+        <div class="text-display">Cards as</div>
+        <ion-select [(ngModel)]="queryDisplay" interface="popover" placeholder="Card Display">
+          <ion-select-option value="images">Images</ion-select-option>
+          <ion-select-option value="text">Text</ion-select-option>
+          <ion-select-option value="checklist">Checklist</ion-select-option>
+        </ion-select>
+      </ion-col>
 
+      <ion-col size="3">
+        <div class="text-display">Sorted by</div>
+        <ion-select [(ngModel)]="querySort" interface="popover" placeholder="Sort Prop" (ionChange)="search()">
+          <ion-select-option value="name">Name</ion-select-option>
+          <ion-select-option value="code">Code</ion-select-option>
+          <ion-select-option value="rarity">Rarity</ion-select-option>
+          <ion-select-option value="expansion">Expansion</ion-select-option>
+          <ion-select-option value="side">Side</ion-select-option>
+          <ion-select-option value="type">Type</ion-select-option>
+          <ion-select-option value="color">Color</ion-select-option>
+          <ion-select-option value="level">Level</ion-select-option>
+          <ion-select-option value="cost">Cost</ion-select-option>
+          <ion-select-option value="power">Power</ion-select-option>
+          <ion-select-option value="soul">Soul</ion-select-option>
+          <ion-select-option value="set">Set</ion-select-option>
+          <ion-select-option value="release">Release</ion-select-option>
+        </ion-select>
+
+        <ion-select [(ngModel)]="querySortBy" interface="popover" placeholder="Sort Dir" (ionChange)="search()">
+          <ion-select-option value="asc">Asc ↑</ion-select-option>
+          <ion-select-option value="desc">Desc ↓</ion-select-option>
+        </ion-select>
+      </ion-col>
+
+      <ion-col size="6" class="pagination">
+        <ion-button fill="outline" color="secondary" [disabled]="page <= 0" (click)="changePage(0)">
+          <span class="symbol">&laquo;</span>
+        </ion-button>
+
+        <ion-button fill="outline" color="secondary" [disabled]="page <= 0" (click)="changePage(page - 1)">
+          <span class="symbol left">&lsaquo;</span> Previous
+        </ion-button>
+
+        <ion-button fill="outline" color="secondary" [disabled]="page >= totalPages" (click)="changePage(page + 1)">
+          Next {{ cardsPerPage }} <span class="symbol right">&rsaquo;</span>
+        </ion-button>
+
+        <ion-button fill="outline" color="secondary" [disabled]="page >= totalPages" (click)="changePage(totalPages)">
+          <span class="symbol">&raquo;</span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="info">
+    <ion-row>
+      <ion-col>
+        {{ displayCurrent | number }} - {{ displayMaximum | number }} of {{ displayTotal | number }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="page-container">
+    <ion-grid class="cards">
+      <ion-row>
+        <ion-col class="card-container" size-md="3" size-sm="6" size-xs="12" *ngFor="let card of visibleCards">
+          <app-card-display class="card" [card]="card" [display]="queryDisplay"></app-card-display>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

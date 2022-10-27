@@ -1,5 +1,12 @@
 {
     "recommendations": [
-        "ionic.ionic"
+        "ionic.ionic",
+        "angular.ng-template",
+        "editorconfig.editorconfig",
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.vscode-typescript-next",
+        "rbbit.typescript-hero",
+        "eamodio.gitlens",
+        "formulahendry.auto-rename-tag"
     ]
 }

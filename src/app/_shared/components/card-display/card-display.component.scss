@@ -1,0 +1,11 @@
+
+.card-image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .card-image {
+    width: 250px;
+    height: 350px;
+  }
+}

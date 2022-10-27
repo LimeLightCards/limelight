@@ -2,7 +2,9 @@ module.exports.classify = function(card) {
   card.tags = [];
 
   (card.ability || []).forEach(abil => {
-    if(!abil) return;
+    if(!abil) {
+      return;
+    }
 
     if(abil.includes('Assist')) {
       card.tags.push('Assist');
@@ -18,6 +20,10 @@ module.exports.classify = function(card) {
 
     if(abil.includes('Change')) {
       card.tags.push('Change');
+    }
+
+    if(abil.includes('CXCOMBO')) {
+      card.tags.push('CXCOMBO');
     }
 
     if(abil.includes('Encore')) {
@@ -42,4 +48,4 @@ module.exports.classify = function(card) {
   });
 
   return card;
-}
+};
