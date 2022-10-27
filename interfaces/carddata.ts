@@ -6,10 +6,10 @@ export enum CardType {
 }
 
 export enum CardColor {
-  Red = 'Red',
-  Blue = 'Blue',
-  Green = 'Green',
-  Yellow = 'Yellow'
+  Red = 'R',
+  Blue = 'B',
+  Green = 'G',
+  Yellow = 'Y'
 }
 
 export enum CardTrigger {

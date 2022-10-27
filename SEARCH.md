@@ -1,7 +1,11 @@
 
 # Searching Cards
 
-Operators can be specified multiple times, and most operators will support commas to specify multiple values. Any numerical 
+Operators can be specified multiple times, and most operators will support commas to specify multiple values. Any numerical operators will be specified, but they should all support `>`, `>=`, `<=`, `<` in addition to equality checks.
+
+## Abilities
+
+You can search for cards by ability by putting it bare into the search field. For example, searching for `Brainstorm` will return all cards with `Brainstorm` in the text.
 
 ## Attribute
 
@@ -91,7 +95,7 @@ Release can be searched for by doing:
 Set can be searched for by doing:
 
 - `set:5HY` to add cards from set `5HY` (Quintessential Quintuplets) to the search results
-- `-s:5HY` to remove cards from set `5HY` (Quintessential Quintuplets) from the search results
+- `-set:5HY` to remove cards from set `5HY` (Quintessential Quintuplets) from the search results
 
 ## Side
 

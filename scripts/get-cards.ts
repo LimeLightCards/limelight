@@ -19,7 +19,7 @@ allCards.forEach(card => {
   card.flavorText = card.flavor_text;
   delete card.flavor_text;
 
-  card.color = card.color.toUpperCase();
+  card.color = card.color.toUpperCase().substring(0, 1);
 
   if(card.rarity === 'Ｒ') card.rarity = 'R';
   card.rarity = card.rarity.trim().split('/')[0] || 'C';
