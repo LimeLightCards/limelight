@@ -103,3 +103,10 @@ test('Filtering cards by multiple operators should filter correctly', () => {
   const res3 = parseQuery(allCards, '-type:character side:w');
   expect(res3.every(c => c.type !== 'Character' && c.side === 'W')).toBe(true);
 });
+
+test('Filtering cards by expansion should return cards of that expansion', () => {
+  const res = parseQuery(allCards, 'expansion:"The Quintessential Quintpulets"');
+  expect(res.every(c => c.expansion.includes('The Quintessential Quintuplets'))).toBe(true);
+  expect(res.every(c => c.expansion === 'The Quintessential Quintuplets'
+                     || c.expansion === 'The Quintessential Quintpulets 2')).toBe(true);
+});

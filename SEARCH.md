@@ -47,6 +47,7 @@ Expansion can be searched for by doing:
 
 - `expansion:Quintessential` to add cards from `The Quintessential Quintuplets` or `The Quintessential Quintuplets 2` to the search results
 - `expansion:"The Quintessential Quintuplets"` to add cards from only `The Quintessential Quintuplets` to the search results
+- `expansion:"The Quintessential Quintuplets,Log Horizon"` to add cards from only `The Quintessential Quintuplets` and `Log Horizon` to the search results
 - `-e:Quintessential` to remove cards from `The Quintessential Quintuplets` or `The Quintessential Quintuplets 2` from the search results
 
 ## Level

@@ -4,14 +4,14 @@ import { isString } from 'lodash';
 
 import { ICard } from '../interfaces';
 
-import { bare, card, color, rarity, set, side, type } from './operators';
+import { bare, card, color, expansion, rarity, set, side, type } from './operators';
 
 const allKeywords = [
   'attribute',  'a',
   'id',                 // exact text
   'color',      'c',    // exact text
   'cost',       'co',
-  'expansion',  'e',
+  'expansion',  'e',    // loose text
   'level',      'l',
   'name',       'n',
   'power',      'p',
@@ -27,6 +27,7 @@ const allKeywords = [
 const operators = [
   card,
   color,
+  expansion,
   rarity,
   set,
   side,
@@ -42,7 +43,13 @@ export function parseQuery(cards: ICard[], query: string): ICard[] {
     return bare(cards, query);
   }
 
+  const resultText = (result as parser.SearchParserResult).text as string;
+
   let returnCards = cards;
+
+  if(resultText) {
+    returnCards = bare(returnCards, resultText);
+  }
 
   // check all the operators
   operators.forEach(operator => {

@@ -4,14 +4,17 @@ import type * as parser from 'search-query-parser';
 
 import { ICard } from '../../interfaces';
 
-// TODO: partial text for expansion
 // TODO: array search
+// TODO: number search
 
 export function numericalOperator(aliases: string[], key: string) {
   return (cards: ICard[], results: parser.SearchParserResult) => {
   };
 }
 
+// this operator works on loose text matching for a field
+// some properties will prefer to use this for shorthand reasons
+// it also checks case-insensitively
 export function partialTextOperator(aliases: string[], key: string) {
   return (cards: ICard[], results: parser.SearchParserResult) => {
 
@@ -29,14 +32,14 @@ export function partialTextOperator(aliases: string[], key: string) {
       if(results.exclude[alias]) {
         const search = isArray(results.exclude[alias]) ? results.exclude[alias] : [results.exclude[alias]];
         const invalidItems = search.map(x => x.toLowerCase());
-        return cards.filter(c => !invalidItems.includes(c[key].toLowerCase()));
+        return cards.filter(c => !invalidItems.some(i => c[key].toLowerCase().includes(i)));
       }
 
       // otherwise we treat it as inclusion, and get those cards
       if(results[alias]) {
         const search = isArray(results[alias]) ? results[alias] : [results[alias]];
         const validItems = search.map(x => x.toLowerCase());
-        return cards.filter(c => validItems.includes(c[key].toLowerCase()));
+        return cards.filter(c => validItems.some(i => c[key].toLowerCase().includes(i)));
       }
 
       // if we have no results for this alias, we return no cards
