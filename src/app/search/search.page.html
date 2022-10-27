@@ -1,11 +1,43 @@
 <ion-header>
   <ion-toolbar>
-    <ion-img class="home-icon" src="assets/favicon/android-chrome-192x192.png" routerLink="/"></ion-img>
+    <a class="home-icon" routerLink="/">
+      <ion-img src="assets/favicon/android-chrome-192x192.png"></ion-img>
+    </a>
+
     <ion-searchbar [debounce]="1000" (ionChange)="search()" [(ngModel)]="query" placeholder="Search all of Weiss Schwarz..."></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ng-container *ngTemplateOutlet="switches"></ng-container>
+
+  <ion-grid class="info">
+    <ion-row>
+      <ion-col>
+        {{ displayCurrent | number }} - {{ displayMaximum | number }} of {{ displayTotal | number }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="page-container">
+    <ion-grid class="cards">
+      <ion-row>
+        <ion-col class="card-container" size-md="3" size-sm="6" size-xs="12" *ngFor="let card of visibleCards">
+          <a [routerLink]="['/card', card.code]">
+            <app-card-display class="card"
+                              [card]="card"
+                              [display]="queryDisplay"></app-card-display>
+          </a>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ng-container *ngTemplateOutlet="switches"></ng-container>
+</ion-content>
+
+<ng-template #switches>
   <ion-grid class="switches">
     <ion-row>
       <ion-col size="3">
@@ -60,22 +92,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <ion-grid class="info">
-    <ion-row>
-      <ion-col>
-        {{ displayCurrent | number }} - {{ displayMaximum | number }} of {{ displayTotal | number }}
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <div class="page-container">
-    <ion-grid class="cards">
-      <ion-row>
-        <ion-col class="card-container" size-md="3" size-sm="6" size-xs="12" *ngFor="let card of visibleCards">
-          <app-card-display class="card" [card]="card" [display]="queryDisplay"></app-card-display>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
-</ion-content>
+</ng-template>

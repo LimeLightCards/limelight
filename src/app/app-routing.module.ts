@@ -15,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
   },
   {
-    path: 'card',
+    path: 'card/:id',
     loadChildren: () => import('./card/card.module').then( m => m.CardPageModule)
   },
   {
