@@ -28,10 +28,10 @@ Cards can be searched by code by doing:
 
 Colors can be searched for by doing:
 
-- `color:blue` to add color `blue` to the search results
-- `c:red` to add color `red` to the search results
-- `-c:green` to remove color `green` from the search results
-- `-c:green,red` to remove color `green` and `red` from the search results
+- `color:b` to add color `blue` to the search results
+- `c:r` to add color `red` to the search results
+- `-c:g` to remove color `green` from the search results
+- `-c:g,r` to remove color `green` and `red` from the search results
 
 ## Cost
 
