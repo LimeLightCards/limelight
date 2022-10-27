@@ -92,3 +92,14 @@ test('Filtering cards by type should return cards of only that type', () => {
   const res2 = parseQuery(allCards, '-type:character');
   expect(res2.every(c => c.type !== 'Character')).toBe(true);
 });
+
+test('Filtering cards by multiple operators should filter correctly', () => {
+  const res = parseQuery(allCards, 'type:character side:w');
+  expect(res.every(c => c.type === 'Character' && c.side === 'W')).toBe(true);
+
+  const res2 = parseQuery(allCards, '-type:character -side:w');
+  expect(res2.every(c => c.type !== 'Character' && c.side !== 'W')).toBe(true);
+
+  const res3 = parseQuery(allCards, '-type:character side:w');
+  expect(res3.every(c => c.type !== 'Character' && c.side === 'W')).toBe(true);
+});
