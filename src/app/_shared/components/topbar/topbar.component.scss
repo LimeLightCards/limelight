@@ -1,0 +1,21 @@
+
+
+.home-icon {
+  z-index: 10;
+  position: absolute;
+  top: 13px;
+  left: 18px;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+}
+
+.popover {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
