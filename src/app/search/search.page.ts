@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { sortBy } from 'lodash';
 
@@ -10,7 +10,7 @@ import { CardsService } from '../cards.service';
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.scss'],
 })
-export class SearchPage implements OnInit {
+export class SearchPage {
 
   public query = '';
 
@@ -34,7 +34,7 @@ export class SearchPage implements OnInit {
     private cardsService: CardsService
   ) { }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.query = this.route.snapshot.queryParamMap.get('q') || '';
     this.queryDisplay = this.route.snapshot.queryParamMap.get('d') as 'images'|'checklist'|'text' || 'images';
     this.querySort = this.route.snapshot.queryParamMap.get('s') as keyof ICard || 'name';
