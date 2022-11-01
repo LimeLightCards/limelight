@@ -14,6 +14,9 @@
           "/assets/expansions.json",
           "/*.css",
           "/*.js"
+        ],
+        "urls": [
+          "https://fonts.googleapis.com/css2?family=Montserrat&amp;display=swap"
         ]
       }
     },
