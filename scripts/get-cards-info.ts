@@ -20,3 +20,5 @@ console.log('Cost', getUniqueValues('cost'));
 console.log('Power', getUniqueValues('power'));
 console.log('Soul', getUniqueValues('soul'));
 console.log('Rarity', getUniqueValues('rarity'));
+console.log('Set', getUniqueValues('set'));
+console.log('Expansions', getUniqueValues('expansion'));
