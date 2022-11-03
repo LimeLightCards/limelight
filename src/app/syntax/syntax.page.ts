@@ -35,7 +35,6 @@ export class SyntaxPage implements OnInit {
   ngOnInit() {
     if(document.location.hash) {
       setTimeout(() => {
-        console.log(document.location.hash);
         this.navigateTo(document.location.hash.replace('#', ''));
       }, 500);
     }
