@@ -4,7 +4,8 @@ import { isString } from 'lodash';
 
 import { ICard } from '../interfaces';
 
-import { attribute, bare, card, color, cost, expansion, level, name, power, rarity, release, set, side, soul, trigger, type } from './operators';
+import { attribute, bare, card, color, cost, expansion, level,
+  name, power, rarity, release, set, side, soul, trigger, type } from './operators';
 
 const allKeywords = [
   'attribute',  'a',    // array search

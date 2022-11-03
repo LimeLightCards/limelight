@@ -70,3 +70,10 @@ ion-input, ion-select {
   border: var(--border-width) solid var(--ion-color-secondary);
   border-radius: var(--border-radius);
 }
+
+code {
+  padding-left: 5px;
+  padding-right: 5px;
+  background: #F6F6F6;
+  color: var(--accent-color, #246782);
+}
