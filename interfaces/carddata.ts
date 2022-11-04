@@ -13,16 +13,16 @@ export enum CardColor {
 }
 
 export enum CardTrigger {
-  Choice = 'CHOICE',
-  Comeback = 'COMEBACK',
-  Draw = 'DRAW',
-  Gate = 'GATE',
-  Pool = 'POOL',
-  Return = 'RETURN',
-  Shot = 'SHOT',
-  Soul = 'SOUL',
-  Standby = 'STANDBY',
-  Treasure = 'TREASURE',
+  Choice = 'Choice',
+  Comeback = 'Comeback',
+  Draw = 'Draw',
+  Gate = 'Gate',
+  Pool = 'Pool',
+  Return = 'Return',
+  Shot = 'Shot',
+  Soul = 'Soul',
+  Standby = 'Standby',
+  Treasure = 'Treasure',
 }
 
 export interface ICardData {
