@@ -16,7 +16,7 @@ export class SearchPage {
   public query = '';
   public queryDesc = '';
 
-  public queryDisplay: 'images'|'checklist'|'text' = 'images';
+  public queryDisplay: 'images'|'text' = 'images';
   public querySort: keyof ICard = 'name';
   public querySortBy: 'asc'|'desc' = 'asc';
 
@@ -38,7 +38,7 @@ export class SearchPage {
 
   ionViewDidEnter() {
     this.query = this.route.snapshot.queryParamMap.get('q') || '';
-    this.queryDisplay = this.route.snapshot.queryParamMap.get('d') as 'images'|'checklist'|'text' || 'images';
+    this.queryDisplay = this.route.snapshot.queryParamMap.get('d') as 'images'|'text' || 'images';
     this.querySort = this.route.snapshot.queryParamMap.get('s') as keyof ICard || 'name';
     this.querySortBy = this.route.snapshot.queryParamMap.get('b') as 'asc'|'desc' || 'asc';
 

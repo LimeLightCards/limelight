@@ -1,4 +1,58 @@
 
-<div class="card-image-container">
+<div class="card-image-container" *ngIf="display === 'images'">
   <ion-img [src]="card.image" class="card-image" [ngClass]="[size]"></ion-img>
+</div>
+
+<div class="card-text-container" *ngIf="display === 'text'">
+  <ion-card class="card-info" [ngClass]="['color-' + card.color]">
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label text-wrap>
+            <div>{{ card.name }}</div>
+            <small>{{ card.rarity }} &middot; {{ card.expansion }}</small>
+          </ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="card.type === 'Character'">
+          <ion-label text-wrap>
+            <div>Character &middot; <em>{{ card.attributes.join(', ') }}</em></div>
+            <div class="vertical-center">
+              {{ card.level }}/{{ card.cost }}
+              &middot;
+              {{ card.power }} Power
+              &middot;
+              <app-cardicon *ngFor="let soul of soulArray" [type]="soul" [size]="16"></app-cardicon>
+            </div>
+          </ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="card.type === 'Event'">
+          <ion-label text-wrap>
+            <div>Event</div>
+            <div>{{ card.level }}/{{ card.cost }}</div>
+          </ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="card.type === 'Climax'">
+          <ion-label text-wrap>
+            <div>Climax</div>
+            <div class="vertical-center">
+              <app-cardicon *ngFor="let icon of card.trigger" [type]="icon" [size]="16"></app-cardicon>
+            </div>
+          </ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="card.ability.length > 0">
+          <ion-label text-wrap>
+            <div class="ability" *ngFor="let ability of card.ability">
+              {{ ability }}
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <div class="color-bar"></div>
+    </ion-card-content>
+  </ion-card>
 </div>

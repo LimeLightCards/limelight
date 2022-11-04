@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ICard } from '../../../../../interfaces';
+import { CardTrigger, ICard } from '../../../../../interfaces';
 
 @Component({
   selector: 'app-card-display',
@@ -10,10 +10,14 @@ export class CardDisplayComponent implements OnInit {
 
   @Input() size: 'normal'|'large' = 'normal';
   @Input() card: ICard;
-  @Input() display: 'images'|'text'|'checklist' = 'images';
+  @Input() display: 'images'|'text' = 'images';
+
+  public soulArray = [];
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.soulArray = Array(this.card.soul).fill(CardTrigger.Soul);
+  }
 
 }

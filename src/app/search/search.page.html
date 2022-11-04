@@ -23,7 +23,7 @@
     <div class="page-container">
       <ion-grid class="cards">
         <ion-row>
-          <ion-col class="card-container" size-md="3" size-sm="6" size-xs="12" *ngFor="let card of visibleCards">
+          <ion-col class="card-container" [sizeMd]="3" [sizeSm]="6" [sizeXs]="12" *ngFor="let card of visibleCards">
             <a [routerLink]="['/card', card.code]">
               <app-card-display class="card"
                                 [card]="card"
