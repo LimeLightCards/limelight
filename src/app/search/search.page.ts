@@ -45,6 +45,10 @@ export class SearchPage {
     this.changePage(page);
   }
 
+  redoCurrentSearch() {
+    this.search(this.query);
+  }
+
   search(query: string, changePage = true) {
     this.query = query;
     this.page = 0;
