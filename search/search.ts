@@ -43,6 +43,73 @@ const operators = [
   type
 ];
 
+export function queryToText(query: string): string {
+  const result = parser.parse(query, { keywords: allKeywords, offsets: false }) as parser.SearchParserResult;
+  if(isString(result)) {
+    return `cards with "${query}" in the name, abilities, expansion, or code`;
+  }
+
+  const text = [];
+
+  if(result.attribute) {
+    text.push(`attribute is ${result.attribute.join(' or ')}`);
+  }
+
+  if(result.id) {
+    text.push(`id is ${result.card}`);
+  }
+
+  if(result.color) {
+    text.push(`color is ${result.color.join(' or ')}`);
+  }
+
+  if(result.cost) {
+    text.push(`cost is ${result.cost}`);
+  }
+
+  if(result.expansion) {
+    text.push(`expansion is ${result.expansion.join(' or ')}`);
+  }
+
+  if(result.level) {
+    text.push(`level is ${result.level}`);
+  }
+
+  if(result.name) {
+    text.push(`name is ${result.name}`);
+  }
+
+  if(result.power) {
+    text.push(`power is ${result.power}`);
+  }
+
+  if(result.rarity) {
+    text.push(`rarity is ${result.rarity.join(' or ')}`);
+  }
+
+  if(result.release) {
+    text.push(`release is ${result.release.join(' or ')}`);
+  }
+
+  if(result.set) {
+    text.push(`set is ${result.set}`);
+  }
+
+  if(result.side) {
+    text.push(`side is ${result.side}`);
+  }
+
+  if(result.soul) {
+    text.push(`soul is ${result.soul}`);
+  }
+
+  if(result.type) {
+    text.push(`type is ${result.type}`);
+  }
+
+  return `cards where ${text.join(' and ')}`;
+}
+
 export function parseQuery(cards: ICard[], query: string): ICard[] {
   const result = parser.parse(query, { keywords: allKeywords, offsets: false });
 

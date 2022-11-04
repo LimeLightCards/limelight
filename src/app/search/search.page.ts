@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { sortBy } from 'lodash';
 
 import { ICard } from '../../../interfaces';
+import { queryToText } from '../../../search/search';
 import { CardsService } from '../cards.service';
 
 @Component({
@@ -13,6 +14,7 @@ import { CardsService } from '../cards.service';
 export class SearchPage {
 
   public query = '';
+  public queryDesc = '';
 
   public queryDisplay: 'images'|'checklist'|'text' = 'images';
   public querySort: keyof ICard = 'name';
@@ -63,6 +65,8 @@ export class SearchPage {
       this.updateParams();
       return;
     }
+
+    this.queryDesc = queryToText(this.query);
 
     this.queriedCards = this.cardsService.searchCards(this.query);
     this.doExtraSorting();

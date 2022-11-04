@@ -15,7 +15,7 @@
     <ion-grid class="info">
       <ion-row>
         <ion-col>
-          {{ displayCurrent | number }} - {{ displayMaximum | number }} of {{ displayTotal | number }}
+          {{ displayCurrent | number }} - {{ displayMaximum | number }} of {{ displayTotal | number }} {{ queryDesc }}
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -48,7 +48,6 @@
         <ion-select class="themed" [(ngModel)]="queryDisplay" interface="popover" placeholder="Card Display">
           <ion-select-option value="images">Images</ion-select-option>
           <ion-select-option value="text">Text</ion-select-option>
-          <ion-select-option value="checklist">Checklist</ion-select-option>
         </ion-select>
       </ion-col>
 
