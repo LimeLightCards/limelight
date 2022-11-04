@@ -25,6 +25,10 @@ function cardMatchesNumberCheck(value: number, numberCheck: string): boolean {
     return value !== +numberCheck.replace('!=', '');
   }
 
+  if(numberCheck.includes('=')) {
+    return value === +numberCheck.replace('=', '');
+  }
+
   return value === +numberCheck;
 }
 
@@ -34,11 +38,15 @@ export function numericalOperator(aliases: string[], key: string) {
   return (cards: ICard[], results: parser.SearchParserResult) => {
 
     // if we have no cards, short-circuit because we can't filter it anymore
-    if(cards.length === 0) return [];
+    if(cards.length === 0) {
+      return [];
+    }
 
     // if this operator isn't present at all, we skip it
     const shouldFilterThisOperator = aliases.some(alias => results[alias] || results.exclude[alias]);
-    if(!shouldFilterThisOperator) return cards;
+    if(!shouldFilterThisOperator) {
+      return cards;
+    }
 
     // map all of the aliases (the same alias is an OR)
     return aliases.map(alias => {
@@ -69,11 +77,15 @@ export function arraySearchOperator(aliases: string[], key: string) {
   return (cards: ICard[], results: parser.SearchParserResult) => {
 
     // if we have no cards, short-circuit because we can't filter it anymore
-    if(cards.length === 0) return [];
+    if(cards.length === 0) {
+      return [];
+    }
 
     // if this operator isn't present at all, we skip it
     const shouldFilterThisOperator = aliases.some(alias => results[alias] || results.exclude[alias]);
-    if(!shouldFilterThisOperator) return cards;
+    if(!shouldFilterThisOperator) {
+      return cards;
+    }
 
     // map all of the aliases (the same alias is an OR)
     return aliases.map(alias => {
@@ -82,28 +94,28 @@ export function arraySearchOperator(aliases: string[], key: string) {
       if(results.exclude[alias]) {
         const search = isArray(results.exclude[alias]) ? results.exclude[alias] : [results.exclude[alias]];
         const invalidItems = search.map(x => x.toLowerCase());
-        return cards.filter(c => {
-          return !invalidItems.some(i => {
-            if(i === 'none') return c[key].length === 0;
+        return cards.filter(c => !invalidItems.some(i => {
+          if(i === 'none') {
+            return c[key].length === 0;
+          }
 
-            const innerSearches = c[key].map(x => x.toLowerCase());
-            return innerSearches.some(x => x === i);
-          });
-        });
+          const innerSearches = c[key].map(x => x.toLowerCase());
+          return innerSearches.some(x => x === i);
+        }));
       }
 
       // otherwise we treat it as inclusion, and get those cards
       if(results[alias]) {
         const search = isArray(results[alias]) ? results[alias] : [results[alias]];
         const validItems = search.map(x => x.toLowerCase());
-        return cards.filter(c => {
-          return validItems.some(i => {
-            if(i === 'none') return c[key].length === 0;
+        return cards.filter(c => validItems.some(i => {
+          if(i === 'none') {
+            return c[key].length === 0;
+          }
 
-            const innerSearches = c[key].map(x => x.toLowerCase());
-            return innerSearches.some(x => x === i);
-          });
-        });
+          const innerSearches = c[key].map(x => x.toLowerCase());
+          return innerSearches.some(x => x === i);
+        }));
       }
 
       // if we have no results for this alias, we return no cards
@@ -120,11 +132,15 @@ export function partialTextOperator(aliases: string[], key: string) {
   return (cards: ICard[], results: parser.SearchParserResult) => {
 
     // if we have no cards, short-circuit because we can't filter it anymore
-    if(cards.length === 0) return [];
+    if(cards.length === 0) {
+      return [];
+    }
 
     // if this operator isn't present at all, we skip it
     const shouldFilterThisOperator = aliases.some(alias => results[alias] || results.exclude[alias]);
-    if(!shouldFilterThisOperator) return cards;
+    if(!shouldFilterThisOperator) {
+      return cards;
+    }
 
     // map all of the aliases (the same alias is an OR)
     return aliases.map(alias => {
@@ -157,11 +173,15 @@ export function exactTextOperator(aliases: string[], key: string) {
   return (cards: ICard[], results: parser.SearchParserResult) => {
 
     // if we have no cards, short-circuit because we can't filter it anymore
-    if(cards.length === 0) return [];
+    if(cards.length === 0) {
+      return [];
+    }
 
     // if this operator isn't present at all, we skip it
     const shouldFilterThisOperator = aliases.some(alias => results[alias] || results.exclude[alias]);
-    if(!shouldFilterThisOperator) return cards;
+    if(!shouldFilterThisOperator) {
+      return cards;
+    }
 
     // map all of the aliases (the same alias is an OR)
     return aliases.map(alias => {

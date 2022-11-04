@@ -8,6 +8,7 @@
           </a>
 
           <ion-searchbar #search
+                         class="themed"
                          [debounce]="1000"
                          (ionChange)="type.emit(search.value)"
                          (keyup.enter)="enter.emit(search.value)"
@@ -51,7 +52,7 @@
           </div>
 
           <div class="ion-hide-md-down buttons">
-            <ion-button fill="clear" color="light">
+            <ion-button fill="clear" color="light" [routerLink]="['/advanced']">
               <ion-icon slot="start" name="library-outline"></ion-icon>
               Advanced
             </ion-button>

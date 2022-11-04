@@ -37,6 +37,7 @@
     "lodash": "^4.17.21",
     "marked": "^4.2.1",
     "ngx-clipboard": "^15.1.0",
+    "ngx-webstorage": "^10.0.1",
     "rxjs": "~6.6.0",
     "search-query-parser": "^1.6.0",
     "tslib": "^2.2.0",

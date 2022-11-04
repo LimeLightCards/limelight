@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
 const { default: gitClone } = require('git-clone-repo');
 const { compress } = require('compress-json');
+const { capitalize } = require('lodash');
 
 const { classify } = require('./helpers/card-classifier');
 
@@ -68,6 +69,8 @@ allCards.forEach(card => {
 
   card.ability = card.ability.filter(abi => abi !== '-' && abi !== '－');
   card.attributes = card.attributes.filter(a => a !== '-' && a !== '－');
+
+  card.trigger = card.trigger.map(trigger => capitalize(trigger.toLowerCase()));
 });
 
 const formattedCards = allCards.map(card => classify(card));

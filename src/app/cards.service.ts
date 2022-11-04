@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { sample } from 'lodash';
+import { sample, sortBy } from 'lodash';
 import { decompress } from 'compress-json';
 
 import { parseQuery } from '../../search/search';
@@ -31,5 +31,9 @@ export class CardsService {
 
   public getRandomCard(): ICard {
     return sample(this.cards);
+  }
+
+  public getAllUniqueAttributes(attribute: keyof ICard): string[] {
+    return sortBy(Array.from(new Set(this.cards.map(c => c[attribute]).flat())), x => x.toString().toLowerCase()) as string[];
   }
 }

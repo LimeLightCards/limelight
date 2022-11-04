@@ -57,18 +57,29 @@ body {
   align-items: center;
 }
 
-ion-searchbar, ion-input, ion-select {
+.hidden {
+  display: none !important;
+}
+
+ion-searchbar.themed, ion-input.themed, ion-select.themed {
   --background: #3f2f5c !important;
   --color: #fff !important;
 }
 
-ion-select {
+ion-select.themed {
   --padding-end: 5px;
 }
 
-ion-input, ion-select {
+ion-input.themed, ion-select.themed {
   border: var(--border-width) solid var(--ion-color-secondary);
   border-radius: var(--border-radius);
+}
+
+ion-alert {
+  &.sc-ion-alert-md-h {
+    --max-width: 600px;
+    --min-width: 600px;
+  }
 }
 
 code {
