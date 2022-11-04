@@ -66,6 +66,7 @@ allCards.forEach(card => {
     });
   }
 
+  card.ability = card.ability.filter(abi => abi !== '-' && abi !== '－');
   card.attributes = card.attributes.filter(a => a !== '-' && a !== '－');
 });
 
