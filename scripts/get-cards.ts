@@ -5,7 +5,12 @@ const { capitalize } = require('lodash');
 
 const { classify } = require('./helpers/card-classifier');
 
+console.log('Cloning card database...');
 gitClone('CCondeluci/WeissSchwarz-ENG-DB', { destination: 'cards' });
+
+console.log('Cloning set metadata...');
+gitClone('LimeLightCards/setdata', { destination: 'cards/meta' });
+fs.copySync('cards/meta/expansions.json', 'src/assets/expansions.json');
 
 const files = fs.readdirSync('cards/DB');
 
