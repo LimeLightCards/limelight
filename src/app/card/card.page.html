@@ -111,7 +111,7 @@
                       expand="block"
                       target="_blank"
                       [href]="'https://www.tcgplayer.com/search/weiss-schwarz/product?Language=English&productLineName=weiss-schwarz&q=' + encodedCardName + '&view=grid'">
-            TCGPlayer <span class="price" *ngIf="tcgplayerPrice">(${{ tcgplayerPrice }})</span>
+            TCGPlayer <span class="price" *ngIf="tcgplayerPrice">({{ tcgplayerPrice | currency }})</span>
           </ion-button>
         </ion-col>
 
