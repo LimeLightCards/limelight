@@ -97,6 +97,14 @@
                       color="secondary"
                       expand="block"
                       target="_blank"
+                      [href]="'https://en.ws-tcg.com/cardlist/list/?cardno=' + hotcCode">
+            Weiß Cards
+          </ion-button>
+
+          <ion-button fill="outline"
+                      color="secondary"
+                      expand="block"
+                      target="_blank"
                       [href]="'https://encoredecks.com/?cards=' + encoreDecksId"
                       *ngIf="encoreDecksId">
             Encore Decks with this card
