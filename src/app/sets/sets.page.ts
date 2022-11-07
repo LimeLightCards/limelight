@@ -3,10 +3,6 @@ import { Router } from '@angular/router';
 
 import { sortBy } from 'lodash';
 
-import * as expansions from '../../assets/expansions.json';
-
-const allExpansions = (expansions as any).default || expansions;
-
 @Component({
   selector: 'app-sets',
   templateUrl: './sets.page.html',
@@ -14,29 +10,35 @@ const allExpansions = (expansions as any).default || expansions;
 })
 export class SetsPage implements OnInit {
 
+  private allExpansions: Record<string, any> = {};
+
   public sort: 'year'|'name' = 'name';
   public allYears: number[] = [];
   public allNames: string[] = [];
 
   get expansions() {
-    return allExpansions;
+    return this.allExpansions;
   }
 
   constructor(
     private router: Router
   ) { }
 
-  ngOnInit() {
-    this.allYears = sortBy([...new Set(Object.values(allExpansions).map((expansion: any) => expansion.release).flat())]).reverse();
-    this.allNames = sortBy(Object.keys(allExpansions), set => set.toLowerCase());
+  async ngOnInit() {
+    const expansions = await fetch('https://data.limelight.cards/expansions.json');
+    const realData = await expansions.json();
+    this.allExpansions = realData;
+
+    this.allYears = sortBy([...new Set(Object.values(this.allExpansions).map((expansion: any) => expansion.release).flat())]).reverse();
+    this.allNames = sortBy(Object.keys(this.allExpansions), set => set.toLowerCase());
   }
 
   getSetReleaseDates(set: string): number[] {
-    return allExpansions[set].release;
+    return this.allExpansions[set].release;
   }
 
   getSetsByYear(year: number): string[] {
-    return Object.keys(allExpansions).filter(set => allExpansions[set].release.includes(year));
+    return Object.keys(this.allExpansions).filter(set => this.allExpansions[set].release.includes(year));
   }
 
   formatSetNameForSearch(setName: string): string {

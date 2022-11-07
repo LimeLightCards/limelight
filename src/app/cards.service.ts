@@ -14,7 +14,7 @@ export class CardsService {
   private cards: ICard[];
 
   public async init() {
-    const cardData = await fetch('assets/cards.min.json');
+    const cardData = await fetch('https://data.limelight.cards/cards.min.json');
     const realData = await cardData.json();
 
     const allCards = decompress(realData);
