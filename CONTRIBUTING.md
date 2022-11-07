@@ -4,6 +4,8 @@
 
 Send me a pull request, but please make sure you grab from the issue list or let me (Seiyria#3457) know first.
 
+Want to add some tags? Check [this file](https://github.com/LimeLightCards/cards/blob/main/scripts/helpers/card-classifier.ts) for the current tags / classifier functionality and extend it.
+
 ## Non-Code Contributions
 
 I'm willing to accept issues, design suggestions, translations, and documentation updates. Just make sure you're not duplicating an existing issue.
