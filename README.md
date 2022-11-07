@@ -8,7 +8,6 @@ A simple and powerful search tool for Weiss Schwarz cards.
 ### Setup
 
 * `npm i`
-* `npm run setup`
 
 ### Running
 
