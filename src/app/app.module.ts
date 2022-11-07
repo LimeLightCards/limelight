@@ -10,6 +10,8 @@ import { CardsService } from './cards.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
+import { NgxMatomoRouterModule } from '@ngx-matomo/router';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +23,9 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    NgxMatomoTrackerModule.forRoot({ trackerUrl: 'https://limelight-analytics.apps.seiyria.com/', siteId: '1' }),
+    NgxMatomoRouterModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

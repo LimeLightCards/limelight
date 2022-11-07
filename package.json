@@ -30,6 +30,8 @@
     "@capacitor/keyboard": "4.0.1",
     "@capacitor/status-bar": "4.0.1",
     "@ionic/angular": "^6.1.9",
+    "@ngx-matomo/router": "^3.2.0",
+    "@ngx-matomo/tracker": "^3.2.0",
     "compress-json": "^2.1.2",
     "ionicons": "^6.0.3",
     "lodash": "^4.17.21",
