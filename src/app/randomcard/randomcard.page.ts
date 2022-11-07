@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CardsService } from '../cards.service';
 
@@ -7,14 +7,14 @@ import { CardsService } from '../cards.service';
   templateUrl: './randomcard.page.html',
   styleUrls: ['./randomcard.page.scss'],
 })
-export class RandomcardPage implements OnInit {
+export class RandomcardPage {
 
   constructor(
     private router: Router,
     private cardsService: CardsService
   ) { }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     const card = this.cardsService.getRandomCard();
     this.router.navigate(['/card', card.code]);
   }
