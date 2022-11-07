@@ -5,7 +5,7 @@ import { isString } from 'lodash';
 import { ICard } from '../interfaces';
 
 import { attribute, bare, card, color, cost, expansion, level,
-  name, power, rarity, release, set, side, soul, trigger, type } from './operators';
+  name, power, rarity, release, set, side, soul, tag, trigger, type } from './operators';
 
 const allKeywords = [
   'attribute',  'a',    // array search
@@ -21,6 +21,7 @@ const allKeywords = [
   'set',                // exact text
   'side',               // exact text
   'soul',       's',    // number search
+  'tag',                // array search
   'type',               // exact text
   'trigger',    't'     // array search
 ];
@@ -39,6 +40,7 @@ const operators = [
   set,
   side,
   soul,
+  tag,
   trigger,
   type
 ];
@@ -49,12 +51,11 @@ export function queryToText(query: string): string {
     return `cards with "${query}" in the name, abilities, expansion, or code`;
   }
 
-  console.log(result);
-
   const text = [];
 
   if(result.attribute) {
-    text.push(`attribute is ${result.attribute.join(' or ')}`);
+    const attributes = isString(result.attribute) ? [result.attribute] : result.attribute;
+    text.push(`attribute is ${attributes.join(' or ')}`);
   }
 
   if(result.id) {
@@ -70,7 +71,8 @@ export function queryToText(query: string): string {
   }
 
   if(result.expansion) {
-    text.push(`expansion is ${result.expansion.join(' or ')}`);
+    const expansions = isString(result.expansion) ? [result.expansion] : result.expansion;
+    text.push(`expansion is ${expansions.join(' or ')}`);
   }
 
   if(result.level) {
@@ -86,11 +88,13 @@ export function queryToText(query: string): string {
   }
 
   if(result.rarity) {
-    text.push(`rarity is ${result.rarity.join(' or ')}`);
+    const rarities = isString(result.rarity) ? [result.rarity] : result.rarity;
+    text.push(`rarity is ${rarities.join(' or ')}`);
   }
 
   if(result.release) {
-    text.push(`release is ${result.release.join(' or ')}`);
+    const releases = isString(result.release) ? [result.release] : result.release;
+    text.push(`release is ${releases.join(' or ')}`);
   }
 
   if(result.set) {
@@ -105,8 +109,18 @@ export function queryToText(query: string): string {
     text.push(`soul is ${result.soul}`);
   }
 
+  if(result.tag) {
+    const tags = isString(result.tag) ? [result.tag] : result.tag;
+    text.push(`tag is ${tags.join(' or ')}`);
+  }
+
   if(result.type) {
     text.push(`type is ${result.type}`);
+  }
+
+  if(result.trigger) {
+    const triggers = isString(result.trigger) ? [result.trigger] : result.trigger;
+    text.push(`trigger is ${triggers.join(' or ')}`);
   }
 
   return `cards where ${text.join(' and ')}`;

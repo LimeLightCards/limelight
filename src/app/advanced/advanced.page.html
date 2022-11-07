@@ -292,6 +292,28 @@
         </ion-col>
       </ion-row>
 
+      <!-- tags -->
+      <ion-row>
+        <ion-col class="criteria" [sizeMd]="2">
+          <ion-icon name="pricetag-outline" color="primary"></ion-icon>
+          <span>Tags</span>
+        </ion-col>
+
+        <ion-col class="search" [sizeMd]="6">
+          <ion-select
+            [(ngModel)]="searchQuery.tags"
+            [interfaceOptions]="{ header: 'Select Tags' }"
+            placeholder="Select tags"
+            (ionChange)="saveQuery()"
+            [multiple]="true"
+          >
+            <ion-select-option *ngFor="let tag of allTags" [value]="tag">
+              {{ tag }}
+            </ion-select-option>
+          </ion-select>
+        </ion-col>
+      </ion-row>
+
       <!-- trigger -->
       <ion-row>
         <ion-col class="criteria" [sizeMd]="2">

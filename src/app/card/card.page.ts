@@ -87,4 +87,8 @@ export class CardPage implements OnInit {
     tcgplayer();
   }
 
+  searchTag(tag: string) {
+    this.search(`tag:"${tag}"`);
+  }
+
 }

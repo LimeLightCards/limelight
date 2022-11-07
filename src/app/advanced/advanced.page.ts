@@ -17,6 +17,7 @@ const defaultQuery = () => ({
   rarity: [],
   side: { w: false, s: false },
   soul: { operator: '=', value: undefined },
+  tags: [],
   trigger: {},
   type: { character: false, event: false, climax: false }
 });
@@ -40,6 +41,7 @@ export class AdvancedPage implements OnInit {
   public allExpansions = [];
   public allRarities = [];
   public allTriggers = [];
+  public allTags = [];
 
   @LocalStorage()
   public searchQuery;
@@ -57,6 +59,7 @@ export class AdvancedPage implements OnInit {
     this.allExpansions = this.cardsService.getAllUniqueAttributes('expansion');
     this.allRarities = this.cardsService.getAllUniqueAttributes('rarity');
     this.allTriggers = this.cardsService.getAllUniqueAttributes('trigger');
+    this.allTags = this.cardsService.getAllUniqueAttributes('tags');
 
     this.allTriggers.forEach(t => this.searchQuery.trigger[t] = false);
   }
@@ -108,6 +111,10 @@ export class AdvancedPage implements OnInit {
 
     if(isNumber(this.searchQuery.soul.value)) {
       queryAttributes.push(`soul:${this.searchQuery.soul.operator}${this.searchQuery.soul.value}`);
+    }
+
+    if(this.searchQuery.tags.length > 0) {
+      queryAttributes.push(`tag:"${this.searchQuery.tags.join(',')}"`);
     }
 
     const triggers = Object.keys(this.searchQuery.trigger).filter(t => this.searchQuery.trigger[t]);

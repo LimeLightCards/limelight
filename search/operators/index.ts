@@ -13,5 +13,6 @@ export * from './release';
 export * from './set';
 export * from './side';
 export * from './soul';
+export * from './tag';
 export * from './trigger';
 export * from './type';

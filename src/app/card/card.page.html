@@ -71,6 +71,12 @@
                     </div>
                   </ion-label>
                 </ion-item>
+
+                <ion-item>
+                  <ion-label text-wrap>
+                    <ion-chip *ngFor="let tag of cardData.tags" color="primary" (click)="searchTag(tag)">{{ tag }}</ion-chip>
+                  </ion-label>
+                </ion-item>
               </ion-list>
 
               <div class="color-bar"></div>

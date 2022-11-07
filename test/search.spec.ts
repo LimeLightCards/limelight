@@ -211,3 +211,8 @@ test('Filtering cards by soul should return cards with that soul/range', () => {
   const res2 = parseQuery(allCards, '-s:>1');
   expect(res2.some(c => c.soul > 1)).toBe(false);
 });
+
+test('Filtering cards by tag should return cards with that tag', () => {
+  const res = parseQuery(allCards, 'tag:"Army"');
+  expect(res.every(c => c.tags.includes('Army'))).toBe(true);
+});

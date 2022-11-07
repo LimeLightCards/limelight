@@ -9,7 +9,8 @@ import { ICardHelp } from '../../../interfaces';
 import { attributeDescription, cardDescription,
   colorDescription, costDescription, expansionDescription, levelDescription,
   nameDescription, powerDescription, rarityDescription, releaseDescription,
-  setDescription, sideDescription, soulDescription, triggerDescription, typeDescription
+  setDescription, sideDescription, soulDescription, tagDescription, triggerDescription,
+  typeDescription
 } from '../../../search/operators';
 
 @Component({
@@ -24,7 +25,8 @@ export class SyntaxPage implements OnInit {
     costDescription, expansionDescription, levelDescription,
     nameDescription, powerDescription, rarityDescription,
     releaseDescription, setDescription, sideDescription,
-    soulDescription, triggerDescription, typeDescription
+    soulDescription, tagDescription, triggerDescription,
+    typeDescription
   ];
 
   constructor(
