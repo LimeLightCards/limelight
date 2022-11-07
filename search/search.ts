@@ -49,6 +49,8 @@ export function queryToText(query: string): string {
     return `cards with "${query}" in the name, abilities, expansion, or code`;
   }
 
+  console.log(result);
+
   const text = [];
 
   if(result.attribute) {
@@ -60,7 +62,7 @@ export function queryToText(query: string): string {
   }
 
   if(result.color) {
-    text.push(`color is ${result.color.join(' or ')}`);
+    text.push(`color is ${result.color.split('').join(' or ')}`);
   }
 
   if(result.cost) {
