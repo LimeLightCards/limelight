@@ -4,7 +4,7 @@
 
 <ion-content>
 
-  <div class="no-results" *ngIf="displayTotal === 0">
+  <div class="no-results ion-text-center" *ngIf="displayTotal === 0">
     <h2>No results found</h2>
     <p>For help using the search tool, check the <a target="_blank" [routerLink]="['/syntax']">help guide</a>.</p>
   </div>
@@ -43,7 +43,7 @@
 <ng-template #switches>
   <ion-grid class="switches">
     <ion-row>
-      <ion-col size="2">
+      <ion-col [sizeXs]="12" [sizeMd]="2">
         <div class="text-display">Cards as</div>
         <ion-select class="themed" [(ngModel)]="queryDisplay" interface="popover" placeholder="Card Display" (ionChange)="redoCurrentSearch()">
           <ion-select-option value="images">Images</ion-select-option>
@@ -51,7 +51,7 @@
         </ion-select>
       </ion-col>
 
-      <ion-col size="4">
+      <ion-col [sizeXs]="12" [sizeMd]="4">
         <div class="text-display">Sorted by</div>
         <ion-select class="themed" [(ngModel)]="querySort" interface="popover" placeholder="Sort Prop" (ionChange)="redoCurrentSearch()">
           <ion-select-option value="name">Name</ion-select-option>
@@ -75,17 +75,17 @@
         </ion-select>
       </ion-col>
 
-      <ion-col size="6" class="pagination">
+      <ion-col [sizeXs]="12" [sizeMd]="6" class="pagination ion-justify-content-center">
         <ion-button fill="outline" color="secondary" [disabled]="page <= 0" (click)="changePage(0)">
           <span class="symbol">&laquo;</span>
         </ion-button>
 
         <ion-button fill="outline" color="secondary" [disabled]="page <= 0" (click)="changePage(page - 1)">
-          <span class="symbol left">&lsaquo;</span> Previous
+          <span class="symbol left">&lsaquo;</span> <span class="ion-hide-sm-down">Previous</span>
         </ion-button>
 
         <ion-button fill="outline" color="secondary" [disabled]="page >= totalPages" (click)="changePage(page + 1)">
-          Next {{ cardsPerPage }} <span class="symbol right">&rsaquo;</span>
+          <span class="ion-hide-sm-down">Next {{ cardsPerPage }}</span> <span class="symbol right">&rsaquo;</span>
         </ion-button>
 
         <ion-button fill="outline" color="secondary" [disabled]="page >= totalPages" (click)="changePage(totalPages)">

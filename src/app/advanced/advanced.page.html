@@ -8,12 +8,12 @@
 
       <!-- card name -->
       <ion-row>
-        <ion-col class="criteria" [sizeMd]="2">
+        <ion-col class="criteria" [sizeXs]="12" [sizeMd]="2">
           <ion-icon name="person-outline" color="primary"></ion-icon>
           <span>Card Name</span>
         </ion-col>
 
-        <ion-col class="search" [sizeMd]="6">
+        <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
           <ion-input (ionChange)="saveQuery()"
                      [(ngModel)]="searchQuery.name"
                      placeholder="Search any card name"></ion-input>
@@ -22,12 +22,12 @@
 
       <!-- attribute -->
       <ion-row>
-        <ion-col class="criteria" [sizeMd]="2">
+        <ion-col class="criteria" [sizeXs]="12" [sizeMd]="2">
           <ion-icon name="color-filter-outline" color="primary"></ion-icon>
           <span>Attributes</span>
         </ion-col>
 
-        <ion-col class="search" [sizeMd]="6">
+        <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
           <ion-input (ionChange)="saveQuery()"
                      [(ngModel)]="searchQuery.attribute"
                      placeholder="Search any card attributes, separate multiple with a comma (,)"></ion-input>
@@ -36,12 +36,12 @@
 
       <!-- color -->
       <ion-row>
-        <ion-col class="criteria" [sizeMd]="2">
+        <ion-col class="criteria" [sizeXs]="12" [sizeMd]="2">
           <ion-icon name="color-palette-outline" color="primary"></ion-icon>
           <span>Color</span>
         </ion-col>
 
-        <ion-col class="search" [sizeMd]="6">
+        <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
           <ion-row>
             <ion-col>
               <ion-item>
@@ -73,12 +73,12 @@
 
       <!-- cost -->
       <ion-row>
-        <ion-col class="criteria" [sizeMd]="2">
+        <ion-col class="criteria" [sizeXs]="12" [sizeMd]="2">
           <ion-icon name="prism-outline" color="primary"></ion-icon>
           <span>Cost</span>
         </ion-col>
 
-        <ion-col class="search" [sizeMd]="6">
+        <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
           <ion-row>
             <ion-col size="6">
               <ion-select
@@ -111,12 +111,12 @@
 
       <!-- expansion -->
       <ion-row>
-        <ion-col class="criteria" [sizeMd]="2">
+        <ion-col class="criteria" [sizeXs]="12" [sizeMd]="2">
           <ion-icon name="library-outline" color="primary"></ion-icon>
           <span>Expansion</span>
         </ion-col>
 
-        <ion-col class="search" [sizeMd]="6">
+        <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
           <ion-select
             [(ngModel)]="searchQuery.expansion"
             [interfaceOptions]="{ header: 'Select Expansions' }"
@@ -133,12 +133,12 @@
 
       <!-- level -->
       <ion-row>
-        <ion-col class="criteria" [sizeMd]="2">
+        <ion-col class="criteria" [sizeXs]="12" [sizeMd]="2">
           <ion-icon name="fitness-outline" color="primary"></ion-icon>
           <span>Level</span>
         </ion-col>
 
-        <ion-col class="search" [sizeMd]="6">
+        <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
           <ion-row>
             <ion-col size="6">
               <ion-select
@@ -171,12 +171,12 @@
 
       <!-- power -->
       <ion-row>
-        <ion-col class="criteria" [sizeMd]="2">
+        <ion-col class="criteria" [sizeXs]="12" [sizeMd]="2">
           <ion-icon name="barbell-outline" color="primary"></ion-icon>
           <span>Power</span>
         </ion-col>
 
-        <ion-col class="search" [sizeMd]="6">
+        <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
           <ion-row>
             <ion-col size="6">
               <ion-select
@@ -209,12 +209,12 @@
 
       <!-- rarity -->
       <ion-row>
-        <ion-col class="criteria" [sizeMd]="2">
+        <ion-col class="criteria" [sizeXs]="12" [sizeMd]="2">
           <ion-icon name="aperture-outline" color="primary"></ion-icon>
           <span>Rarity</span>
         </ion-col>
 
-        <ion-col class="search" [sizeMd]="6">
+        <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
           <ion-select
             [(ngModel)]="searchQuery.rarity"
             [interfaceOptions]="{ header: 'Select Rarities' }"
@@ -231,12 +231,12 @@
 
       <!-- side -->
       <ion-row>
-        <ion-col class="criteria" [sizeMd]="2">
+        <ion-col class="criteria" [sizeXs]="12" [sizeMd]="2">
           <ion-icon name="star-half-outline" color="primary"></ion-icon>
           <span>Side</span>
         </ion-col>
 
-        <ion-col class="search" [sizeMd]="6">
+        <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
           <ion-row>
             <ion-col>
               <ion-item>
@@ -256,12 +256,12 @@
 
       <!-- soul -->
       <ion-row>
-        <ion-col class="criteria" [sizeMd]="2">
+        <ion-col class="criteria" [sizeXs]="12" [sizeMd]="2">
           <ion-icon name="dice-outline" color="primary"></ion-icon>
           <span>Soul</span>
         </ion-col>
 
-        <ion-col class="search" [sizeMd]="6">
+        <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
           <ion-row>
             <ion-col size="6">
               <ion-select
@@ -294,12 +294,12 @@
 
       <!-- tags -->
       <ion-row>
-        <ion-col class="criteria" [sizeMd]="2">
+        <ion-col class="criteria" [sizeXs]="12" [sizeMd]="2">
           <ion-icon name="pricetag-outline" color="primary"></ion-icon>
           <span>Tags</span>
         </ion-col>
 
-        <ion-col class="search" [sizeMd]="6">
+        <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
           <ion-select
             [(ngModel)]="searchQuery.tags"
             [interfaceOptions]="{ header: 'Select Tags' }"
@@ -316,14 +316,14 @@
 
       <!-- trigger -->
       <ion-row>
-        <ion-col class="criteria" [sizeMd]="2">
+        <ion-col class="criteria" [sizeXs]="12" [sizeMd]="2">
           <ion-icon name="gift-outline" color="primary"></ion-icon>
           <span>Trigger</span>
         </ion-col>
 
-        <ion-col class="search" [sizeMd]="6">
+        <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
           <ion-row class="triggers">
-            <ion-col *ngFor="let trigger of allTriggers">
+            <ion-col [sizeXs]="6" *ngFor="let trigger of allTriggers">
               <ion-item>
                 <ion-checkbox slot="start"
                               [(ngModel)]="searchQuery.trigger[trigger]"
@@ -342,12 +342,12 @@
 
       <!-- type -->
       <ion-row>
-        <ion-col class="criteria" [sizeMd]="2">
+        <ion-col class="criteria" [sizeXs]="12" [sizeMd]="2">
           <ion-icon name="extension-puzzle-outline" color="primary"></ion-icon>
           <span>Type</span>
         </ion-col>
 
-        <ion-col class="search" [sizeMd]="6">
+        <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
           <ion-row>
             <ion-col>
               <ion-item>
@@ -373,8 +373,8 @@
 
       <!-- search! -->
       <ion-row class="actions">
-        <ion-col class="criteria" [sizeMd]="2"></ion-col>
-        <ion-col class="search" [sizeMd]="6">
+        <ion-col class="criteria" [sizeXs]="2" [sizeMd]="2"></ion-col>
+        <ion-col class="search" [sizeXs]="10" [sizeMd]="6">
           <ion-button (click)="querySearch()" color="primary" [disabled]="!getSearchQuery()">Search</ion-button>
           <ion-button (click)="reset()" color="warning" fill="outline">Reset</ion-button>
         </ion-col>

@@ -56,6 +56,9 @@ export class AdvancedPage implements OnInit {
       this.searchQuery = defaultQuery();
     }
 
+    // in case we add new fields that the cached query doesn't have available
+    this.searchQuery = Object.assign({}, defaultQuery(), this.searchQuery);
+
     this.allExpansions = this.cardsService.getAllUniqueAttributes('expansion');
     this.allRarities = this.cardsService.getAllUniqueAttributes('rarity');
     this.allTriggers = this.cardsService.getAllUniqueAttributes('trigger');

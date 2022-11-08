@@ -6,16 +6,14 @@
   <div class="page-container">
     <ion-grid>
       <ion-row>
-        <ion-col size="2"></ion-col>
-
-        <ion-col size="4">
+        <ion-col [sizeXs]="12" [sizeMd]="6" [sizeLg]="4" [offsetLg]="2">
           <app-card-display class="card"
             [card]="cardData"
             [size]="'large'"
             [display]="'images'"></app-card-display>
         </ion-col>
 
-        <ion-col size="4">
+        <ion-col [sizeXs]="12" [sizeMd]="6" [sizeLg]="4">
           <ion-card class="card-info" [ngClass]="['color-' + cardData.color]">
             <ion-card-header>
               <ion-card-title>{{ cardData.name }}</ion-card-title>
@@ -83,12 +81,10 @@
             </ion-card-content>
           </ion-card>
         </ion-col>
-
-        <ion-col size="2"></ion-col>
       </ion-row>
 
       <ion-row class="tools">
-        <ion-col>
+        <ion-col [sizeXs]="12" [sizeMd]="4" class="ion-text-center">
           <div class="title">About This Card</div>
 
           <ion-button fill="outline"
@@ -117,7 +113,7 @@
           </ion-button>
         </ion-col>
 
-        <ion-col>
+        <ion-col [sizeXs]="12" [sizeMd]="4" class="ion-text-center">
           <div class="title">Buy This Card</div>
 
           <ion-button fill="outline"
@@ -129,7 +125,7 @@
           </ion-button>
         </ion-col>
 
-        <ion-col>
+        <ion-col [sizeXs]="12" [sizeMd]="4" class="ion-text-center">
           <div class="title">Card Data</div>
 
           <ion-button fill="outline"

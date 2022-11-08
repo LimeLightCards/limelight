@@ -1,22 +1,37 @@
 <ion-content [fullscreen]="true">
   <div class="container">
-    <div class="search-container">
-      <div class="search-text">
-        <strong>Limelight</strong> is a powerful search tool for <strong>Weiß Schwarz</strong>.
-      </div>
+    <ion-grid class="search-container">
+      <ion-row class="search-text">
+        <ion-col>
+          <strong>Limelight</strong> is a powerful search tool for <strong>Weiß Schwarz</strong>.
+        </ion-col>
+      </ion-row>
 
-      <div class="search-bar-container">
-        <ion-img class="search-icon" src="assets/favicon/android-chrome-192x192.png"></ion-img>
-        <ion-input placeholder="Search all of Weiß Schwarz..." class="search themed" [(ngModel)]="searchQuery" (keydown.enter)="search(searchQuery)"></ion-input>
-      </div>
+      <ion-row>
+        <ion-col class="search-bar-container">
+          <ion-img class="search-icon" src="assets/favicon/android-chrome-192x192.png"></ion-img>
+          <ion-input placeholder="Search all of Weiß Schwarz..." class="search themed" [(ngModel)]="searchQuery" (keydown.enter)="search(searchQuery)"></ion-input>
+        </ion-col>
+      </ion-row>
 
-      <div class="search-actions">
-        <ion-button fill="outline" color="light" routerLink="/advanced">Advanced Search</ion-button>
-        <ion-button fill="outline" color="light" routerLink="/syntax">Syntax</ion-button>
-        <ion-button fill="outline" color="light" routerLink="/sets">All Sets</ion-button>
-        <ion-button fill="outline" color="light" routerLink="/randomcard">Random Card</ion-button>
-      </div>
-    </div>
+      <ion-row class="search-actions">
+        <ion-col>
+          <ion-button fill="outline" expand="block" color="light" routerLink="/advanced">Advanced Search</ion-button>
+        </ion-col>
+
+        <ion-col>
+          <ion-button fill="outline" expand="block" color="light" routerLink="/syntax">Syntax</ion-button>
+        </ion-col>
+
+        <ion-col>
+          <ion-button fill="outline" expand="block" color="light" routerLink="/sets">All Sets</ion-button>
+        </ion-col>
+
+        <ion-col>
+          <ion-button fill="outline" expand="block" color="light" routerLink="/randomcard">Random Card</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 
   <app-below-the-fold></app-below-the-fold>
