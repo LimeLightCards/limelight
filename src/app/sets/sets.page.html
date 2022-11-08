@@ -32,7 +32,7 @@
             <ion-card-content>
               <ion-list>
                 <ion-item *ngFor="let setName of getSetsByYear(year)">
-                  <ion-label>
+                  <ion-label text-wrap>
                     <ion-row>
                       <ion-col class="set-name">
                         <a [routerLink]="['/search']" [queryParams]="{ q: formatSetNameForSearch(setName) }">
@@ -60,7 +60,7 @@
             <ion-card-content>
               <ion-list>
                 <ion-item *ngFor="let setName of allNames">
-                  <ion-label>
+                  <ion-label text-wrap>
                     <ion-row>
                       <ion-col class="set-name">
                         <a [routerLink]="['/search']" [queryParams]="{ q: formatSetNameForSearch(setName) }">

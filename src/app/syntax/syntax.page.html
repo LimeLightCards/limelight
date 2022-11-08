@@ -14,7 +14,7 @@
       </ion-row>
 
       <ion-row>
-        <ion-col size="4" *ngFor="let operator of allOperators">
+        <ion-col [sizeXs]="12" [sizeMd]="4" *ngFor="let operator of allOperators">
           <ion-button shape="round" expand="full" fill="outline" (click)="navigateTo(operator.id)">
             <ion-icon [name]="operator.icon" slot="start"></ion-icon>
             {{ operator.name }}
@@ -25,7 +25,7 @@
 
     <ion-grid class="reference-list">
       <ion-row class="reference-row" *ngFor="let operator of allOperators" [style.--accent-color]="operator.color">
-        <ion-col>
+        <ion-col [sizeXs]="12" [sizeMd]="6">
           <h3 class="operator-title" [id]="operator.id">
             <ion-icon [name]="operator.icon" [style.color]="operator.color"></ion-icon>
             <span class="text">{{ operator.name }}</span>

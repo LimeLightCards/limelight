@@ -28,14 +28,11 @@
       position: relative;
       margin-bottom: 20px;
 
-      padding-left: 15%;
-      padding-right: 15%;
-
       .search-icon {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        left: calc(15% + 15px);
+        left: calc(20px);
         z-index: 10;
         height: 32px;
         width: 32px;
