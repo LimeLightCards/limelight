@@ -75,16 +75,19 @@ ion-input.themed, ion-select.themed {
   border-radius: var(--border-radius);
 }
 
-ion-alert {
-  &.sc-ion-alert-md-h {
-    --max-width: 600px;
-    --min-width: 600px;
-  }
-}
-
 code {
   padding-left: 5px;
   padding-right: 5px;
   background: #F6F6F6;
   color: var(--accent-color, #246782);
+}
+
+
+@media screen and (min-width: 768px) {
+  ion-alert {
+    &.sc-ion-alert-md-h {
+      --max-width: 600px;
+      --min-width: 600px;
+    }
+  }
 }
