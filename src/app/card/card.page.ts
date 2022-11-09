@@ -13,6 +13,8 @@ export class CardPage implements OnInit {
   public cardData: ICard = undefined;
   public soulArray = [];
 
+  public similarCards: Array<{ card: ICard; score: number }> = [];
+
   // this is going to be a mess
   public encodedCardName = '';
   public encoreDecksId = '';
@@ -41,6 +43,7 @@ export class CardPage implements OnInit {
     this.soulArray = Array(this.cardData.soul).fill(CardTrigger.Soul);
 
     this.loadCardExtraData();
+    this.getCardsLikeThisCard();
   }
 
   search(query: string) {
@@ -89,6 +92,10 @@ export class CardPage implements OnInit {
 
   searchTag(tag: string) {
     this.search(`tag:"${tag}"`);
+  }
+
+  private getCardsLikeThisCard() {
+    this.similarCards = this.cardsService.getCardsLikeCard(this.cardData, 4);
   }
 
 }

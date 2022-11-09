@@ -83,6 +83,25 @@
         </ion-col>
       </ion-row>
 
+      <ion-row class="like-this ion-hide-lg-down">
+        <ion-col [sizeLg]="12" class="ion-text-center">
+          <div class="title">Cards Like This</div>
+        </ion-col>
+
+        <ion-col [sizeLg]="1"></ion-col>
+
+        <ion-col *ngFor="let cardInfo of similarCards">
+          <a [routerLink]="['/card', cardInfo.card.code]">
+            <app-card-display class="card"
+              [card]="cardInfo.card"
+              [size]="'normal'"
+              [display]="'images'"></app-card-display>
+          </a>
+        </ion-col>
+
+        <ion-col [sizeLg]="1"></ion-col>
+      </ion-row>
+
       <ion-row class="tools">
         <ion-col [sizeXs]="12" [sizeMd]="4" class="ion-text-center">
           <div class="title">About This Card</div>
