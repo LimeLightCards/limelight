@@ -12,6 +12,9 @@ import { environment } from '../environments/environment';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
 import { NgxMatomoRouterModule } from '@ngx-matomo/router';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,9 +28,12 @@ import { NgxMatomoRouterModule } from '@ngx-matomo/router';
       registrationStrategy: 'registerWhenStable:30000'
     }),
     NgxMatomoTrackerModule.forRoot({ trackerUrl: 'https://limelight-analytics.apps.seiyria.com/', siteId: '1' }),
-    NgxMatomoRouterModule
+    NgxMatomoRouterModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth())
   ],
   providers: [
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
       provide: APP_INITIALIZER,

@@ -26,6 +26,20 @@
               <ng-template>
                 <ion-content class="ion-padding">
                   <ion-list>
+                    <ng-container *ngIf="authService.user | async as user; else showLogin">
+                      <ion-item [routerLink]="['/profile']" detail="false">
+                        <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+                        Profile
+                      </ion-item>
+                    </ng-container>
+
+                    <ng-template #showLogin>
+                      <ion-item [routerLink]="['/login']" detail="false">
+                        <ion-icon slot="start" name="log-in-outline"></ion-icon>
+                        Log In
+                      </ion-item>
+                    </ng-template>
+
                     <ion-item [routerLink]="['/advanced']" detail="false">
                       <ion-icon slot="start" name="library-outline"></ion-icon>
                       Advanced
@@ -71,6 +85,18 @@
               <ion-icon slot="start" name="shuffle-outline"></ion-icon>
               Random
             </ion-button>
+
+            <ng-container *ngIf="authService.user | async as user; else showLogin">
+              <ion-button fill="clear" color="light" [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+              </ion-button>
+            </ng-container>
+
+            <ng-template #showLogin>
+              <ion-button fill="clear" color="light" [routerLink]="['/login']">
+                <ion-icon slot="icon-only" name="log-in-outline"></ion-icon>
+              </ion-button>
+            </ng-template>
           </div>
         </ion-col>
       </ion-row>

@@ -1,0 +1,32 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-secondary));
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  color: #fff;
+}
+
+ion-card {
+  padding: 2em;
+
+  @media screen and (max-width: 576px) {
+    width: 80vw;
+  }
+
+  @media screen and (min-width: 576px) {
+    width: 60vw;
+  }
+}
+
+.action-row {
+  padding-top: 1em;
+}
+
+.action-button {
+  margin-top: 14px;
+}
