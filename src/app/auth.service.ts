@@ -1,21 +1,46 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
+import { LocalStorage } from 'ngx-webstorage';
+import { interval } from 'rxjs';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  @LocalStorage() private lastUsername: string;
+  @LocalStorage() private lastPassword: string;
+  @LocalStorage() private token: string;
+
+  public get idToken() {
+    return this.token;
+  }
+
   public get user() {
     return this.auth.user;
   }
 
-  constructor(private auth: AngularFireAuth) { }
+  constructor(private router: Router, private auth: AngularFireAuth, private api: ApiService) {}
+
+  public async init() {
+    const user = await this.auth.currentUser;
+    if(!user && this.lastUsername && this.lastPassword) {
+      await this.signIn(this.lastUsername, this.lastPassword);
+    }
+
+    interval(1000 * 60 * 30).subscribe(() => {
+      this.getToken();
+    });
+  }
 
   async signUp(email: string, password: string, username: string) {
     try {
       await this.auth.createUserWithEmailAndPassword(email, password);
       await this.changeDisplayName(username);
+      await this.getToken();
+      this.api.createUser().subscribe();
     } catch(e) {
       throw e;
     }
@@ -24,6 +49,11 @@ export class AuthService {
   async signIn(email: string, password: string) {
     try {
       await this.auth.signInWithEmailAndPassword(email, password);
+      await this.getToken();
+      this.api.createUser().subscribe();
+
+      this.lastUsername = email;
+      this.lastPassword = password;
     } catch(e) {
       throw e;
     }
@@ -32,9 +62,22 @@ export class AuthService {
   async signOut() {
     try {
       await this.auth.signOut();
+      this.router.navigate(['/login']);
+      this.token = '';
+      this.lastUsername = '';
+      this.lastPassword = '';
     } catch(e) {
       throw e;
     }
+  }
+
+  async getToken() {
+    const user = await this.auth.currentUser;
+    if(!user) {
+      return;
+    }
+
+    this.token = await user.getIdToken(true) ?? '';
   }
 
   async changeDisplayName(username: string) {
@@ -42,6 +85,10 @@ export class AuthService {
     await user.updateProfile({
       displayName: username
     });
+
+    await this.getToken();
+
+    this.api.updateUserDisplayName().subscribe();
   }
 
   async changePassword(password: string) {

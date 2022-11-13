@@ -15,13 +15,19 @@ import { NgxMatomoRouterModule } from '@ngx-matomo/router';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './token-interceptor.service';
+import { AuthService } from './auth.service';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    NgxDatatableModule,
     NgxWebstorageModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
@@ -35,6 +41,20 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (service: AuthService) => async () => {
+        await service.init();
+        return service;
+      },
+      deps: [AuthService],
+      multi: true
+    },
     {
       provide: APP_INITIALIZER,
       useFactory: (service: CardsService) => async () => {

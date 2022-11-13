@@ -25,6 +25,12 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+/* ngx-datatable */
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+
+
 body {
   --border-width: 2px;
   --border-radius: 4px;
@@ -89,5 +95,18 @@ code {
       --max-width: 600px;
       --min-width: 600px;
     }
+  }
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.datatable-body-cell {
+  display: flex !important;
+  align-items: center;
+
+  .datatable-body-cell-label {
+    width: 100%;
   }
 }

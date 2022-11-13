@@ -8,5 +8,6 @@ export const environment = {
     authDomain: 'limelight-cards.firebaseapp.com',
     messagingSenderId: '808668109682',
   },
+  api: 'https://api.limelight.cards',
   production: true
 };

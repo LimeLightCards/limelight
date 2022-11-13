@@ -24,6 +24,13 @@
 
             <ion-card-content>
               <ion-list>
+                <ion-item *ngIf="cardsService.getQuantityOwned(cardData.code) > 0">
+                  <ion-chip>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-label>You have {{ cardsService.getQuantityOwned(cardData.code) }} of this card!</ion-label>
+                  </ion-chip>
+                </ion-item>
+
                 <ion-item *ngIf="cardData.type === 'Character'">
                   <ion-label text-wrap>
                     <h2>Character &middot; <em>{{ cardData.attributes.join(', ') }}</em></h2>

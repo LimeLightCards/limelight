@@ -43,11 +43,6 @@ export class ProfilePage {
     }
   }
 
-  async logout() {
-    await this.authService.signOut();
-    this.router.navigate(['/login']);
-  }
-
   search(query: string) {
     this.router.navigate(['/search'], { queryParams: { q: query } });
   }

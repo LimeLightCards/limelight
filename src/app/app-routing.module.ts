@@ -47,6 +47,12 @@ const routes: Routes = [
     data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
+    path: 'collection',
+    loadChildren: () => import('./collection/collection.module').then( m => m.CollectionPageModule),
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'

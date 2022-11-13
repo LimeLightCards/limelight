@@ -1,0 +1,31 @@
+
+.container {
+  width: 100vw;
+  min-height: 70vh;
+
+  .actions {
+    margin-top: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
+
+.table-container {
+  padding: 2em;
+}
+
+ion-input {
+  border: 1px solid #aaa;
+  border-radius: 2px;
+}
+
+.quantity-actions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

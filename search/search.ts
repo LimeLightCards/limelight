@@ -4,7 +4,7 @@ import { isString } from 'lodash';
 
 import { ICard } from '../interfaces';
 
-import { attribute, bare, card, color, cost, expansion, level,
+import { attribute, bare, card, color, cost, expansion, inC, level,
   name, power, rarity, release, set, side, soul, tag, trigger, type } from './operators';
 
 const allKeywords = [
@@ -13,6 +13,7 @@ const allKeywords = [
   ['color',      'c'],    // exact text
   ['cost',       'co'],   // number search
   ['expansion',  'e'],    // loose text
+  ['in'],                 // special operator
   ['level',      'l'],    // number search
   ['name',       'n'],    // loose text
   ['power',      'p'],    // number search
@@ -27,6 +28,8 @@ const allKeywords = [
 ];
 
 const operators = [
+  inC,
+
   attribute,
   card,
   color,
@@ -67,7 +70,7 @@ export function properOperatorsInsteadOfAliases(result: parser.SearchParserResul
 };
 
 export function queryToText(query: string): string {
-  query = query.toLowerCase();
+  query = query.toLowerCase().trim();
 
   const firstResult = parser.parse(query, { keywords: allKeywords.flat(), offsets: false }) as parser.SearchParserResult;
   if(isString(firstResult)) {
@@ -148,18 +151,22 @@ export function queryToText(query: string): string {
     text.push(`trigger is ${triggers.join(' or ')}`);
   }
 
+  if(result.in) {
+    text.push(`in ${result.in}`);
+  }
+
   return `cards where ${text.join(' and ')}`;
 }
 
-export function parseQuery(cards: ICard[], query: string): ICard[] {
-  query = query.toLowerCase();
+export function parseQuery(cards: ICard[], query: string, extraData = {}): ICard[] {
+  query = query.toLowerCase().trim();
 
   const result = parser.parse(query, { keywords: allKeywords.flat(), offsets: false });
 
   // the parser returns a string if there's nothing interesting to do, for some reason
   // so we have a bare words parser
   if(isString(result)) {
-    return bare(cards, query);
+    return bare(cards, query, extraData);
   }
 
   const resultText = (result as parser.SearchParserResult).text as string;
@@ -167,12 +174,12 @@ export function parseQuery(cards: ICard[], query: string): ICard[] {
   let returnCards = cards;
 
   if(resultText) {
-    returnCards = bare(returnCards, resultText);
+    returnCards = bare(returnCards, resultText, extraData);
   }
 
   // check all the operators
   operators.forEach(operator => {
-    returnCards = operator(returnCards, result as parser.SearchParserResult);
+    returnCards = operator(returnCards, result as parser.SearchParserResult, extraData);
   });
 
   return returnCards;

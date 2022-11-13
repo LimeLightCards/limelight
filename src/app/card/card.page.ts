@@ -28,7 +28,7 @@ export class CardPage implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private cardsService: CardsService
+    public cardsService: CardsService
   ) { }
 
   ngOnInit() {
