@@ -77,7 +77,7 @@ export class CardPage implements OnInit {
     const tcgplayer = async () => {
       try {
         const price = await fetch(
-          `https://weissprice.herokuapp.com/api/cards/tcgplayerprice?rarity=${cardRarity}&name=${this.encodedCardName}`);
+          `https://pricing.limelight.cards/api/cards/tcgplayerprice?rarity=${cardRarity}&name=${this.encodedCardName}`);
         const priceBody = await price.json();
 
         this.tcgplayerPrice = priceBody;
