@@ -16,7 +16,6 @@ import { ClipboardModule } from 'ngx-clipboard';
     FormsModule,
     SharedModule,
     IonicModule,
-
     ClipboardModule,
     CardPageRoutingModule
   ],
