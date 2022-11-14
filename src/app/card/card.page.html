@@ -149,6 +149,14 @@
                       [href]="'https://www.tcgplayer.com/search/weiss-schwarz/product?Language=English&productLineName=weiss-schwarz&q=' + encodedCardName + '&view=grid'">
             TCGPlayer <span class="price" *ngIf="tcgplayerPrice">({{ tcgplayerPrice | currency }})</span>
           </ion-button>
+
+          <ion-button fill="outline"
+                      color="secondary"
+                      expand="block"
+                      target="_blank"
+                      [href]="'https://www.cardmarket.com/en/WeissSchwarz/Products/Search?searchString=' + encodedCardName">
+            Cardmarket
+          </ion-button>
         </ion-col>
 
         <ion-col [sizeXs]="12" [sizeMd]="4" class="ion-text-center">
