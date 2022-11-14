@@ -4,7 +4,7 @@ import { isString } from 'lodash';
 
 import { ICard } from '../interfaces';
 
-import { ability, attribute, bare, card, color, cost, expansion, inC, level,
+import { ability, attribute, bare, card, color, cost, expansion, flavor, inC, level,
   name, power, rarity, release, set, side, soul, tag, trigger, type } from './operators';
 
 const allKeywords = [
@@ -14,6 +14,7 @@ const allKeywords = [
   ['color',      'c'],    // exact text
   ['cost',       'co'],   // number search
   ['expansion',  'e'],    // loose text
+  ['flavor',     'f'],    // loose text
   ['in'],                 // special operator
   ['level',      'l'],    // number search
   ['name',       'n'],    // loose text
@@ -37,6 +38,7 @@ const operators = [
   color,
   cost,
   expansion,
+  flavor,
   level,
   name,
   power,
@@ -110,12 +112,16 @@ export function queryToText(query: string): string {
     text.push(`expansion is ${expansions.join(' or ')}`);
   }
 
+  if(result.flavor) {
+    text.push(`flavor text contains ${result.flavor}`);
+  }
+
   if(result.level) {
     text.push(`level is ${result.level}`);
   }
 
   if(result.name) {
-    text.push(`name is ${result.name}`);
+    text.push(`name contains ${result.name}`);
   }
 
   if(result.power) {

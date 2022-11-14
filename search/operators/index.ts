@@ -6,6 +6,7 @@ export * from './card';
 export * from './color';
 export * from './cost';
 export * from './expansion';
+export * from './flavor';
 export * from './in';
 export * from './level';
 export * from './name';
