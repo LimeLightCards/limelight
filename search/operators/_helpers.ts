@@ -89,6 +89,7 @@ export function arraySearchOperator(aliases: string[], key: string) {
 
     // map all of the aliases (the same alias is an OR)
     return aliases.map(alias => {
+      console.log(alias, cards[0], results);
 
       // if we have an exclusion rule for the alias (-alias), we ignore those cards
       if(results.exclude[alias]) {
@@ -100,7 +101,7 @@ export function arraySearchOperator(aliases: string[], key: string) {
           }
 
           const innerSearches = c[key].map(x => x.toLowerCase());
-          return innerSearches.some(x => x === i);
+          return innerSearches.some(x => x.toLowerCase().includes(i.toLowerCase()));
         }));
       }
 
@@ -114,7 +115,7 @@ export function arraySearchOperator(aliases: string[], key: string) {
           }
 
           const innerSearches = c[key].map(x => x.toLowerCase());
-          return innerSearches.some(x => x === i);
+          return innerSearches.some(x => x.toLowerCase().includes(i.toLowerCase()));
         }));
       }
 

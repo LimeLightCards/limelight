@@ -4,10 +4,11 @@ import { isString } from 'lodash';
 
 import { ICard } from '../interfaces';
 
-import { attribute, bare, card, color, cost, expansion, inC, level,
+import { ability, attribute, bare, card, color, cost, expansion, inC, level,
   name, power, rarity, release, set, side, soul, tag, trigger, type } from './operators';
 
 const allKeywords = [
+  ['ability'],            // array search
   ['attribute',  'a'],    // array search
   ['id'],                 // exact text
   ['color',      'c'],    // exact text
@@ -30,6 +31,7 @@ const allKeywords = [
 const operators = [
   inC,
 
+  ability,
   attribute,
   card,
   color,
@@ -80,6 +82,11 @@ export function queryToText(query: string): string {
   const result = properOperatorsInsteadOfAliases(firstResult);
 
   const text = [];
+
+  if(result.ability) {
+    const abilities = isString(result.ability) ? [result.ability] : result.ability;
+    text.push(`ability has ${abilities.join(' or ')}`);
+  }
 
   if(result.attribute) {
     const attributes = isString(result.attribute) ? [result.attribute] : result.attribute;
