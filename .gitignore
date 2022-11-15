@@ -35,3 +35,8 @@ npm-debug.log*
 cards/
 src/assets/cards*.json
 src/assets/expansions.json
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json

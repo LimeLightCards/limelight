@@ -24,6 +24,13 @@
 
             <ion-card-content>
               <ion-list>
+                <ion-item *ngIf="cardsService.getQuantityOwned(cardData.code) > 0">
+                  <ion-chip>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-label>You have {{ cardsService.getQuantityOwned(cardData.code) }} of this card!</ion-label>
+                  </ion-chip>
+                </ion-item>
+
                 <ion-item *ngIf="cardData.type === 'Character'">
                   <ion-label text-wrap>
                     <h2>Character &middot; <em>{{ cardData.attributes.join(', ') }}</em></h2>
@@ -141,6 +148,14 @@
                       target="_blank"
                       [href]="'https://www.tcgplayer.com/search/weiss-schwarz/product?Language=English&productLineName=weiss-schwarz&q=' + encodedCardName + '&view=grid'">
             TCGPlayer <span class="price" *ngIf="tcgplayerPrice">({{ tcgplayerPrice | currency }})</span>
+          </ion-button>
+
+          <ion-button fill="outline"
+                      color="secondary"
+                      expand="block"
+                      target="_blank"
+                      [href]="'https://www.cardmarket.com/en/WeissSchwarz/Products/Search?searchString=' + encodedCardName">
+            Cardmarket
           </ion-button>
         </ion-col>
 

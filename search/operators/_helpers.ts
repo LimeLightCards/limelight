@@ -35,7 +35,7 @@ function cardMatchesNumberCheck(value: number, numberCheck: string): boolean {
 // this operator works on number fields
 // it supports exact matching, as well as >, >=, <, <=
 export function numericalOperator(aliases: string[], key: string) {
-  return (cards: ICard[], results: parser.SearchParserResult) => {
+  return (cards: ICard[], results: parser.SearchParserResult, extraData = {}) => {
 
     // if we have no cards, short-circuit because we can't filter it anymore
     if(cards.length === 0) {
@@ -74,7 +74,7 @@ export function numericalOperator(aliases: string[], key: string) {
 // it also checks case-insensitively
 // it also supports "none" as a value for empty arrays
 export function arraySearchOperator(aliases: string[], key: string) {
-  return (cards: ICard[], results: parser.SearchParserResult) => {
+  return (cards: ICard[], results: parser.SearchParserResult, extraData = {}) => {
 
     // if we have no cards, short-circuit because we can't filter it anymore
     if(cards.length === 0) {
@@ -89,6 +89,7 @@ export function arraySearchOperator(aliases: string[], key: string) {
 
     // map all of the aliases (the same alias is an OR)
     return aliases.map(alias => {
+      console.log(alias, cards[0], results);
 
       // if we have an exclusion rule for the alias (-alias), we ignore those cards
       if(results.exclude[alias]) {
@@ -100,7 +101,7 @@ export function arraySearchOperator(aliases: string[], key: string) {
           }
 
           const innerSearches = c[key].map(x => x.toLowerCase());
-          return innerSearches.some(x => x === i);
+          return innerSearches.some(x => x.toLowerCase().includes(i.toLowerCase()));
         }));
       }
 
@@ -114,7 +115,7 @@ export function arraySearchOperator(aliases: string[], key: string) {
           }
 
           const innerSearches = c[key].map(x => x.toLowerCase());
-          return innerSearches.some(x => x === i);
+          return innerSearches.some(x => x.toLowerCase().includes(i.toLowerCase()));
         }));
       }
 
@@ -129,7 +130,7 @@ export function arraySearchOperator(aliases: string[], key: string) {
 // some properties will prefer to use this for shorthand reasons
 // it also checks case-insensitively
 export function partialTextOperator(aliases: string[], key: string) {
-  return (cards: ICard[], results: parser.SearchParserResult) => {
+  return (cards: ICard[], results: parser.SearchParserResult, extraData = {}) => {
 
     // if we have no cards, short-circuit because we can't filter it anymore
     if(cards.length === 0) {
@@ -170,7 +171,7 @@ export function partialTextOperator(aliases: string[], key: string) {
 // most properties can use this sufficiently
 // it still checks case-insensitively
 export function exactTextOperator(aliases: string[], key: string) {
-  return (cards: ICard[], results: parser.SearchParserResult) => {
+  return (cards: ICard[], results: parser.SearchParserResult, extraData = {}) => {
 
     // if we have no cards, short-circuit because we can't filter it anymore
     if(cards.length === 0) {

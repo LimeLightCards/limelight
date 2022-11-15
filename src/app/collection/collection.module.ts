@@ -5,9 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
-import { SearchPageRoutingModule } from './search-routing.module';
+import { CollectionPageRoutingModule } from './collection-routing.module';
 
-import { SearchPage } from './search.page';
+import { CollectionPage } from './collection.page';
 import { SharedModule } from '../_shared/shared.module';
 
 @NgModule({
@@ -15,10 +15,10 @@ import { SharedModule } from '../_shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    NgxDatatableModule,
     SharedModule,
-    SearchPageRoutingModule
+    NgxDatatableModule,
+    CollectionPageRoutingModule
   ],
-  declarations: [SearchPage]
+  declarations: [CollectionPage]
 })
-export class SearchPageModule {}
+export class CollectionPageModule {}

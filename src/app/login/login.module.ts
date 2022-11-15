@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
-import { SearchPageRoutingModule } from './search-routing.module';
+import { LoginPageRoutingModule } from './login-routing.module';
 
-import { SearchPage } from './search.page';
+import { LoginPage } from './login.page';
 import { SharedModule } from '../_shared/shared.module';
 
 @NgModule({
@@ -15,10 +14,9 @@ import { SharedModule } from '../_shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    NgxDatatableModule,
     SharedModule,
-    SearchPageRoutingModule
+    LoginPageRoutingModule
   ],
-  declarations: [SearchPage]
+  declarations: [LoginPage]
 })
-export class SearchPageModule {}
+export class LoginPageModule {}

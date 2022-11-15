@@ -6,8 +6,8 @@ import { marked } from 'marked';
 
 import { ICardHelp } from '../../../interfaces';
 
-import { attributeDescription, cardDescription,
-  colorDescription, costDescription, expansionDescription, levelDescription,
+import { abilityDescription, attributeDescription, cardDescription,
+  colorDescription, costDescription, expansionDescription, flavorDescription, inDescription, levelDescription,
   nameDescription, powerDescription, rarityDescription, releaseDescription,
   setDescription, sideDescription, soulDescription, tagDescription, triggerDescription,
   typeDescription
@@ -21,8 +21,11 @@ import { attributeDescription, cardDescription,
 export class SyntaxPage implements OnInit {
 
   public allOperators: ICardHelp[] = [
+    abilityDescription,
     attributeDescription, cardDescription, colorDescription,
-    costDescription, expansionDescription, levelDescription,
+    costDescription, expansionDescription, flavorDescription,
+    levelDescription,
+    inDescription,
     nameDescription, powerDescription, rarityDescription,
     releaseDescription, setDescription, sideDescription,
     soulDescription, tagDescription, triggerDescription,

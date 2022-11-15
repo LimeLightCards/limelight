@@ -1,0 +1,117 @@
+<ion-header>
+  <app-topbar (enter)="search($event)"></app-topbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+
+    <ion-row class="actions">
+      <ion-col [sizeMd]="6">
+        <ion-input type="text" [(ngModel)]="searchString" placeholder="Search your collection..." [debounce]="1000" (ionChange)="doSearch()"></ion-input>
+      </ion-col>
+
+      <ion-col [sizeMd]="6" class="buttons">
+        <ion-button (click)="addCardsPrompt()">Add Cards From TSV</ion-button>
+        <ion-button color="danger" (click)="resetCardsPrompt()">Reset Collection</ion-button>
+      </ion-col>
+    </ion-row>
+
+
+    <!-- mobile table -->
+    <div class="table-container ion-hide-md-up">
+      <ngx-datatable
+          #table
+          class="material striped expandable"
+          [columnMode]="'flex'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [rowHeight]="75"
+          [limit]="10"
+          [sorts]="[{ prop: 'name', dir: 'asc' }]"
+          [rows]="displayCards">
+
+        <ngx-datatable-column name="Name" [flexGrow]="3">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div class="vertical-center-cell">
+              <a [routerLink]="['/card', row.code]">{{ row.name }}</a>
+              <br>
+              {{ row.code }}
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Quantity" [flexGrow]="1">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div class="quantity-actions">
+              <ion-button size="small" color="secondary" (click)="adjustCardQuantity(row, -1)">-</ion-button>
+              <span>{{ row.quantity }}</span>
+              <ion-button size="small" color="secondary" (click)="adjustCardQuantity(row, 1)">+</ion-button>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+      </ngx-datatable>
+    </div>
+
+
+    <!-- desktop table -->
+    <div class="table-container ion-hide-md-down">
+      <ngx-datatable
+          #table
+          class="material striped"
+          [columnMode]="'flex'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [rowHeight]="75"
+          [limit]="10"
+          [sorts]="[{ prop: 'name', dir: 'asc' }]"
+          [rows]="displayCards">
+
+        <ngx-datatable-column name="Name" [flexGrow]="4">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div class="vertical-center-cell">
+              <a [routerLink]="['/card', row.code]">{{ row.name }}</a>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Code" [flexGrow]="1">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div class="vertical-center-cell">
+              {{ row.code }}
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Quantity" [flexGrow]="2">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div class="quantity-actions">
+              <ion-button size="small" color="secondary" (click)="adjustCardQuantity(row, -1)">-</ion-button>
+              <span>{{ row.quantity }}</span>
+              <ion-button size="small" color="secondary" (click)="adjustCardQuantity(row, 1)">+</ion-button>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Rarity" [flexGrow]="1">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div class="vertical-center-cell">
+              {{ row.rarity }}
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Expansion" [flexGrow]="3">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <div class="vertical-center-cell">
+              {{ row.expansion }}
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+      </ngx-datatable>
+    </div>
+  </div>
+
+  <app-below-the-fold></app-below-the-fold>
+</ion-content>

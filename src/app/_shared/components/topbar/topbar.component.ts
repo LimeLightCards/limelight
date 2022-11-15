@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AuthService } from '../../../auth.service';
 
 @Component({
   selector: 'app-topbar',
@@ -11,7 +12,7 @@ export class TopbarComponent implements OnInit {
   @Output() type = new EventEmitter<string>();
   @Output() enter = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit() {}
 

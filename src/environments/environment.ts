@@ -3,6 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  firebase: {
+    projectId: 'limelight-cards',
+    appId: '1:808668109682:web:a6b9587e05d22d6fa59beb',
+    storageBucket: 'limelight-cards.appspot.com',
+    locationId: 'us-central',
+    apiKey: 'AIzaSyCXuNqau5utVnyMQw5P0gjgpvzF0gcfWF4',
+    authDomain: 'limelight-cards.firebaseapp.com',
+    messagingSenderId: '808668109682',
+  },
+  api: 'http://localhost:3535',
+  priceApi: 'http://localhost:3333',
   production: false
 };
 

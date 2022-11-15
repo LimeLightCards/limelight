@@ -19,6 +19,7 @@
   "dependencies": {
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0",
+    "@angular/fire": "^7.4.1",
     "@angular/forms": "^14.0.0",
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
@@ -32,7 +33,9 @@
     "@ionic/angular": "^6.1.9",
     "@ngx-matomo/router": "^3.2.0",
     "@ngx-matomo/tracker": "^3.2.0",
+    "@swimlane/ngx-datatable": "^20.1.0",
     "compress-json": "^2.1.2",
+    "csv-parse": "^5.3.2",
     "ionicons": "^6.0.3",
     "lodash": "^4.17.21",
     "marked": "^4.2.1",

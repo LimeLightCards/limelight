@@ -6,6 +6,7 @@ import { decompress } from 'compress-json';
 import { parseQuery } from '../../search/search';
 import { ICard } from '../../interfaces';
 import { compare } from '../../compare/compare';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +14,44 @@ import { compare } from '../../compare/compare';
 export class CardsService {
 
   private cards: ICard[];
+  private cardsByName: Record<string, ICard> = {};
+  private cardsByCode: Record<string, ICard> = {};
+
+  private collection: Record<string, number> = {};
+
+  public get cardCollection() {
+    return this.collection;
+  }
+
+  constructor(private apiService: ApiService) { }
 
   public async init() {
     const cardData = await fetch('https://data.limelight.cards/cards.min.json');
     const realData = await cardData.json();
 
     const allCards = decompress(realData);
-    this.cards = allCards;
+    this.setCards(allCards);
+
+    this.apiService.getCards().subscribe((cards: Record<string, number>) => {
+      this.addCardsToCollection(cards);
+    });
+  }
+
+  private setCards(cards: ICard[]) {
+    this.cards = cards;
+
+    this.cards.forEach(card => {
+      this.cardsByName[card.name] = card;
+      this.cardsByCode[card.code] = card;
+    });
+  }
+
+  public getCardByCodeOrName(codeOrName: string): ICard | undefined {
+    return this.cardsByCode[codeOrName] ?? this.cardsByName[codeOrName] ?? undefined;
   }
 
   public searchCards(query: string): ICard[] {
-    return parseQuery(this.cards, query);
+    return parseQuery(this.cards, query, { collection: this.cardCollection });
   }
 
   public getCardById(id: string): ICard | undefined {
@@ -49,5 +77,23 @@ export class CardsService {
     }
 
     return cardScores.slice(1);
+  }
+
+  public addCardsToCollection(cards: Record<string, number>) {
+    Object.keys(cards).forEach(cardId => {
+      if(!this.collection[cardId]) {
+        this.collection[cardId] = 0;
+      }
+
+      this.collection[cardId] += cards[cardId];
+    });
+  }
+
+  public removeCardFromCollection(cardCode: string): void {
+    delete this.collection[cardCode];
+  }
+
+  public getQuantityOwned(cardCode: string): number {
+    return this.collection[cardCode] ?? 0;
   }
 }

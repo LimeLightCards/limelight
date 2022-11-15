@@ -1,0 +1,79 @@
+<ion-header>
+  <app-topbar (enter)="search($event)"></app-topbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <ion-card *ngIf="user">
+      <ion-card-header>
+        <ion-card-title>Your Profile</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" [value]="user.email" disabled></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Display Name</ion-label>
+            <ion-input type="text" [(ngModel)]="displayName"></ion-input>
+
+            <ion-button class="action-button"
+                        slot="end"
+                        size="default"
+                        (click)="changeDisplayName()"
+                        expand="block"
+                        fill="outline"
+                        [disabled]="!displayName || currentDisplayName === displayName">Update</ion-button>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ng-container *ngIf="profileError">
+              <ion-icon name="alert-circle-outline" slot="start" color="danger"></ion-icon>
+              <ion-label color="danger">{{ profileError }}</ion-label>
+            </ng-container>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="user">
+      <ion-card-header>
+        <ion-card-title>Change Your Password</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">New Password</ion-label>
+            <ion-input type="password" [(ngModel)]="newPassword"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Confirm New Password</ion-label>
+            <ion-input type="password" [(ngModel)]="newPasswordConfirm"></ion-input>
+
+            <ion-button class="action-button"
+                        slot="end"
+                        size="default"
+                        (click)="changePassword()"
+                        expand="block"
+                        fill="outline"
+                        [disabled]="!newPassword || !newPasswordConfirm || newPassword !== newPasswordConfirm">Change</ion-button>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ng-container *ngIf="passwordError">
+              <ion-icon name="alert-circle-outline" slot="start" color="danger"></ion-icon>
+              <ion-label color="danger">{{ passwordError }}</ion-label>
+            </ng-container>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <app-below-the-fold></app-below-the-fold>
+</ion-content>

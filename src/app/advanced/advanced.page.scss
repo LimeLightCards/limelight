@@ -97,3 +97,16 @@
 .actions {
   padding-top: 0.5em;
 }
+
+// The "pointer: fine" media feature tests whether
+// the user has a pointing device (Desktop)
+@media (pointer: fine) {
+    .actions {
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        background-color: #fff;
+    }
+}

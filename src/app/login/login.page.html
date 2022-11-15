@@ -1,0 +1,84 @@
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-card *ngIf="isLogin">
+      <ion-card-header>
+        <ion-card-title>Login</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" [(ngModel)]="email" autocomplete="username" (keyup.enter)="login()"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" [(ngModel)]="password" autocomplete="password" (keyup.enter)="login()"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ng-container *ngIf="loginError">
+              <ion-icon name="alert-circle-outline" slot="start" color="danger"></ion-icon>
+              <ion-label color="danger">{{ loginError }}</ion-label>
+            </ng-container>
+          </ion-item>
+
+          <ion-item class="action-row" lines="none">
+            <ion-col>
+              <ion-button size="lg" color="primary" expand="block" (click)="login()" [disabled]="!email || !password">Log In</ion-button>
+            </ion-col>
+
+            <ion-col>
+              <ion-button size="lg" color="secondary" expand="block" fill="outline" (click)="isLogin = false">...or Register</ion-button>
+            </ion-col>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="!isLogin">
+      <ion-card-header>
+        <ion-card-title>Register</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" [(ngModel)]="email" autocomplete="username"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" [(ngModel)]="password" autocomplete="password"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Display Name</ion-label>
+            <ion-input type="text" [(ngModel)]="username" maxlength="20"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ng-container *ngIf="registerError">
+              <ion-icon name="alert-circle-outline" slot="start" color="danger"></ion-icon>
+              <ion-label color="danger">{{ registerError }}</ion-label>
+            </ng-container>
+          </ion-item>
+
+          <ion-item class="action-row" lines="none">
+            <ion-col>
+              <ion-button size="lg" color="primary" expand="block" (click)="register()" [disabled]="!username || !email || !password">Register</ion-button>
+            </ion-col>
+
+            <ion-col>
+              <ion-button size="lg" color="secondary" expand="block" fill="outline" (click)="isLogin = true">...or Login</ion-button>
+            </ion-col>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <app-below-the-fold></app-below-the-fold>
+</ion-content>

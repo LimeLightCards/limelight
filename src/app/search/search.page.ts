@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SelectionType, DatatableComponent } from '@swimlane/ngx-datatable';
 import { sortBy } from 'lodash';
 
 import { ICard } from '../../../interfaces';
@@ -13,10 +14,12 @@ import { CardsService } from '../cards.service';
 })
 export class SearchPage {
 
+  @ViewChild(DatatableComponent) table: DatatableComponent;
+
   public query = '';
   public queryDesc = '';
 
-  public queryDisplay: 'images'|'text' = 'images';
+  public queryDisplay: 'images'|'text'|'checklist' = 'images';
   public querySort: keyof ICard = 'name';
   public querySortBy: 'asc'|'desc' = 'asc';
 
@@ -29,6 +32,10 @@ export class SearchPage {
   public displayCurrent = 0;
   public displayTotal = 0;
   public displayMaximum = 0;
+
+  public selected = [];
+  public expanded = {};
+  public checkboxSelectionType: SelectionType = SelectionType.checkbox;
 
   constructor(
     private router: Router,
@@ -112,6 +119,14 @@ export class SearchPage {
     this.displayMaximum = Math.min(this.displayTotal, (this.page + 1) * this.cardsPerPage);
 
     this.updateParams();
+  }
+
+  select({ selected }) {
+    this.selected = [...selected];
+  }
+
+  public getDetailHeight(): any {
+    return '100%';
   }
 
 }

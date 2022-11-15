@@ -87,7 +87,7 @@ export class AdvancedPage implements OnInit {
       queryAttributes.push(`color:${colors.join(',')}`);
     }
 
-    if(isNumber(this.searchQuery.cost.value)) {
+    if(isNumber(+this.searchQuery.cost.value) && !isNaN(+this.searchQuery.cost.value)) {
       queryAttributes.push(`cost:${this.searchQuery.cost.operator}${this.searchQuery.cost.value}`);
     }
 
@@ -95,11 +95,11 @@ export class AdvancedPage implements OnInit {
       queryAttributes.push(`expansion:"${this.searchQuery.expansion.join(',')}"`);
     }
 
-    if(isNumber(this.searchQuery.level.value)) {
+    if(isNumber(+this.searchQuery.level.value) && !isNaN(+this.searchQuery.level.value)) {
       queryAttributes.push(`level:${this.searchQuery.level.operator}${this.searchQuery.level.value}`);
     }
 
-    if(isNumber(this.searchQuery.power.value)) {
+    if(isNumber(+this.searchQuery.power.value) && !isNaN(+this.searchQuery.power.value)) {
       queryAttributes.push(`power:${this.searchQuery.power.operator}${this.searchQuery.power.value}`);
     }
 
@@ -112,7 +112,7 @@ export class AdvancedPage implements OnInit {
       queryAttributes.push(`side:${sides.join(',')}`);
     }
 
-    if(isNumber(this.searchQuery.soul.value)) {
+    if(isNumber(+this.searchQuery.soul.value) && !isNaN(+this.searchQuery.soul.value)) {
       queryAttributes.push(`soul:${this.searchQuery.soul.operator}${this.searchQuery.soul.value}`);
     }
 

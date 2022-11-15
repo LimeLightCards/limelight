@@ -25,6 +25,12 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+/* ngx-datatable */
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+
+
 body {
   --border-width: 2px;
   --border-radius: 4px;
@@ -75,16 +81,42 @@ ion-input.themed, ion-select.themed {
   border-radius: var(--border-radius);
 }
 
-ion-alert {
-  &.sc-ion-alert-md-h {
-    --max-width: 600px;
-    --min-width: 600px;
-  }
-}
-
 code {
   padding-left: 5px;
   padding-right: 5px;
   background: #F6F6F6;
   color: var(--accent-color, #246782);
+}
+
+
+@media screen and (min-width: 768px) {
+  ion-alert {
+    &.sc-ion-alert-md-h {
+      --max-width: 600px;
+      --min-width: 600px;
+    }
+  }
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.ngx-datatable {
+  .datatable-body-cell {
+    display: flex !important;
+    align-items: center;
+
+    .datatable-body-cell-label {
+      width: 100%;
+    }
+  }
+
+  .datatable-row-detail {
+    white-space: normal !important;
+  }
+
+  .datatable-checkbox {
+    margin-top: -7px;
+  }
 }
