@@ -28,7 +28,10 @@
 /* ngx-datatable */
 @import '~@swimlane/ngx-datatable/index.css';
 @import '~@swimlane/ngx-datatable/themes/material.css';
+@import '~@swimlane/ngx-datatable/themes/dark.css';
 @import '~@swimlane/ngx-datatable/assets/icons.css';
+
+@import 'colors';
 
 
 body {
@@ -36,20 +39,6 @@ body {
   --border-radius: 4px;
 
   --ion-font-family: Montserrat, Roboto, Helvetica Neue, sans-serif;
-
-	--ion-color-primary: #8360c3;
-	--ion-color-primary-rgb: 131,96,195;
-	--ion-color-primary-contrast: #ffffff;
-	--ion-color-primary-contrast-rgb: 255,255,255;
-	--ion-color-primary-shade: #7354ac;
-	--ion-color-primary-tint: #8f70c9;
-
-	--ion-color-secondary: #608b7d;
-	--ion-color-secondary-rgb: 96,139,125;
-	--ion-color-secondary-contrast: #ffffff;
-	--ion-color-secondary-contrast-rgb: 255,255,255;
-	--ion-color-secondary-shade: #547a6e;
-	--ion-color-secondary-tint: #70978a;
 }
 
 .page-container {

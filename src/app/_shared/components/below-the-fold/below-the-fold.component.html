@@ -9,6 +9,9 @@
           <div class="map-item">
             <a routerLink="/">Home</a>
           </div>
+          <div class="map-item">
+            <a href="javascript:void(0)" (click)="toggleMode()">{{ visualMode === 'light' ? 'Dark Mode' : 'Light Mode' }}</a>
+          </div>
         </ion-col>
 
         <ion-col [sizeMd]="3" [sizeXs]="12">
