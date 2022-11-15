@@ -251,7 +251,8 @@ export function queryToText(query: string): string {
 
   const firstResult = parser.parse(query, { keywords: allKeywords.flat(), offsets: false }) as parser.SearchParserResult;
   if(isString(firstResult)) {
-    return `cards with "${query}" in the name, abilities, expansion, or code`;
+    const queries = query.split(' ').map(x => `"${x}"`).join(' or ');
+    return `cards with ${queries} in the name, abilities, expansion, or code`;
   }
 
   const result = properOperatorsInsteadOfAliases(firstResult);
