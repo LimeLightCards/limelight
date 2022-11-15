@@ -9,5 +9,6 @@ export const environment = {
     messagingSenderId: '808668109682',
   },
   api: 'https://api.limelight.cards',
+  priceApi: 'https://pricing.limelight.cards',
   production: true
 };

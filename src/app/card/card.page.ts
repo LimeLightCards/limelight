@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CardTrigger, ICard } from '../../../interfaces';
+import { environment } from '../../environments/environment';
 import { CardsService } from '../cards.service';
 
 @Component({
@@ -77,7 +78,7 @@ export class CardPage implements OnInit {
     const tcgplayer = async () => {
       try {
         const price = await fetch(
-          `https://pricing.limelight.cards/api/cards/tcgplayerprice?rarity=${cardRarity}&name=${this.encodedCardName}`);
+          `${environment.priceApi}/api/cards/tcgplayerprice?code=${cardId}&rarity=${cardRarity}&name=${this.encodedCardName}`);
         const priceBody = await price.json();
 
         this.tcgplayerPrice = priceBody;

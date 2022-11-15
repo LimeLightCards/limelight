@@ -13,6 +13,7 @@ export const environment = {
     messagingSenderId: '808668109682',
   },
   api: 'http://localhost:3535',
+  priceApi: 'http://localhost:3333',
   production: false
 };
 
