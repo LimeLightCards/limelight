@@ -73,6 +73,179 @@ export function properOperatorsInsteadOfAliases(result: parser.SearchParserResul
   return result;
 };
 
+const allQueryFormatters = [
+  {
+    key: 'ability',
+    includes: 'has',
+    excludes: 'does not have',
+    formatter: (result: Record<string, any>) => {
+      const value = result.ability;
+      const abilities: string[] = isString(value) ? [value] : value as unknown as string[];
+      return `${abilities.map(x => `"${x}"`).join(' or ')}`;
+    }
+  },
+  {
+    key: 'attribute',
+    includes: 'has',
+    excludes: 'does not have',
+    formatter: (result: Record<string, any>) => {
+      const value = result.attribute;
+      const attributes: string[] = isString(value) ? [value] : value as unknown as string[];
+      return `${attributes.map(x => `"${x}"`).join(' or ')}`;
+    }
+  },
+  {
+    key: 'id',
+    includes: 'is',
+    excludes: 'is not',
+    formatter: (result: Record<string, any>) => {
+      const value = result.id;
+      return `${value}`;
+    }
+  },
+  {
+    key: 'color',
+    includes: 'is',
+    excludes: 'is not',
+    formatter: (result: Record<string, any>) => {
+      const value = result.color;
+      const colors: string[] = isString(value) ? [value] : value as unknown as string[];
+      return `${colors.join(' or ')}`;
+    }
+  },
+  {
+    key: 'cost',
+    includes: 'is',
+    excludes: 'is not',
+    formatter: (result: Record<string, any>) => {
+      const value = result.cost;
+      return `${value}`;
+    }
+  },
+  {
+    key: 'expansion',
+    includes: 'has',
+    excludes: 'does not have',
+    formatter: (result: Record<string, any>) => {
+      const value = result.expansion;
+      const expansions: string[] = isString(value) ? [value] : value as unknown as string[];
+      return `${expansions.map(x => `"${x}"`).join(' or ')}`;
+    }
+  },
+  {
+    key: 'flavor',
+    includes: 'text contains',
+    excludes: 'text does not contain',
+    formatter: (result: Record<string, any>) => {
+      const value = result.flavor;
+      return `"${value}"`;
+    }
+  },
+  {
+    key: 'level',
+    includes: 'is',
+    excludes: 'is not',
+    formatter: (result: Record<string, any>) => {
+      const value = result.level;
+      return `${value}`;
+    }
+  },
+  {
+    key: 'name',
+    includes: 'contains',
+    excludes: 'does not contain',
+    formatter: (result: Record<string, any>) => {
+      const value = result.name;
+      return `"${value}"`;
+    }
+  },
+  {
+    key: 'power',
+    includes: 'is',
+    excludes: 'is not',
+    formatter: (result: Record<string, any>) => {
+      const value = result.power;
+      return `${value}`;
+    }
+  },
+  {
+    key: 'rarity',
+    includes: 'is',
+    excludes: 'is not',
+    formatter: (result: Record<string, any>) => {
+      const value = result.rarity;
+      const rarities: string[] = isString(value) ? [value] : value as unknown as string[];
+      return `${rarities.map(x => `"${x}"`).join(' or ')}`;
+    }
+  },
+  {
+    key: 'release',
+    includes: 'is',
+    excludes: 'is not',
+    formatter: (result: Record<string, any>) => {
+      const value = result.release;
+      const releases: string[] = isString(value) ? [value] : value as unknown as string[];
+      return `${releases.map(x => `"${x}"`).join(' or ')}`;
+    }
+  },
+  {
+    key: 'set',
+    includes: 'is',
+    excludes: 'is not',
+    formatter: (result: Record<string, any>) => {
+      const value = result.set;
+      return `${value}`;
+    }
+  },
+  {
+    key: 'side',
+    includes: 'is',
+    excludes: 'is not',
+    formatter: (result: Record<string, any>) => {
+      const value = result.side;
+      return `${value}`;
+    }
+  },
+  {
+    key: 'soul',
+    includes: 'is',
+    excludes: 'is not',
+    formatter: (result: Record<string, any>) => {
+      const value = result.soul;
+      return `${value}`;
+    }
+  },
+  {
+    key: 'tag',
+    includes: 'has',
+    excludes: 'does not have',
+    formatter: (result: Record<string, any>) => {
+      const value = result.tag;
+      const tags: string[] = isString(value) ? [value] : value as unknown as string[];
+      return `${tags.map(x => `"${x}"`).join(' or ')}`;
+    }
+  },
+  {
+    key: 'trigger',
+    includes: 'has',
+    excludes: 'does not have',
+    formatter: (result: Record<string, any>) => {
+      const value = result.trigger;
+      const triggers: string[] = isString(value) ? [value] : value as unknown as string[];
+      return `${triggers.map(x => `"${x}"`).join(' or ')}`;
+    }
+  },
+  {
+    key: 'type',
+    includes: 'is',
+    excludes: 'is not',
+    formatter: (result: Record<string, any>) => {
+      const value = result.type;
+      return `${value}`;
+    }
+  },
+];
+
 export function queryToText(query: string): string {
   query = query.toLowerCase().trim();
 
@@ -85,84 +258,16 @@ export function queryToText(query: string): string {
 
   const text = [];
 
-  if(result.ability) {
-    const abilities = isString(result.ability) ? [result.ability] : result.ability;
-    text.push(`ability has ${abilities.join(' or ')}`);
-  }
+  allQueryFormatters.forEach(queryFormatter => {
+    const { key, includes, excludes, formatter } = queryFormatter;
 
-  if(result.attribute) {
-    const attributes = isString(result.attribute) ? [result.attribute] : result.attribute;
-    text.push(`attribute is ${attributes.join(' or ')}`);
-  }
-
-  if(result.id) {
-    text.push(`id is ${result.card}`);
-  }
-
-  if(result.color) {
-    text.push(`color is ${result.color.split('').join(' or ')}`);
-  }
-
-  if(result.cost) {
-    text.push(`cost is ${result.cost}`);
-  }
-
-  if(result.expansion) {
-    const expansions = isString(result.expansion) ? [result.expansion] : result.expansion;
-    text.push(`expansion is ${expansions.join(' or ')}`);
-  }
-
-  if(result.flavor) {
-    text.push(`flavor text contains ${result.flavor}`);
-  }
-
-  if(result.level) {
-    text.push(`level is ${result.level}`);
-  }
-
-  if(result.name) {
-    text.push(`name contains ${result.name}`);
-  }
-
-  if(result.power) {
-    text.push(`power is ${result.power}`);
-  }
-
-  if(result.rarity) {
-    const rarities = isString(result.rarity) ? [result.rarity] : result.rarity;
-    text.push(`rarity is ${rarities.join(' or ')}`);
-  }
-
-  if(result.release) {
-    const releases = isString(result.release) ? [result.release] : result.release;
-    text.push(`release is ${releases.join(' or ')}`);
-  }
-
-  if(result.set) {
-    text.push(`set is ${result.set}`);
-  }
-
-  if(result.side) {
-    text.push(`side is ${result.side}`);
-  }
-
-  if(result.soul) {
-    text.push(`soul is ${result.soul}`);
-  }
-
-  if(result.tag) {
-    const tags = isString(result.tag) ? [result.tag] : result.tag;
-    text.push(`tag is ${tags.join(' or ')}`);
-  }
-
-  if(result.type) {
-    text.push(`type is ${result.type}`);
-  }
-
-  if(result.trigger) {
-    const triggers = isString(result.trigger) ? [result.trigger] : result.trigger;
-    text.push(`trigger is ${triggers.join(' or ')}`);
-  }
+    if(result[key]) {
+      text.push(`${key} ${includes} ${formatter(result)}`);
+    }
+    if(result.exclude[key]) {
+      text.push(`${key} ${excludes} ${formatter(result.exclude)}`);
+    }
+  });
 
   if(result.in) {
     text.push(`in ${result.in}`);
