@@ -134,6 +134,9 @@ export class CollectionPage implements OnInit {
           type: 'textarea',
           name: 'cards',
           placeholder: 'Paste your TSV here',
+          attributes: {
+            rows: 6
+          }
         },
       ],
     });
