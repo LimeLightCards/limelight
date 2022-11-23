@@ -37,19 +37,19 @@
                         Profile
                       </ion-item>
 
-                      <ion-item [routerLink]="['/collection']" detail="false">
+                      <ion-item [routerLink]="['/collection']" detail="false" matomoClickCategory="actionbar" matomoClickAction="collection">
                         <ion-icon slot="start" name="library-outline"></ion-icon>
                         My Collection
                       </ion-item>
 
-                      <ion-item [routerLink]="['/deck/create']" detail="false">
+                      <ion-item [routerLink]="['/deck/create']" detail="false" matomoClickCategory="actionbar" matomoClickAction="deck">
                         <ion-icon slot="start" name="id-card-outline"></ion-icon>
                         Create A Deck
                       </ion-item>
                     </ng-container>
 
                     <ng-template #showLogin>
-                      <ion-item [routerLink]="['/login']" detail="false">
+                      <ion-item [routerLink]="['/login']" detail="false" matomoClickCategory="actionbar" matomoClickAction="login">
                         <ion-icon slot="start" name="log-in-outline"></ion-icon>
                         Log In
                       </ion-item>
@@ -82,7 +82,7 @@
                     </ng-container>
 
                     <ng-container *ngIf="authService.user | async">
-                      <ion-item (click)="authService.signOut()" detail="false" class="cursor">
+                      <ion-item (click)="authService.signOut()" detail="false" class="cursor" matomoClickCategory="actionbar" matomoClickAction="logout">
                         <ion-icon slot="start" name="log-out-outline"></ion-icon>
                         Log Out
                       </ion-item>
@@ -134,17 +134,17 @@
                         Profile
                       </ion-item>
 
-                      <ion-item [routerLink]="['/collection']" detail="false">
+                      <ion-item [routerLink]="['/collection']" detail="false" matomoClickCategory="actionbar" matomoClickAction="collection">
                         <ion-icon slot="start" name="library-outline"></ion-icon>
                         My Collection
                       </ion-item>
 
-                      <ion-item [routerLink]="['/deck/create']" detail="false">
+                      <ion-item [routerLink]="['/deck/create']" detail="false" matomoClickCategory="actionbar" matomoClickAction="deck">
                         <ion-icon slot="start" name="id-card-outline"></ion-icon>
                         Create A Deck
                       </ion-item>
 
-                      <ion-item (click)="authService.signOut()" detail="false" class="cursor">
+                      <ion-item (click)="authService.signOut()" detail="false" class="cursor" matomoClickCategory="actionbar" matomoClickAction="logout">
                         <ion-icon slot="start" name="log-out-outline"></ion-icon>
                         Log Out
                       </ion-item>
@@ -155,7 +155,7 @@
             </ng-container>
 
             <ng-template #showLogin>
-              <ion-button fill="clear" color="light" [routerLink]="['/login']">
+              <ion-button fill="clear" color="light" [routerLink]="['/login']" matomoClickCategory="actionbar" matomoClickAction="login">
                 <ion-icon slot="icon-only" name="log-in-outline"></ion-icon>
               </ion-button>
             </ng-template>

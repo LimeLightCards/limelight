@@ -26,11 +26,11 @@
 
           <ion-item class="action-row" lines="none">
             <ion-col>
-              <ion-button size="lg" color="primary" expand="block" (click)="login()" [disabled]="!email || !password">Log In</ion-button>
+              <ion-button size="lg" color="primary" expand="block" (click)="login()" [disabled]="!email || !password" matomoClickCategory="authentication" matomoClickAction="login">Log In</ion-button>
             </ion-col>
 
             <ion-col>
-              <ion-button size="lg" color="secondary" expand="block" fill="outline" (click)="isLogin = false">...or Register</ion-button>
+              <ion-button size="lg" color="secondary" expand="block" fill="outline" (click)="isLogin = false" matomoClickCategory="authentication" matomoClickAction="swapregister">...or Register</ion-button>
             </ion-col>
           </ion-item>
         </ion-list>
@@ -68,11 +68,11 @@
 
           <ion-item class="action-row" lines="none">
             <ion-col>
-              <ion-button size="lg" color="primary" expand="block" (click)="register()" [disabled]="!username || !email || !password">Register</ion-button>
+              <ion-button size="lg" color="primary" expand="block" (click)="register()" [disabled]="!username || !email || !password" matomoClickCategory="authentication" matomoClickAction="register">Register</ion-button>
             </ion-col>
 
             <ion-col>
-              <ion-button size="lg" color="secondary" expand="block" fill="outline" (click)="isLogin = true">...or Login</ion-button>
+              <ion-button size="lg" color="secondary" expand="block" fill="outline" (click)="isLogin = true" matomoClickCategory="authentication" matomoClickAction="swaplogin">...or Login</ion-button>
             </ion-col>
           </ion-item>
         </ion-list>
