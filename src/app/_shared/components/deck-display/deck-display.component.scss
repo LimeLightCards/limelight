@@ -48,17 +48,27 @@ app-card-display {
     font-size: 1.1rem;
   }
 
-  .author-name {
+  .bottom-area {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     background: var(--ion-color-tertiary);
     color: var(--ion-color-tertiary-contrast);
     min-height: 105px;
     padding: 1em;
-  }
 
-  .timestamp {
-    font-size: 0.8rem;
-    font-style: italic;
+    .author-name {
+      display: flex;
+      flex-direction: row;
+
+      span, app-gravatar {
+        margin-right: 0.5em;
+      }
+    }
+
+    .timestamp {
+      margin-top: 0.5em;
+      font-size: 0.8rem;
+      font-style: italic;
+    }
   }
 }

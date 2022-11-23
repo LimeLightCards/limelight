@@ -6,8 +6,14 @@
   <div class="container">
     <ng-container *ngIf="user">
       <div class="about-user">
-        <h2>{{ user.displayName }}</h2>
-        <h6>Joined {{ user.createdAt | dateTimeFromMilliseconds | dateTimeToRelative }}</h6>
+        <div class="pfp">
+          <app-gravatar size="64" [emailHash]="user.emailHash"></app-gravatar>
+        </div>
+
+        <div>
+          <h2>{{ user.displayName }}</h2>
+          <h6>Joined {{ user.createdAt | dateTimeFromMilliseconds | dateTimeToRelative }}</h6>
+        </div>
       </div>
 
       <div class="user-decks">

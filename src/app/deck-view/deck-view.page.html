@@ -36,7 +36,13 @@
               <ion-card-subtitle>
                 Created {{ deck.createdAt | dateTimeFromMilliseconds | dateTimeToRelative }}
                 <span *ngIf="deck.createdAt !== deck.updatedAt">&middot; Updated {{ deck.updatedAt | dateTimeFromMilliseconds | dateTimeToRelative }}&nbsp;</span>
-                <span>&middot; by <a target="_blank" [routerLink]="['/profile', deck.author.id]">{{ deck.author.displayName }}</a>&nbsp;</span>
+                <span class="author-area">
+                  <span>&middot;</span>
+                  <span>by</span>
+                  <app-gravatar [emailHash]="deck.author?.emailHash || ''" size="20"></app-gravatar>
+                  <a target="_blank" [routerLink]="['/profile', deck.author.id]">{{ deck.author.displayName }}</a>
+                  &nbsp;
+                </span>
                 <span *ngIf="deck.parent">&middot; remixed from <a target="_blank" [routerLink]="['/deck/view', deck.parent.id]">{{ deck.parent.name }}</a></span>
               </ion-card-subtitle>
             </ion-card-header>

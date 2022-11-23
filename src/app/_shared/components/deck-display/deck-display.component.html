@@ -6,12 +6,15 @@
 
   <div class="author-info">
     <div class="deck-name">{{ deck.name }}</div>
-    <div class="author-name">
-      by {{ deck.author?.displayName || 'Unknown' }}
-      <br>
-      <span class="timestamp">
+    <div class="bottom-area">
+      <div class="author-name">
+        <span>by</span>
+        <app-gravatar [emailHash]="deck.author?.emailHash || ''" size="20"></app-gravatar>
+        <span>{{ deck.author?.displayName || 'Unknown' }}</span>
+      </div>
+      <div class="timestamp">
         Last updated {{ deck.updatedAt | dateTimeFromMilliseconds | dateTimeToRelative }}
-      </span>
+      </div>
     </div>
   </div>
 </div>

@@ -119,3 +119,13 @@
 .cards-row {
   margin-top: 1em;
 }
+
+.author-area {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+
+  span, a, app-gravatar {
+    margin-right: 0.5em;
+  }
+}

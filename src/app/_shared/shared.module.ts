@@ -13,6 +13,7 @@ import { CardIconComponent } from './components/cardicon/cardicon.component';
 import { DeckDisplayComponent } from './components/deck-display/deck-display.component';
 import { SearchCardsComponent } from './components/search-cards/search-cards.component';
 import { SearchDecksComponent } from './components/search-decks/search-decks.component';
+import { GravatarComponent } from './gravatar/gravatar.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { SearchDecksComponent } from './components/search-decks/search-decks.com
     BelowTheFoldComponent,
     TopbarComponent,
     SearchCardsComponent,
-    SearchDecksComponent
+    SearchDecksComponent,
+    GravatarComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +42,8 @@ import { SearchDecksComponent } from './components/search-decks/search-decks.com
     BelowTheFoldComponent,
     TopbarComponent,
     SearchCardsComponent,
-    SearchDecksComponent
+    SearchDecksComponent,
+    GravatarComponent
   ]
 })
 export class SharedModule { }
