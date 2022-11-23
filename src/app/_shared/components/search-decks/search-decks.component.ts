@@ -20,6 +20,7 @@ export class SearchDecksComponent implements OnChanges {
   @Input() page = 0;
   @Input() updateQueryParams = true;
 
+  public readonly decksPerPage = 20;
   public isSearching = false;
   public queryDesc = '';
 

@@ -17,7 +17,7 @@ export class CardPage implements OnInit {
 
   public similarCards: Array<{ card: ICard; score: number }> = [];
 
-  public deckStats = { decks: [] };
+  public deckStats: any = { decks: [] };
 
   // this is going to be a mess
   public encodedCardName = '';

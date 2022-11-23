@@ -33,7 +33,7 @@ export class DeckCreatePage implements OnInit {
   @LocalStorage() searchRefinement;
 
   public filteredCards = [];
-  public deckStats = {};
+  public deckStats: any = {};
   public isSaving = false;
 
   public activeCard: ICard;

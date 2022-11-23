@@ -20,7 +20,7 @@ export class DeckViewPage implements OnInit {
   public deckSort: 'level'|'color'|'type' = 'level';
 
   public deck: IDeck;
-  public deckStats = {};
+  public deckStats: any = {};
 
   public viewingRevision = '';
   public viewingCards = {};
@@ -123,7 +123,7 @@ export class DeckViewPage implements OnInit {
     }
   }
 
-  private resortCards() {
+  public resortCards() {
 
     this.router.navigate([], {
       relativeTo: this.route,

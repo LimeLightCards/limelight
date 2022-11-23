@@ -7,11 +7,14 @@ export interface IDeckRevision {
 
 export interface IDeck {
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   id?: string;
 
+  author?: any;
+  authorId?: string;
+
   // if this was remixed from somewhere
-  parent?: string;
+  parent?: IDeck;
+  parentId?: string;
   parentRevision?: string;
 
   // if the deck is private
@@ -24,7 +27,6 @@ export interface IDeck {
   createdAt?: number;
   updatedAt?: number;
   expansions?: string[];
-  author?: string;
   revisions: IDeckRevision[];
 
   // user-editable
