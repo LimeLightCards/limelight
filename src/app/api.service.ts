@@ -36,19 +36,19 @@ export class ApiService {
 
   // user collection
   public getCards() {
-    return this.http.get(this.baseUrl + '/user/collection');
+    return this.http.get(this.baseUrl + '/collection').pipe(map((d: any) => d.collection));
   }
 
   public resetCards() {
-    return this.http.delete(this.baseUrl + '/user/collection');
+    return this.http.delete(this.baseUrl + '/collection');
   }
 
   public addCards(cards: Record<string, number>) {
-    return this.http.post(this.baseUrl + '/user/collection/add-cards', { cards });
+    return this.http.post(this.baseUrl + '/collection/add-cards', { cards });
   }
 
   public removeCards(cards: Record<string, number>) {
-    return this.http.post(this.baseUrl + '/user/collection/remove-cards', { cards });
+    return this.http.post(this.baseUrl + '/collection/remove-cards', { cards });
   }
 
   public getDeckStatsForCard(cardId: string) {

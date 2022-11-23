@@ -87,7 +87,7 @@ export class CardsService {
   }
 
   public addCardsToCollection(cards: Record<string, number>) {
-    Object.keys(cards).forEach(cardId => {
+    Object.keys(cards || {}).forEach(cardId => {
       if(!this.collection[cardId]) {
         this.collection[cardId] = 0;
       }
