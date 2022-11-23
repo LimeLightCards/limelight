@@ -29,6 +29,9 @@
           <div class="map-item">
             <a routerLink="/randomcard">Random Card</a>
           </div>
+          <div class="map-item">
+            <a routerLink="/search" [queryParams]="{ q: 'is:deck' }">Deck Search</a>
+          </div>
         </ion-col>
 
         <ion-col [sizeMd]="3" [sizeXs]="12">
@@ -42,6 +45,9 @@
           </div>
           <div class="map-item">
             <a routerLink="/collection">My Collection</a>
+          </div>
+          <div class="map-item">
+            <a routerLink="/deck/create">Create A Deck</a>
           </div>
         </ion-col>
 

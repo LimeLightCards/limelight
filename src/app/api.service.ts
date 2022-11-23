@@ -1,5 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+import { map } from 'rxjs/operators';
+
+import { IDeck } from '../../interfaces';
 import { environment } from '../environments/environment';
 
 @Injectable({
@@ -22,6 +26,14 @@ export class ApiService {
     return this.http.put(this.baseUrl + '/auth/user/name', {});
   }
 
+  public getUserById(userId: string) {
+    return this.http.get(this.baseUrl + `/user/${userId}`).pipe(map((d: any) => d.user));
+  }
+
+  public getUserByFirebaseId(userId: string) {
+    return this.http.get(this.baseUrl + `/user/firebase/${userId}`).pipe(map((d: any) => d.user));
+  }
+
   // user collection
   public getCards() {
     return this.http.get(this.baseUrl + '/user/collection');
@@ -37,5 +49,38 @@ export class ApiService {
 
   public removeCards(cards: Record<string, number>) {
     return this.http.post(this.baseUrl + '/user/collection/remove-cards', { cards });
+  }
+
+  public getDeckStatsForCard(cardId: string) {
+    return this.http.get(this.baseUrl + `/deck/with/${encodeURIComponent(cardId)}`);
+  }
+
+  // deck collection
+  public getDecks() {
+    return this.http.get(this.baseUrl + '/deck/all').pipe(map((d: any) => d.decks));
+  }
+
+  public getDeckById(deckId: string) {
+    return this.http.get(this.baseUrl + `/deck/${deckId}`).pipe(map((d: any) => d.deck));
+  }
+
+  public getMyDecks() {
+    return this.http.get(this.baseUrl + '/deck/mine').pipe(map((d: any) => d.decks));
+  }
+
+  public remixDeck(parentDeck: string, parentRevision: string, deck: IDeck) {
+    return this.http.put(this.baseUrl + `/deck/${parentDeck}/remix/${parentRevision}`, { deck }).pipe(map((d: any) => d.deck));
+  }
+
+  public createOrUpdateDeck(deck: IDeck) {
+    return this.http.put(this.baseUrl + '/deck', { deck }).pipe(map((d: any) => d.deck));
+  }
+
+  public deleteDeck(deck: IDeck) {
+    return this.http.delete(this.baseUrl + `/deck/${deck.id}/revise`).pipe(map((d: any) => d.deck));
+  }
+
+  public searchDecks(query: string, page = 0, sort = '', sortBy = '') {
+    return this.http.get(this.baseUrl + `/deck/search?q=${encodeURIComponent(query)}&page=${page}&sort=${sort}&sortBy=${sortBy}`);
   }
 }

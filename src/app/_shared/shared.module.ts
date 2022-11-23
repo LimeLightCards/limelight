@@ -6,27 +6,41 @@ import { BelowTheFoldComponent } from './components/below-the-fold/below-the-fol
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { LuxonModule } from 'luxon-angular';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 import { CardIconComponent } from './components/cardicon/cardicon.component';
+import { DeckDisplayComponent } from './components/deck-display/deck-display.component';
+import { SearchCardsComponent } from './components/search-cards/search-cards.component';
+import { SearchDecksComponent } from './components/search-decks/search-decks.component';
 
 
 @NgModule({
   declarations: [
     CardDisplayComponent,
     CardIconComponent,
+    DeckDisplayComponent,
     BelowTheFoldComponent,
-    TopbarComponent
+    TopbarComponent,
+    SearchCardsComponent,
+    SearchDecksComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     RouterModule,
-    IonicModule
+    IonicModule,
+    LuxonModule,
+    NgxDatatableModule,
   ],
   exports: [
     CardDisplayComponent,
     CardIconComponent,
+    DeckDisplayComponent,
     BelowTheFoldComponent,
-    TopbarComponent
+    TopbarComponent,
+    SearchCardsComponent,
+    SearchDecksComponent
   ]
 })
 export class SharedModule { }

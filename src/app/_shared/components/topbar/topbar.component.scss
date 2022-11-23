@@ -10,11 +10,24 @@
     width: 32px;
     cursor: pointer;
   }
+
+  ion-title {
+    position: absolute;
+    margin-left: 35px;
+    margin-top: 10px;
+  }
 }
 
 .ios {
   ion-searchbar {
     padding-top: 1.5em;
+  }
+
+  ion-title {
+    position: absolute;
+    margin-left: -25px;
+    margin-top: 2px;
+    text-align: left;
   }
 
   .home-icon {

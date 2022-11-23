@@ -14,6 +14,12 @@ export class AuthService {
   @LocalStorage() private lastPassword: string;
   @LocalStorage() private token: string;
 
+  private uid: string;
+
+  public get currentFirebaseUId() {
+    return this.uid;
+  }
+
   public get idToken() {
     return this.token;
   }
@@ -77,6 +83,7 @@ export class AuthService {
       return;
     }
 
+    this.uid = user.uid;
     this.token = await user.getIdToken(true) ?? '';
   }
 

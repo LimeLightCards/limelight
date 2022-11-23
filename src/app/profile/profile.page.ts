@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { User } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ApiService } from '../api.service';
 import { AuthService } from '../auth.service';
 import { NotifyService } from '../notify.service';
 
@@ -15,6 +16,7 @@ export class ProfilePage {
   private userSub: Subscription;
 
   public user: User;
+  public apiUser;
   public displayName = '';
   public currentDisplayName = '';
 
@@ -25,7 +27,12 @@ export class ProfilePage {
 
   public passwordError = '';
 
-  constructor(private router: Router, private notifyService: NotifyService, public authService: AuthService) { }
+  constructor(
+    private router: Router,
+    private notifyService: NotifyService,
+    public authService: AuthService,
+    private apiService: ApiService
+  ) { }
 
   ionViewDidEnter() {
     this.userSub = this.authService.user.subscribe(user => this.setUser(user));
@@ -40,6 +47,10 @@ export class ProfilePage {
     if(this.user) {
       this.displayName = user.displayName;
       this.currentDisplayName = user.displayName;
+
+      this.apiService.getUserByFirebaseId(user.uid).subscribe(apiUser => {
+        this.apiUser = apiUser;
+      });
     }
   }
 

@@ -1,0 +1,17 @@
+
+<div class="deck">
+  <div class="cover-image">
+    <app-card-display [cardCode]="firstCard"></app-card-display>
+  </div>
+
+  <div class="author-info">
+    <div class="deck-name">{{ deck.name }}</div>
+    <div class="author-name">
+      by {{ deck.author?.displayName || 'Unknown' }}
+      <br>
+      <span class="timestamp">
+        Last updated {{ deck.updatedAt | dateTimeFromMilliseconds | dateTimeToRelative }}
+      </span>
+    </div>
+  </div>
+</div>

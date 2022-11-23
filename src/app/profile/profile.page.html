@@ -37,6 +37,8 @@
           </ion-item>
         </ion-list>
       </ion-card-content>
+
+      <ion-button fill="clear" [routerLink]="['/profile', apiUser.id]" *ngIf="apiUser">Public Profile</ion-button>
     </ion-card>
 
     <ion-card *ngIf="user">

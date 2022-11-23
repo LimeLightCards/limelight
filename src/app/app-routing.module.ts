@@ -47,16 +47,36 @@ const routes: Routes = [
     data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
+    path: 'profile/:id',
+    loadChildren: () => import('./profile-public/profile-public.module').then( m => m.ProfilePublicPageModule)
+  },
+  {
     path: 'collection',
     loadChildren: () => import('./collection/collection.module').then( m => m.CollectionPageModule),
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
+    path: 'deck/create',
+    loadChildren: () => import('./deck-create/deck-create.module').then( m => m.DeckCreatePageModule),
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
+    path: 'deck/edit/:id',
+    loadChildren: () => import('./deck-create/deck-create.module').then( m => m.DeckCreatePageModule),
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  {
+    path: 'deck/view/:id',
+    loadChildren: () => import('./deck-view/deck-view.module').then( m => m.DeckViewPageModule)
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
-  },
+  }
 ];
 
 @NgModule({

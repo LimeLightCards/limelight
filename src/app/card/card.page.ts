@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CardTrigger, ICard } from '../../../interfaces';
 import { environment } from '../../environments/environment';
+import { ApiService } from '../api.service';
 import { CardsService } from '../cards.service';
 
 @Component({
@@ -16,6 +17,8 @@ export class CardPage implements OnInit {
 
   public similarCards: Array<{ card: ICard; score: number }> = [];
 
+  public deckStats = { decks: [] };
+
   // this is going to be a mess
   public encodedCardName = '';
   public encoreDecksId = '';
@@ -29,6 +32,7 @@ export class CardPage implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private apiService: ApiService,
     public cardsService: CardsService
   ) { }
 
@@ -87,8 +91,15 @@ export class CardPage implements OnInit {
       }
     };
 
+    const deckStats = async () => {
+      this.apiService.getDeckStatsForCard(cardId).subscribe((d: any) => {
+        this.deckStats = d.stats;
+      });
+    };
+
     encoreDecks();
     tcgplayer();
+    deckStats();
   }
 
   searchTag(tag: string) {

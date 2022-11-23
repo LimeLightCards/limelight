@@ -1,0 +1,132 @@
+
+.page-container {
+  margin-top: 1em;
+  min-height: 100vh;
+}
+
+.pagination {
+  margin-top: 1em;
+  text-align: center;
+  min-height: 20px;
+
+  --swiper-pagination-bullet-inactive-color: #ccc;
+  --swiper-pagination-bullet-inactive-opacity: 0.5;
+  --swiper-pagination-color: var(--ion-color-primary);
+
+  .swiper-pagination-bullet {
+    outline: 1px solid #000;
+  }
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.climax-container {
+  display: flex;
+  flex-direction: row;
+
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.swiper {
+  min-height: 510px;
+  margin-top: 1em;
+}
+
+.card-container {
+  position: relative;
+  cursor: grab;
+
+  .card-count {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--ion-color-primary-contrast);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);
+  }
+}
+
+.level-container, .climax-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1em;
+}
+
+.level-card-stack, .climax-card-stack {
+  position: relative;
+  margin-right: 1em;
+
+  --stack-multiplier-per: 30px;
+
+  height: calc(var(--stack-base-height) + (var(--stack-size) * var(--stack-multiplier-per)));
+
+  .card {
+    position: absolute;
+    top: calc(var(--stack-index) * var(--stack-multiplier-per));
+    left: 0;
+    right: 0;
+    z-index: calc(10 - var(--stack-index));
+  }
+}
+
+.climax-container {
+
+  .climax-card-stack {
+    --stack-base-height: 200px;
+    width: 275px;
+  }
+}
+
+.level-container {
+
+  .level-card-stack {
+    --stack-base-height: 275px;
+    width: 200px;
+  }
+}
+
+.stat-chip {
+  min-width: 80px;
+}
+
+.color-chip {
+  --color: #fff;
+
+  &.color-R {
+    --background: #6a111b;
+  }
+
+  &.color-G {
+    --background: #21613d;
+  }
+
+  &.color-B {
+    --background: #00587c;
+  }
+
+  &.color-Y {
+    --background: #7d700c;
+  }
+}
+
+.card-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

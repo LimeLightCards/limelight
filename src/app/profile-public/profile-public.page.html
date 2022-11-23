@@ -1,0 +1,20 @@
+<ion-header>
+  <app-topbar (enter)="search($event)"></app-topbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <ng-container *ngIf="user">
+      <div class="about-user">
+        <h2>{{ user.displayName }}</h2>
+        <h6>Joined {{ user.createdAt | dateTimeFromMilliseconds | dateTimeToRelative }}</h6>
+      </div>
+
+      <div class="user-decks">
+        <app-search-decks [query]="deckQuery" [updateQueryParams]="false"></app-search-decks>
+      </div>
+    </ng-container>
+  </div>
+
+  <app-below-the-fold></app-below-the-fold>
+</ion-content>

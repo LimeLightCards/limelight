@@ -8,7 +8,7 @@
       <ion-row>
         <ion-col [sizeXs]="12" [sizeMd]="6" [sizeLg]="4" [offsetLg]="2">
           <app-card-display class="card"
-            [card]="cardData"
+            [cardCode]="cardData.code"
             [size]="'large'"
             [display]="'images'"></app-card-display>
         </ion-col>
@@ -100,9 +100,28 @@
         <ion-col *ngFor="let cardInfo of similarCards">
           <a [routerLink]="['/card', cardInfo.card.code]">
             <app-card-display class="card"
-              [card]="cardInfo.card"
+              [cardCode]="cardInfo.card.code"
               [size]="'normal'"
               [display]="'images'"></app-card-display>
+          </a>
+        </ion-col>
+
+        <ion-col [sizeLg]="1"></ion-col>
+      </ion-row>
+
+      <ion-row class="like-this ion-hide-lg-down" *ngIf="deckStats.decks.length > 0">
+        <ion-col [sizeLg]="12" class="ion-text-center">
+          <div class="title">Decks With This Card</div>
+          <div class="subtitle">
+            <strong>{{ deckStats.decksWithCount / (deckStats.decksWithCount + deckStats.decksWithoutCount) * 100 | number }}%</strong> of {{ cardData.expansion }} decks use this card!
+          </div>
+        </ion-col>
+
+        <ion-col [sizeLg]="1"></ion-col>
+
+        <ion-col class="like-deck" *ngFor="let deckInfo of deckStats.decks">
+          <a [routerLink]="['/deck/view', deckInfo.id]">
+            <app-deck-display [deck]="deckInfo"></app-deck-display>
           </a>
         </ion-col>
 
@@ -146,7 +165,7 @@
                       color="secondary"
                       expand="block"
                       target="_blank"
-                      [href]="'https://www.tcgplayer.com/search/weiss-schwarz/product?Language=English&productLineName=weiss-schwarz&q=' + encodedCardName + '&view=grid'">
+                      [href]="cardsService.tcgPlayerLink(cardData)">
             TCGPlayer <span class="price" *ngIf="tcgplayerPrice">({{ tcgplayerPrice | currency }})</span>
           </ion-button>
 

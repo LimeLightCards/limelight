@@ -1,0 +1,121 @@
+
+.page-container {
+  margin-top: 1em;
+}
+
+.buttons {
+  position: absolute;
+  right: 0;
+  top: -6px;
+
+  ion-button:not(:last-child) {
+    margin-right: 0.5em;
+  }
+}
+
+.stat-chip {
+  min-width: 80px;
+}
+
+.color-chip {
+  --color: #fff;
+
+  &.color-R {
+    --background: #6a111b;
+  }
+
+  &.color-G {
+    --background: #21613d;
+  }
+
+  &.color-B {
+    --background: #00587c;
+  }
+
+  &.color-Y {
+    --background: #7d700c;
+  }
+}
+
+.rev-icon {
+  transform: rotate(90deg);
+}
+
+.rev-list {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.controls ion-col {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  ion-select {
+    margin-left: 10px;
+    width: 120px !important;
+  }
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.stack-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1em;
+}
+
+.card-stack {
+  position: relative;
+  margin-right: 1em;
+
+  --stack-multiplier-per: 30px;
+
+  height: calc(var(--stack-base-height) + (var(--stack-size) * var(--stack-multiplier-per)));
+
+  .card {
+    position: absolute;
+    top: calc(var(--stack-index) * var(--stack-multiplier-per));
+    left: 0;
+    right: 0;
+    z-index: calc(10 - var(--stack-index));
+  }
+}
+
+.table-container, .stats-container {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.table-container {
+
+  ngx-datatable {
+    border-radius: 5px;
+  }
+}
+
+.draw-actions {
+  ion-button:last-child {
+    margin-left: 0;
+  }
+
+  ion-button:not(:last-child) {
+    margin-right: 0.5em;
+  }
+}
+
+.hand-row, .cards-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.cards-row {
+  margin-top: 1em;
+}

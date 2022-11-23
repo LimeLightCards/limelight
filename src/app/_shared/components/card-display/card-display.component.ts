@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CardTrigger, ICard } from '../../../../../interfaces';
+import { CardsService } from '../../../cards.service';
 
 @Component({
   selector: 'app-card-display',
@@ -8,15 +9,18 @@ import { CardTrigger, ICard } from '../../../../../interfaces';
 })
 export class CardDisplayComponent implements OnInit {
 
-  @Input() size: 'normal'|'large' = 'normal';
-  @Input() card: ICard;
+  @Input() size: 'grid'|'small'|'normal'|'large' = 'normal';
+  @Input() cardCode: string;
   @Input() display: 'images'|'text' = 'images';
+  @Input() climax = false;
 
+  public card: ICard;
   public soulArray = [];
 
-  constructor() { }
+  constructor(private cardsService: CardsService) { }
 
   ngOnInit() {
+    this.card = this.cardsService.getCardById(this.cardCode);
     this.soulArray = Array(this.card.soul).fill(CardTrigger.Soul);
   }
 
