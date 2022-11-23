@@ -39,7 +39,7 @@
                 <span class="author-area">
                   <span>&middot;</span>
                   <span>by</span>
-                  <app-gravatar [emailHash]="deck.author?.emailHash || ''" size="20"></app-gravatar>
+                  <app-gravatar [emailHash]="deck.author?.emailHash || ''" [size]="20"></app-gravatar>
                   <a target="_blank" [routerLink]="['/profile', deck.author.id]">{{ deck.author.displayName }}</a>
                   &nbsp;
                 </span>

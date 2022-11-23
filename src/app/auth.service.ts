@@ -3,6 +3,9 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { LocalStorage } from 'ngx-webstorage';
 import { interval } from 'rxjs';
+
+import * as md5 from 'md5';
+
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -18,6 +21,10 @@ export class AuthService {
 
   public get currentFirebaseUId() {
     return this.uid;
+  }
+
+  public get currentEmailHash() {
+    return md5(this.lastUsername);
   }
 
   public get idToken() {

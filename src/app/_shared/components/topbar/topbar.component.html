@@ -122,7 +122,7 @@
 
             <ng-container *ngIf="authService.user | async as user; else showLogin">
               <ion-button fill="clear" color="light" (click)="userPopover.present($event)">
-                <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+                <app-gravatar [size]="24" [emailHash]="authService.currentEmailHash" [circle]="true"></app-gravatar>
               </ion-button>
 
               <ion-popover reference="event" [dismissOnSelect]="true" #userPopover>

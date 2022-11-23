@@ -9,7 +9,7 @@
     <div class="bottom-area">
       <div class="author-name">
         <span>by</span>
-        <app-gravatar [emailHash]="deck.author?.emailHash || ''" size="20"></app-gravatar>
+        <app-gravatar [emailHash]="deck.author?.emailHash || ''" [size]="20"></app-gravatar>
         <span>{{ deck.author?.displayName || 'Unknown' }}</span>
       </div>
       <div class="timestamp">

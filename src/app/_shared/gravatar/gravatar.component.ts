@@ -9,6 +9,7 @@ export class GravatarComponent implements OnInit {
 
   @Input() emailHash: string;
   @Input() size = 40;
+  @Input() circle = false;
 
   constructor() { }
 
