@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CardTrigger, ICard } from '../../../interfaces';
@@ -33,7 +34,8 @@ export class CardPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private apiService: ApiService,
-    public cardsService: CardsService
+    public cardsService: CardsService,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -67,12 +69,11 @@ export class CardPage implements OnInit {
     // encore decks
     const encoreDecks = async () => {
       try {
-        const encoreSearch = await fetch(`https://encoredecks.com/api/card?text=${cardId}`);
-        const encoreSearchBody = await encoreSearch.json();
-
-        if(encoreSearchBody.length > 0) {
-          this.encoreDecksId = encoreSearchBody[0].id;
-        }
+        this.http.get(`https://encoredecks.com/api/card?text=${cardId}`).subscribe((encoreSearchBody: any) => {
+          if(encoreSearchBody.length > 0) {
+            this.encoreDecksId = encoreSearchBody[0].id;
+          }
+        });
       } catch(e) {
         console.error('Encore decks failed', e);
       }
@@ -81,11 +82,10 @@ export class CardPage implements OnInit {
     // tcgplayer
     const tcgplayer = async () => {
       try {
-        const price = await fetch(
-          `${environment.priceApi}/api/cards/tcgplayerprice?code=${cardId}&rarity=${cardRarity}&name=${this.encodedCardName}`);
-        const priceBody = await price.json();
-
-        this.tcgplayerPrice = priceBody;
+        this.http.get(`${environment.priceApi}/api/cards/tcgplayerprice?code=${cardId}&rarity=${cardRarity}&name=${this.encodedCardName}`)
+          .subscribe((d: number) => {
+            this.tcgplayerPrice = d;
+          });
       } catch(e) {
         console.error('Weiss price failed', e);
       }

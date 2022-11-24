@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -38,7 +39,8 @@ export class DeckViewPage implements OnInit {
     private route: ActivatedRoute,
     public authService: AuthService,
     public cardsService: CardsService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -256,13 +258,12 @@ export class DeckViewPage implements OnInit {
         const allCodes = this.listCards.map(card => card.code).join('|');
         const allRarities = this.listCards.map(card => card.rarity).join('|');
 
-        const prices = await fetch(
-          `${environment.priceApi}/api/cards/tcgplayerpricemulti?code=${allCodes}&rarity=${allRarities}&name=${allNames}`);
-        const priceBody = await prices.json();
-
-        for(let i = 0; i < this.listCards.length; i++) {
-          this.listCards[i].price = priceBody[i];
-        }
+        this.http.get(`${environment.priceApi}/api/cards/tcgplayerpricemulti?code=${allCodes}&rarity=${allRarities}&name=${allNames}`)
+          .subscribe(d => {
+            for(let i = 0; i < this.listCards.length; i++) {
+              this.listCards[i].price = d[i];
+            }
+          });
       };
 
       getPrices();
