@@ -1,6 +1,6 @@
 
 <div class="card-image-container" *ngIf="display === 'images'">
-  <ion-img [src]="card.image" class="card-image" [ngClass]="[size]"></ion-img>
+  <ion-img [src]="card.image" class="card-image" [ngClass]="[size, climax ? 'climax' : '']"></ion-img>
 </div>
 
 <div class="card-text-container" *ngIf="display === 'text'">

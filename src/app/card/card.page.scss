@@ -57,6 +57,15 @@ ion-card-header {
   font-weight: bold;
 }
 
+.subtitle {
+  margin-top: -0.5em;
+  margin-bottom: 1em;
+
+  font-size: 0.75em;
+
+  font-style: italic;
+}
+
 .like-this {
   margin-top: 3em;
   border-top: 1px dashed #ccc;
@@ -83,4 +92,10 @@ ion-card-header {
       padding-right: 2.5em;
     }
   }
+}
+
+.like-deck {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

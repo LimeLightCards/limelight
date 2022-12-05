@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -21,16 +22,17 @@ export class SetsPage implements OnInit {
   }
 
   constructor(
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) { }
 
   async ngOnInit() {
-    const expansions = await fetch('https://data.limelight.cards/expansions.json');
-    const realData = await expansions.json();
-    this.allExpansions = realData;
+    this.http.get('https://data.limelight.cards/expansions.json').subscribe(sets => {
+      this.allExpansions = sets;
 
-    this.allYears = sortBy([...new Set(Object.values(this.allExpansions).map((expansion: any) => expansion.release).flat())]).reverse();
-    this.allNames = sortBy(Object.keys(this.allExpansions), set => set.toLowerCase());
+      this.allYears = sortBy([...new Set(Object.values(this.allExpansions).map((expansion: any) => expansion.release).flat())]).reverse();
+      this.allNames = sortBy(Object.keys(this.allExpansions), set => set.toLowerCase());
+    });
   }
 
   getSetReleaseDates(set: string): number[] {

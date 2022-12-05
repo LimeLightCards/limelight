@@ -1,0 +1,74 @@
+<div class="no-results ion-text-center" *ngIf="displayTotal === 0 && !isSearching">
+  <h2>No results found</h2>
+  <p>For help using the search tool, check the <a target="_blank" [routerLink]="['/syntax']">help guide</a>.</p>
+</div>
+
+<div class="no-results ion-text-center" *ngIf="isSearching">
+  <h2 class="spinner">
+    <ion-spinner></ion-spinner> Searching...
+  </h2>
+</div>
+
+<ng-container *ngIf="displayTotal > 0">
+  <ng-container *ngTemplateOutlet="deckSwitches"></ng-container>
+
+  <ion-grid class="info">
+    <ion-row>
+      <ion-col>
+        <span>{{ displayCurrent | number }} - {{ displayMaximum | number }} of&nbsp;</span> {{ displayTotal | number }} {{ queryDesc }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="page-container">
+    <ion-grid class="decks">
+      <ion-row>
+        <ion-col class="deck-container" [sizeMd]="3" [sizeSm]="6" [sizeXs]="12" *ngFor="let deck of visibleDecks">
+          <a [routerLink]="['/deck/view', deck.id]">
+            <app-deck-display class="deck"
+                              [deck]="deck"></app-deck-display>
+          </a>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ng-container *ngTemplateOutlet="deckSwitches"></ng-container>
+</ng-container>
+
+<ng-template #deckSwitches>
+  <ion-grid class="switches">
+    <ion-row>
+      <ion-col [sizeXs]="0" [sizeMd]="6">
+        <div class="text-display">Sorted by</div>
+        <ion-select class="themed" [(ngModel)]="querySort" interface="popover" placeholder="Sort Prop" (ionChange)="redoCurrentSearch()">
+          <ion-select-option value="name">Name</ion-select-option>
+          <ion-select-option value="updatedAt">Last Updated</ion-select-option>
+        </ion-select>
+
+        <ion-select class="themed" [(ngModel)]="querySortBy" interface="popover" placeholder="Sort Dir" (ionChange)="redoCurrentSearch()">
+          <ion-select-option value="asc">Asc ↑</ion-select-option>
+          <ion-select-option value="desc">Desc ↓</ion-select-option>
+        </ion-select>
+      </ion-col>
+
+      <ion-col [sizeXs]="12" [sizeMd]="6" class="pagination ion-justify-content-center">
+        <ion-button fill="outline" color="secondary" [disabled]="page <= 0" (click)="changePage(0)">
+          <span class="symbol">&laquo;</span>
+        </ion-button>
+
+        <ion-button fill="outline" color="secondary" [disabled]="page <= 0" (click)="changePage(page - 1)">
+          <span class="symbol left">&lsaquo;</span> <span class="ion-hide-sm-down">Previous</span>
+        </ion-button>
+
+        <ion-button fill="outline" color="secondary" [disabled]="page >= totalPages" (click)="changePage(page + 1)">
+          <span class="ion-hide-sm-down">Next {{ decksPerPage }}</span> <span class="symbol right">&rsaquo;</span>
+        </ion-button>
+
+        <ion-button fill="outline" color="secondary" [disabled]="page >= totalPages" (click)="changePage(totalPages)">
+          <span class="symbol">&raquo;</span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ng-template>

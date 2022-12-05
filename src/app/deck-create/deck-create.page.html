@@ -1,0 +1,241 @@
+<ion-header>
+  <app-topbar [showSearch]="false" title="Limelight Deck Creator">
+
+    <ng-container slot="buttons-desktop">
+      <ion-button class="ion-margin-end" color="tertiary" (click)="showHelp()">
+        <ion-icon slot="icon-only" name="help-circle-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button class="ion-margin-end" color="secondary" (click)="addCardsPrompt()">Add Cards From TSV</ion-button>
+
+      <ion-button color="danger" (click)="resetPrompt()">Reset Deck</ion-button>
+    </ng-container>
+
+    <ng-container slot="buttons-mobile">
+      <ion-item class="cursor" color="tertiary" detail="false" (click)="showHelp()">
+        <ion-icon slot="start" name="help-circle-outline"></ion-icon>
+        Help
+      </ion-item>
+
+      <ion-item class="cursor" color="secondary" detail="false" (click)="addCardsPrompt()">
+        <ion-icon slot="start" name="add-outline"></ion-icon>
+        Add Cards From TSV
+      </ion-item>
+
+      <ion-item class="cursor" color="danger" detail="false" (click)="resetPrompt()">
+        <ion-icon slot="start" name="refresh-outline"></ion-icon>
+        Reset Deck
+      </ion-item>
+    </ng-container>
+
+  </app-topbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-container">
+    <ion-grid>
+      <ion-row>
+        <ion-col [sizeMd]="3">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Card Finder</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list>
+                <ion-item>
+                  <ion-label position="floating">Expansion</ion-label>
+                  <ion-input type="text" [(ngModel)]="searchExpansion" [debounce]="500" (ionChange)="updateShownCards()"></ion-input>
+                  <ion-note slot="helper">
+                    <a [routerLink]="['/sets']" target="_blank">View All Sets</a>
+                  </ion-note>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Refinement</ion-label>
+                  <ion-textarea rows="3" [(ngModel)]="searchRefinement" [debounce]="500" (ionChange)="updateShownCards()"></ion-textarea>
+                  <ion-note slot="helper">
+                    <a [routerLink]="['/syntax']" target="_blank">Syntax Help</a>
+                  </ion-note>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>About This Deck</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list>
+                <ion-item>
+                  <ion-label position="floating">Name</ion-label>
+                  <ion-input type="text" [(ngModel)]="currentDeck.name" (ionChange)="saveDeck()" [maxlength]="20"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Description</ion-label>
+                  <ion-textarea rows="6" [(ngModel)]="currentDeck.description" (ionChange)="saveDeck()" [maxlength]="500"></ion-textarea>
+                </ion-item>
+
+                <!--
+                <ion-item>
+                  <ion-label>Private Deck</ion-label>
+                  <ion-checkbox slot="end" [(ngModel)]="currentDeck.isPrivate" (ionChange)="saveDeck()"></ion-checkbox>
+                </ion-item>
+                -->
+
+                <ion-item color="primary" class="cursor" (click)="save()" [disabled]="!canSave()">
+                  <ion-icon slot="start" icon="save"></ion-icon>
+                  Save
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Deck Stats</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list>
+                <ion-item>
+                  <ion-label>
+                    <ion-chip [color]="numCards() === 50 ? 'success' : 'danger'">
+                      {{ deckStats.totalCards }} cards
+                    </ion-chip>
+                  </ion-label>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label class="ion-text-wrap">
+                    <ion-chip class="stat-chip">Lv0: {{ deckStats.level0 }}</ion-chip>
+                    <ion-chip class="stat-chip">Lv1: {{ deckStats.level1 }}</ion-chip>
+                    <br>
+                    <ion-chip class="stat-chip">Lv2: {{ deckStats.level2 }}</ion-chip>
+                    <ion-chip class="stat-chip">Lv3: {{ deckStats.level3 }}</ion-chip>
+                  </ion-label>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label class="ion-text-wrap">
+                    <ion-chip class="stat-chip color-chip color-R">R: {{ deckStats.r }}</ion-chip>
+                    <ion-chip class="stat-chip color-chip color-G">G: {{ deckStats.g }}</ion-chip>
+                    <br>
+                    <ion-chip class="stat-chip color-chip color-B">B: {{ deckStats.b }}</ion-chip>
+                    <ion-chip class="stat-chip color-chip color-Y">Y: {{ deckStats.y }}</ion-chip>
+                  </ion-label>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label class="ion-text-wrap">
+                    <ion-chip>Character: {{ deckStats.character }}</ion-chip>
+                    <br>
+                    <ion-chip>Climax: {{ deckStats.climax }}</ion-chip>
+                    <br>
+                    <ion-chip>Event: {{ deckStats.event }}</ion-chip>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col [sizeMd]="9">
+          <ion-row [class.hidden]="filteredCards.length === 0">
+            <ion-col>
+              <div class="title">Library</div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row [class.hidden]="filteredCards.length === 0">
+            <ion-col [sizeMd]="6">
+              <swiper #swiper
+                      [slidesPerView]="4"
+                      [spaceBetween]="3"
+                      [navigation]="{ nextEl: pagination }"
+                      [pagination]="{ clickable: true, el: pagination }"
+                      [grid]="{ fill: 'row', rows: 4 }"
+                      [zoom]="{ maxRatio: 5 }">
+
+                <ng-template *ngFor="let card of filteredCards; let i = index" swiperSlide>
+                  <div class="swiper-zoom-container"
+                  (mouseover)="setActiveCard(card)"
+                  (mouseout)="setActiveCard(undefined)"
+                  (contextmenu)="addCardToDeck($event, card.code)">
+                    <app-card-display class="swiper-zoom-target"
+                      [cardCode]="card.code"
+                      [size]="'grid'"
+                      [display]="'images'"></app-card-display>
+                  </div>
+                </ng-template>
+
+              </swiper>
+
+              <div class="pagination" #pagination></div>
+            </ion-col>
+
+            <ion-col [sizeMd]="6" class="card-preview">
+              <app-card-display *ngIf="activeCard" [cardCode]="activeCard.code" [size]="'large'"></app-card-display>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ng-container *ngFor="let level of [0, 1, 2, 3]">
+              <ion-col *ngIf="cardsByLevelThenStack[level].length > 0" size="12">
+                <div class="title">Level {{ level }}</div>
+
+                <div class="level-container">
+                  <div class="level-card-stack"
+                       *ngFor="let stack of cardsByLevelThenStack[level]; trackBy:trackBy"
+                       [style.--total-stacks]="cardsByLevelThenStack[level].length"
+                       [style.--stack-size]="stack.length">
+
+                    <app-card-display class="card"
+                      *ngFor="let cardId of stack; let i = index; trackBy:trackBy"
+                      [style.--stack-index]="i"
+                      (contextmenu)="removeCardFromDeck($event, cardId)"
+                      [cardCode]="cardId"
+                      [size]="'small'"
+                      [display]="'images'"></app-card-display>
+
+                  </div>
+                </div>
+              </ion-col>
+            </ng-container>
+          </ion-row>
+
+          <ion-row *ngIf="cardsByLevelThenStack.climax.length > 0">
+            <ion-col size="12">
+              <div class="title">Climax</div>
+            </ion-col>
+
+            <ion-col size="12">
+              <div class="climax-container">
+                <div class="climax-card-stack"
+                     *ngFor="let stack of cardsByLevelThenStack.climax; trackBy:trackBy"
+                     [style.--total-stacks]="cardsByLevelThenStack.climax.length"
+                     [style.--stack-size]="stack.length">
+
+                  <app-card-display class="card"
+                    *ngFor="let cardId of stack; let i = index"
+                    [style.--stack-index]="i"
+                    (contextmenu)="removeCardFromDeck($event, cardId)"
+                    [cardCode]="cardId"
+                    [size]="'small'"
+                    [display]="'images'"
+                    [climax]="true"></app-card-display>
+
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <app-below-the-fold></app-below-the-fold>
+</ion-content>

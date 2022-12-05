@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { sample, sortBy } from 'lodash';
+import { sample, sortBy, sum } from 'lodash';
 import { decompress } from 'compress-json';
 
 import { parseQuery } from '../../search/search';
-import { ICard } from '../../interfaces';
+import { ICard, IDeck } from '../../interfaces';
 import { compare } from '../../compare/compare';
 import { ApiService } from './api.service';
 
@@ -46,6 +46,13 @@ export class CardsService {
     });
   }
 
+  // external links
+  public tcgPlayerLink(card: ICard) {
+    // eslint-disable-next-line max-len
+    return `https://www.tcgplayer.com/search/weiss-schwarz/product?Language=English&productLineName=weiss-schwarz&q=${encodeURIComponent(card.name)}&view=grid`;
+  }
+
+  // card utilities
   public getCardByCodeOrName(codeOrName: string): ICard | undefined {
     return this.cardsByCode[codeOrName] ?? this.cardsByName[codeOrName] ?? undefined;
   }
@@ -80,7 +87,7 @@ export class CardsService {
   }
 
   public addCardsToCollection(cards: Record<string, number>) {
-    Object.keys(cards).forEach(cardId => {
+    Object.keys(cards || {}).forEach(cardId => {
       if(!this.collection[cardId]) {
         this.collection[cardId] = 0;
       }
@@ -95,5 +102,41 @@ export class CardsService {
 
   public getQuantityOwned(cardCode: string): number {
     return this.collection[cardCode] ?? 0;
+  }
+
+  public numCardsInDeck(deck: IDeck): number {
+    return sum(Object.values(deck.cards));
+  }
+
+  public getCardStatsForDeck(deck: IDeck): Record<string, number> {
+    const stats = {
+      totalCards: this.numCardsInDeck(deck),
+      level0: 0,
+      level1: 0,
+      level2: 0,
+      level3: 0,
+      character: 0,
+      event: 0,
+      climax: 0,
+      r: 0,
+      g: 0,
+      b: 0,
+      y: 0
+    };
+
+    Object.keys(deck.cards || {}).forEach(card => {
+      const cardData = this.getCardById(card);
+      if(!cardData) {
+        return;
+      }
+
+      const count = deck.cards[card];
+
+      stats['level' + cardData.level] += count;
+      stats[cardData.color.toLowerCase()] += count;
+      stats[cardData.type.toLowerCase()] += count;
+    });
+
+    return stats;
   }
 }

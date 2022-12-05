@@ -1,0 +1,20 @@
+
+<div class="deck">
+  <div class="cover-image">
+    <app-card-display [cardCode]="firstCard"></app-card-display>
+  </div>
+
+  <div class="author-info">
+    <div class="deck-name">{{ deck.name }}</div>
+    <div class="bottom-area">
+      <div class="author-name">
+        <span>by</span>
+        <app-gravatar [emailHash]="deck.author?.emailHash || ''" [size]="20"></app-gravatar>
+        <span>{{ deck.author?.displayName || 'Unknown' }}</span>
+      </div>
+      <div class="timestamp">
+        Last updated {{ deck.updatedAt | dateTimeFromMilliseconds | dateTimeToRelative }}
+      </div>
+    </div>
+  </div>
+</div>

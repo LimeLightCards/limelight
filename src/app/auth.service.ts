@@ -3,6 +3,9 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { LocalStorage } from 'ngx-webstorage';
 import { interval } from 'rxjs';
+
+import * as md5 from 'md5';
+
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -13,6 +16,16 @@ export class AuthService {
   @LocalStorage() private lastUsername: string;
   @LocalStorage() private lastPassword: string;
   @LocalStorage() private token: string;
+
+  private uid: string;
+
+  public get currentFirebaseUId() {
+    return this.uid;
+  }
+
+  public get currentEmailHash() {
+    return md5(this.lastUsername);
+  }
 
   public get idToken() {
     return this.token;
@@ -77,6 +90,7 @@ export class AuthService {
       return;
     }
 
+    this.uid = user.uid;
     this.token = await user.getIdToken(true) ?? '';
   }
 

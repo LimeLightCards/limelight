@@ -1,0 +1,283 @@
+<ion-header>
+  <app-topbar (enter)="search($event)"></app-topbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-container">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card *ngIf="deck">
+            <ion-card-header>
+              <ion-card-title>
+                {{ deck.name }}
+
+                <div class="buttons">
+                  <ion-button size="small" color="secondary" *ngIf="authService.currentFirebaseUId === deck.author.firebaseUId" [routerLink]="['/deck/edit', deck.id]">
+                    <ion-icon slot="start" name="pencil"></ion-icon>
+                    Edit
+                  </ion-button>
+
+                  <ion-button size="small" color="secondary" *ngIf="authService.currentFirebaseUId && !deck.isPrivate" [routerLink]="['/deck/edit', deck.id]" [queryParams]="{ remix: true, revision: viewingRevision }">
+                    <ion-icon slot="start" name="git-branch"></ion-icon>
+                    Remix
+                  </ion-button>
+
+                  <ion-button size="small" color="tertiary" (click)="export()">
+                    <ion-icon slot="start" name="download"></ion-icon>
+                    Export
+                  </ion-button>
+
+                  <ion-button size="small" color="danger" *ngIf="authService.currentFirebaseUId === deck.author.firebaseUId">
+                    <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                  </ion-button>
+                </div>
+              </ion-card-title>
+              <ion-card-subtitle>
+                Created {{ deck.createdAt | dateTimeFromMilliseconds | dateTimeToRelative }}
+                <span *ngIf="deck.createdAt !== deck.updatedAt">&middot; Updated {{ deck.updatedAt | dateTimeFromMilliseconds | dateTimeToRelative }}&nbsp;</span>
+                <span class="author-area">
+                  <span>&middot;</span>
+                  <span>by</span>
+                  <app-gravatar [emailHash]="deck.author?.emailHash || ''" [size]="20"></app-gravatar>
+                  <a target="_blank" [routerLink]="['/profile', deck.author.id]">{{ deck.author.displayName }}</a>
+                  &nbsp;
+                </span>
+                <span *ngIf="deck.parent">&middot; remixed from <a target="_blank" [routerLink]="['/deck/view', deck.parent.id]">{{ deck.parent.name }}</a></span>
+              </ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <p>{{ deck.description }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col [sizeMd]="3">
+
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Deck Stats</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list>
+                <ion-item>
+                  <ion-label class="ion-text-wrap">
+                    <ion-chip class="stat-chip">Lv0: {{ deckStats.level0 }}</ion-chip>
+                    <ion-chip class="stat-chip">Lv1: {{ deckStats.level1 }}</ion-chip>
+                    <br>
+                    <ion-chip class="stat-chip">Lv2: {{ deckStats.level2 }}</ion-chip>
+                    <ion-chip class="stat-chip">Lv3: {{ deckStats.level3 }}</ion-chip>
+                  </ion-label>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label class="ion-text-wrap">
+                    <ion-chip class="stat-chip color-chip color-R">R: {{ deckStats.r }}</ion-chip>
+                    <ion-chip class="stat-chip color-chip color-G">G: {{ deckStats.g }}</ion-chip>
+                    <br>
+                    <ion-chip class="stat-chip color-chip color-B">B: {{ deckStats.b }}</ion-chip>
+                    <ion-chip class="stat-chip color-chip color-Y">Y: {{ deckStats.y }}</ion-chip>
+                  </ion-label>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label class="ion-text-wrap">
+                    <ion-chip>Character: {{ deckStats.character }}</ion-chip>
+                    <br>
+                    <ion-chip>Climax: {{ deckStats.climax }}</ion-chip>
+                    <br>
+                    <ion-chip>Event: {{ deckStats.event }}</ion-chip>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+
+          <ion-card class="ion-margin-top" *ngIf="deck && deck.revisions.length > 0">
+            <ion-card-header>
+              <ion-card-title>Deck Revisions ({{ deck.revisions.length + 1 }})</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-list class="rev-list">
+                <ion-item class="cursor" [color]="viewingRevision === '' ? 'medium' : 'default'" (click)="setCardView('', deck.cards)">
+                  <ion-icon class="rev-icon" slot="start" name="git-commit-outline"></ion-icon>
+                  <ion-label>
+                    Current
+                  </ion-label>
+                </ion-item>
+
+                <ion-item class="cursor" [color]="viewingRevision === rev.id ? 'medium' : 'default'" (click)="setCardView(rev.id, rev.cards)" *ngFor="let rev of deck.revisions">
+                  <ion-icon class="rev-icon" slot="start" name="git-commit-outline"></ion-icon>
+                  <ion-label>
+                    Updated {{ rev.originalCreatedAt | dateTimeFromMilliseconds | dateTimeToRelative }}
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+
+        </ion-col>
+
+        <ion-col [sizeMd]="9">
+          <ion-card>
+            <ion-card-content>
+              <ion-row class="controls">
+                <ion-col [sizeMd]="3">
+                  <div class="text-display">View as</div>
+                  <ion-select class="themed" [(ngModel)]="deckView" interface="popover" placeholder="Deck Display" (ionChange)="resortCards()">
+                    <ion-select-option value="visual">Images</ion-select-option>
+                    <ion-select-option value="list">List</ion-select-option>
+                    <ion-select-option value="stats">Stats</ion-select-option>
+                  </ion-select>
+                </ion-col>
+
+                <ion-col [sizeMd]="3" *ngIf="deckView === 'visual'">
+                  <div class="text-display">Sort by</div>
+                  <ion-select class="themed" [(ngModel)]="deckSort" interface="popover" placeholder="Deck Sort" (ionChange)="resortCards()">
+                    <ion-select-option value="level">Level</ion-select-option>
+                    <ion-select-option value="color">Color</ion-select-option>
+                    <ion-select-option value="type">Type</ion-select-option>
+                  </ion-select>
+                </ion-col>
+
+                <ion-col class="draw-actions" *ngIf="deckView === 'stats'">
+                  <ion-button color="secondary" (click)="drawHand()">Draw Hand</ion-button>
+                  <ion-button color="secondary" (click)="drawCard(1)">Draw</ion-button>
+                  <ion-button color="secondary" (click)="drawCard(2)">Clock Draw</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+
+          <div *ngIf="deckView === 'visual'">
+            <ion-row>
+              <ng-container *ngFor="let group of cardsSortedByHeaderAndType">
+                <ion-col size="12">
+                  <div class="title">{{ group.header }}</div>
+
+                  <div class="stack-container">
+                    <div class="card-stack"
+                        *ngFor="let stack of group.cards; trackBy:trackBy"
+                        [style.--stack-base-height]="group.cards[0][0].type === 'Climax' ? '200px' : '275px'"
+                        [style.width]="group.cards[0][0].type === 'Climax' ? '275px' : '200px'"
+                        [style.--total-stacks]="group.cards.length"
+                        [style.--stack-size]="stack.length">
+
+                      <app-card-display class="card"
+                        *ngFor="let card of stack; let i = index; trackBy:trackBy"
+                        [style.--stack-index]="i"
+                        [cardCode]="card.code"
+                        [size]="'small'"
+                        [display]="'images'"
+                        [climax]="card.type === 'Climax'"></app-card-display>
+
+                    </div>
+                  </div>
+                </ion-col>
+              </ng-container>
+            </ion-row>
+          </div>
+
+          <div class="table-container" *ngIf="deckView === 'list'">
+            <ngx-datatable
+                class="striped dark"
+                [columnMode]="'flex'"
+                [headerHeight]="50"
+                [footerHeight]="50"
+                [rowHeight]="40"
+                [summaryRow]="true"
+                [summaryPosition]="'bottom'"
+                [limit]="listCards.length"
+                [sorts]="[{ prop: 'name', dir: 'asc' }]"
+                [rows]="listCards">
+
+              <ngx-datatable-column name="Name" [flexGrow]="3">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <div class="vertical-center-cell">
+                    <a [routerLink]="['/card', row.code]">{{ row.name }}</a>
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column name="Code" [flexGrow]="2">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <div class="vertical-center-cell">
+                    {{ row.code }}
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column name="Level" [flexGrow]="1">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <div class="vertical-center-cell">
+                    {{ row.level }}
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column name="Color" [flexGrow]="1">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <div class="vertical-center-cell">
+                    {{ row.color }}
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column name="Type" [flexGrow]="1">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <div class="vertical-center-cell">
+                    {{ row.type }}
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column name="Quantity" [flexGrow]="1">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ row.quantity }}
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column name="Price" [flexGrow]="2" [summaryTemplate]="totalPriceSummary">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ row.price * row.needToBuy | currency }}
+
+                  <a *ngIf="row.needToBuy > 0" target="_blank" [href]="cardsService.tcgPlayerLink(row)">
+                    <ion-icon name="open-outline"></ion-icon>
+                  </a>
+                </ng-template>
+              </ngx-datatable-column>
+
+            </ngx-datatable>
+
+            <ng-template #totalPriceSummary>
+              {{ totalPrice() | currency }}
+            </ng-template>
+          </div>
+
+          <div class="stats-container" *ngIf="deckView === 'stats'">
+            <div class="hand-row">
+              <div class="stats-card" *ngFor="let card of drawnHand">
+                <app-card-display [cardCode]="card.code" [size]="'small'" [display]="'images'"></app-card-display>
+              </div>
+            </div>
+
+            <div class="cards-row">
+              <div class="stats-card" *ngFor="let card of drawnCards">
+                <app-card-display [cardCode]="card.code" [size]="'small'" [display]="'images'"></app-card-display>
+              </div>
+            </div>
+          </div>
+
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <app-below-the-fold></app-below-the-fold>
+</ion-content>

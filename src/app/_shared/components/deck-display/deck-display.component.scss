@@ -1,0 +1,74 @@
+
+:host {
+  width: 250px;
+  max-width: 250px;
+}
+
+.spinner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+app-card-display {
+  width: 250px;
+}
+
+.cover-image {
+  z-index: 9;
+}
+
+.author-info {
+  z-index: 10;
+
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 5px;
+
+  .deck-name {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: var(--ion-color-tertiary);
+    color: var(--ion-color-tertiary-contrast);
+    min-height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.1rem;
+  }
+
+  .bottom-area {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: var(--ion-color-tertiary);
+    color: var(--ion-color-tertiary-contrast);
+    min-height: 105px;
+    padding: 1em;
+
+    .author-name {
+      display: flex;
+      flex-direction: row;
+
+      span, app-gravatar {
+        margin-right: 0.5em;
+      }
+    }
+
+    .timestamp {
+      margin-top: 0.5em;
+      font-size: 0.8rem;
+      font-style: italic;
+    }
+  }
+}
