@@ -1,7 +1,7 @@
 import { ICardHelp } from '../../interfaces';
-import { partialTextOperator } from './_helpers';
+import { partialWithOptionalExactTextOperator } from './_helpers';
 
-export const expansion = partialTextOperator(['expansion', 'e'], 'expansion');
+export const expansion = partialWithOptionalExactTextOperator(['expansion', 'e'], 'expansion');
 
 export const expansionDescription: ICardHelp = {
   name: 'Expansion',
@@ -26,7 +26,11 @@ If an expansion has spaces in its name, you must use quotation marks around the 
     },
     {
       example: '`e:"The Quintessential Quintuplets,Log Horizon"`',
-      explanation: 'Cards in the Quintessential Quintuplets 1 or Log Horizon set.',
+      explanation: 'Cards in the Quintessential Quintuplets 1 or 2 or Log Horizon set.',
+    },
+    {
+      example: '`e:"=The Quintessential Quintuplets"`',
+      explanation: 'Cards in the Quintessential Quintuplets 1 only.',
     },
     {
       example: '`-e:"Log Horizon"`',

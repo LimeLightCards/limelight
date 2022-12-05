@@ -129,7 +129,7 @@ export function arraySearchOperator(aliases: string[], key: string) {
 // this operator works on loose text matching for a field
 // some properties will prefer to use this for shorthand reasons
 // it also checks case-insensitively
-export function partialTextOperator(aliases: string[], key: string) {
+export function partialWithOptionalExactTextOperator(aliases: string[], key: string) {
   return (cards: ICard[], results: parser.SearchParserResult, extraData = {}) => {
 
     // if we have no cards, short-circuit because we can't filter it anymore
@@ -150,14 +150,32 @@ export function partialTextOperator(aliases: string[], key: string) {
       if(results.exclude[alias]) {
         const search = isArray(results.exclude[alias]) ? results.exclude[alias] : [results.exclude[alias]];
         const invalidItems = search.map(x => x.toLowerCase());
-        return cards.filter(c => !invalidItems.some(i => c[key].toLowerCase().includes(i)));
+        return cards.filter(c => !invalidItems.some(i => {
+          const isExact = i.startsWith('=');
+          const searchString = isExact ? i.replace('=', '') : i;
+
+          if(isExact) {
+            return c[key].toLowerCase() === searchString;
+          }
+
+          return c[key].toLowerCase().includes(i);
+        }));
       }
 
       // otherwise we treat it as inclusion, and get those cards
       if(results[alias]) {
         const search = isArray(results[alias]) ? results[alias] : [results[alias]];
         const validItems = search.map(x => x.toLowerCase());
-        return cards.filter(c => validItems.some(i => c[key].toLowerCase().includes(i)));
+        return cards.filter(c => validItems.some(i => {
+          const isExact = i.startsWith('=');
+          const searchString = isExact ? i.replace('=', '') : i;
+
+          if(isExact) {
+            return c[key].toLowerCase() === searchString;
+          }
+
+          return c[key].toLowerCase().includes(i);
+        }));
       }
 
       // if we have no results for this alias, we return no cards

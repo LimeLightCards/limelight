@@ -1,7 +1,7 @@
 import { ICardHelp } from '../../interfaces';
-import { exactTextOperator } from './_helpers';
+import { partialWithOptionalExactTextOperator } from './_helpers';
 
-export const set = exactTextOperator(['set'], 'set');
+export const set = partialWithOptionalExactTextOperator(['set'], 'set');
 
 export const setDescription: ICardHelp = {
   name: 'Set',

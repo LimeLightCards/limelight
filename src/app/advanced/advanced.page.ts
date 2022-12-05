@@ -92,7 +92,8 @@ export class AdvancedPage implements OnInit {
     }
 
     if(this.searchQuery.expansion.length > 0) {
-      queryAttributes.push(`expansion:"${this.searchQuery.expansion.join(',')}"`);
+      const exactExpansions = this.searchQuery.expansion.map(e => `=${e}`);
+      queryAttributes.push(`expansion:"${exactExpansions.join(',')}"`);
     }
 
     if(isNumber(+this.searchQuery.level.value) && !isNaN(+this.searchQuery.level.value)) {

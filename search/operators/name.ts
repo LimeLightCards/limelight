@@ -1,7 +1,7 @@
 import { ICardHelp } from '../../interfaces';
-import { partialTextOperator } from './_helpers';
+import { partialWithOptionalExactTextOperator } from './_helpers';
 
-export const name = partialTextOperator(['name', 'n'], 'name');
+export const name = partialWithOptionalExactTextOperator(['name', 'n'], 'name');
 
 export const nameDescription: ICardHelp = {
   name: 'Name',
@@ -27,6 +27,10 @@ If a name has spaces in its name, you must use quotation marks around the name.
     {
       example: '`name:nakano`',
       explanation: 'Cards that have "Nakano" in their name.',
+    },
+    {
+      example: '`name:"=Nino Nakano"`',
+      explanation: 'Cards that are called exactly "Nino Nakano".',
     },
     {
       example: '`-name:"Futaro Uesugi"`',

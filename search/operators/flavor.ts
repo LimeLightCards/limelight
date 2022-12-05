@@ -1,7 +1,7 @@
 import { ICardHelp } from '../../interfaces';
-import { partialTextOperator } from './_helpers';
+import { partialWithOptionalExactTextOperator } from './_helpers';
 
-export const flavor = partialTextOperator(['flavor', 'f'], 'flavorText');
+export const flavor = partialWithOptionalExactTextOperator(['flavor', 'f'], 'flavorText');
 
 export const flavorDescription: ICardHelp = {
   name: 'Flavor Text',
