@@ -22,11 +22,11 @@ Almost every card will have a tag. You can find a list of valid tags by using th
       explanation: 'Cards that have the Army tag.',
     },
     {
-      example: '`t:"Army,Clock Cleanset"`',
+      example: '`tag:"Army,Clock Cleanset"`',
       explanation: 'Cards that have the Army and Clock Cleanse triggers.',
     },
     {
-      example: '`t:none`',
+      example: '`tag:none`',
       explanation: 'Cards with no tags.',
     }
   ]

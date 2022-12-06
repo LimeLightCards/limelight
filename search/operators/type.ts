@@ -12,7 +12,7 @@ export const typeDescription: ICardHelp = {
   color: '#cf3c4f',
 
   help: `
-You can find cards that match a type by using the \`type:\` or \`t:\` operator.
+You can find cards that match a type by using the \`type:\` operator.
 
 The valid values here are: \`character\`, \`climax\`, \`event\`.
 `,
@@ -23,11 +23,11 @@ The valid values here are: \`character\`, \`climax\`, \`event\`.
       explanation: 'Cards that are characters.',
     },
     {
-      example: '`c:character,event`',
+      example: '`type:character,event`',
       explanation: 'Cards that are characters or events.',
     },
     {
-      example: '`-c:climax`',
+      example: '`-type:climax`',
       explanation: 'Cards that are not climaxes.',
     }
   ]

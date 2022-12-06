@@ -27,7 +27,7 @@ You can also search for cards that have no abilities at all.
       explanation: 'Cards without abilities that contain "two or more".',
     },
     {
-      example: '`a:none`',
+      example: '`ability:none`',
       explanation: 'Cards with no abilities.',
     }
   ]
