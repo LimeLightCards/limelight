@@ -8,12 +8,14 @@ import { AdvancedPageRoutingModule } from './advanced-routing.module';
 
 import { AdvancedPage } from './advanced.page';
 import { SharedModule } from '../_shared/shared.module';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     SharedModule,
+    NgSelectModule,
     IonicModule,
     AdvancedPageRoutingModule
   ],

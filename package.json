@@ -31,6 +31,7 @@
     "@capacitor/keyboard": "4.0.1",
     "@capacitor/status-bar": "4.0.1",
     "@ionic/angular": "^6.1.9",
+    "@ng-select/ng-select": "^9.1.0",
     "@ngx-matomo/router": "^3.2.0",
     "@ngx-matomo/tracker": "^3.2.0",
     "@swimlane/ngx-datatable": "^20.1.0",

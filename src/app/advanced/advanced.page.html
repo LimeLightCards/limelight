@@ -28,9 +28,15 @@
         </ion-col>
 
         <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
-          <ion-input (ionChange)="saveQuery()"
-                     [(ngModel)]="searchQuery.attribute"
-                     placeholder="Search any card attributes, separate multiple with a comma (,)"></ion-input>
+          <ng-select
+            [items]="allAttributes"
+            [multiple]="true"
+            [closeOnSelect]="false"
+            [searchable]="true"
+            placeholder="Select attributes"
+            (change)="saveQuery()"
+            [(ngModel)]="searchQuery.attribute">
+          </ng-select>
         </ion-col>
       </ion-row>
 
@@ -117,17 +123,15 @@
         </ion-col>
 
         <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
-          <ion-select
-            [(ngModel)]="searchQuery.expansion"
-            [interfaceOptions]="{ header: 'Select Expansions' }"
-            placeholder="Select expansions"
-            (ionChange)="saveQuery()"
+          <ng-select
+            [items]="allExpansions"
             [multiple]="true"
-          >
-            <ion-select-option *ngFor="let expansion of allExpansions" [value]="expansion">
-              {{ expansion }}
-            </ion-select-option>
-          </ion-select>
+            [closeOnSelect]="false"
+            [searchable]="true"
+            placeholder="Select expansions"
+            (change)="saveQuery()"
+            [(ngModel)]="searchQuery.expansion">
+          </ng-select>
         </ion-col>
       </ion-row>
 
@@ -215,17 +219,15 @@
         </ion-col>
 
         <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
-          <ion-select
-            [(ngModel)]="searchQuery.rarity"
-            [interfaceOptions]="{ header: 'Select Rarities' }"
-            placeholder="Select rarities"
-            (ionChange)="saveQuery()"
+          <ng-select
+            [items]="allRarities"
             [multiple]="true"
-          >
-            <ion-select-option *ngFor="let rarity of allRarities" [value]="rarity">
-              {{ rarity }}
-            </ion-select-option>
-          </ion-select>
+            [closeOnSelect]="false"
+            [searchable]="true"
+            placeholder="Select rarities"
+            (change)="saveQuery()"
+            [(ngModel)]="searchQuery.rarity">
+          </ng-select>
         </ion-col>
       </ion-row>
 
@@ -300,17 +302,15 @@
         </ion-col>
 
         <ion-col class="search" [sizeXs]="12" [sizeMd]="6">
-          <ion-select
-            [(ngModel)]="searchQuery.tags"
-            [interfaceOptions]="{ header: 'Select Tags' }"
-            placeholder="Select tags"
-            (ionChange)="saveQuery()"
+          <ng-select
+            [items]="allTags"
             [multiple]="true"
-          >
-            <ion-select-option *ngFor="let tag of allTags" [value]="tag">
-              {{ tag }}
-            </ion-select-option>
-          </ion-select>
+            [closeOnSelect]="false"
+            [searchable]="true"
+            placeholder="Select tags"
+            (change)="saveQuery()"
+            [(ngModel)]="searchQuery.tags">
+          </ng-select>
         </ion-col>
       </ion-row>
 

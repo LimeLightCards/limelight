@@ -38,6 +38,7 @@ export class AdvancedPage implements OnInit {
     { value: '<=',  label: 'Less Than Or Equal To' }
   ];
 
+  public allAttributes = [];
   public allExpansions = [];
   public allRarities = [];
   public allTriggers = [];
@@ -59,6 +60,7 @@ export class AdvancedPage implements OnInit {
     // in case we add new fields that the cached query doesn't have available
     this.searchQuery = Object.assign({}, defaultQuery(), this.searchQuery);
 
+    this.allAttributes = this.cardsService.getAllUniqueAttributes('attributes');
     this.allExpansions = this.cardsService.getAllUniqueAttributes('expansion');
     this.allRarities = this.cardsService.getAllUniqueAttributes('rarity');
     this.allTriggers = this.cardsService.getAllUniqueAttributes('trigger');
@@ -78,8 +80,8 @@ export class AdvancedPage implements OnInit {
       queryAttributes.push(`name:"${this.searchQuery.name}"`);
     }
 
-    if(this.searchQuery.attribute) {
-      queryAttributes.push(`attribute:"${this.searchQuery.attribute}"`);
+    if(this.searchQuery.attribute.length > 0) {
+      queryAttributes.push(`attribute:"${this.searchQuery.attribute.join(',')}"`);
     }
 
     const colors = Object.keys(this.searchQuery.color).filter(c => this.searchQuery.color[c]);

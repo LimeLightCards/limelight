@@ -14,6 +14,7 @@ import { DeckDisplayComponent } from './components/deck-display/deck-display.com
 import { SearchCardsComponent } from './components/search-cards/search-cards.component';
 import { SearchDecksComponent } from './components/search-decks/search-decks.component';
 import { GravatarComponent } from './gravatar/gravatar.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { GravatarComponent } from './gravatar/gravatar.component';
     IonicModule,
     LuxonModule,
     NgxDatatableModule,
+    NgSelectModule
   ],
   exports: [
     CardDisplayComponent,
